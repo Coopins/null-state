@@ -3,7 +3,9 @@
   --bg-soft: #121832;
   --ink: rgba(245, 247, 255, 0.95);
   --muted: rgba(245, 247, 255, 0.65);
+  --faint: rgba(245, 247, 255, 0.42);
   --accent: #6b7cff;
+  --brace: rgba(150, 210, 255, 0.85);
 }
 
 * {
@@ -13,7 +15,8 @@
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
-  background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+  background: radial-gradient(1200px 600px at 50% 30%, rgba(107, 124, 255, 0.14), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg-soft));
   color: var(--ink);
   line-height: 1.6;
 }
@@ -28,9 +31,11 @@ body {
 .site-header {
   position: sticky;
   top: 0;
-  background: rgba(11, 16, 32, 0.9);
+  z-index: 50;
+  background: rgba(11, 16, 32, 0.82);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header-inner {
@@ -40,17 +45,48 @@ body {
   height: 72px;
 }
 
+/* Brand / Logo */
 .brand {
-  font-family: "DM Serif Display", serif;
-  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
   text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-wordmark {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.45rem;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.brand-strong {
   color: var(--ink);
 }
 
 .brand-soft {
   opacity: 0.6;
+  margin-left: 6px;
 }
 
+.brand-brace {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1.5rem;
+  color: var(--brace);
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.brand-llc {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  transform: translateY(-2px);
+}
+
+/* Nav */
 .nav a {
   margin-left: 20px;
   text-decoration: none;
@@ -67,9 +103,10 @@ body {
   background: var(--accent);
   color: white;
   padding: 10px 16px;
-  border-radius: 6px;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: 500;
+  box-shadow: 0 8px 30px rgba(107, 124, 255, 0.18);
 }
 
 .btn.small {
@@ -79,13 +116,18 @@ body {
 
 .btn.ghost {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: var(--ink);
+  box-shadow: none;
+}
+
+.btn.ghost:hover {
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 /* Hero */
 .hero {
-  padding: 120px 0;
+  padding: 120px 0 90px;
 }
 
 .kicker {
@@ -97,24 +139,25 @@ body {
 
 .hero h1 {
   font-family: "DM Serif Display", serif;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  margin: 20px 0;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  margin: 18px 0 16px;
 }
 
 .lead {
-  max-width: 640px;
+  max-width: 680px;
   font-size: 1.1rem;
   color: var(--muted);
 }
 
 .cta-row {
-  margin-top: 32px;
+  margin-top: 28px;
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .pill-row {
-  margin-top: 40px;
+  margin-top: 32px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -123,8 +166,10 @@ body {
 .pill {
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 0.8rem;
+  color: var(--muted);
 }
 
 /* Sections */
@@ -133,7 +178,7 @@ section {
 }
 
 .definition p {
-  max-width: 720px;
+  max-width: 760px;
   font-size: 1.05rem;
   color: var(--muted);
 }
@@ -146,25 +191,6 @@ section {
 }
 
 .card {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   padding: 24px;
-  border-radius: 12px;
-}
-
-.card h3 {
-  margin-top: 0;
-  font-family: "DM Serif Display", serif;
-}
-
-/* Footer */
-.site-footer {
-  padding: 40px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  color: var(--muted);
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-}
+  border-radius:
