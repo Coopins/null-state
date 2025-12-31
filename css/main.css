@@ -1,196 +1,372 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap");
+
 :root {
-  --bg: #0b1020;
-  --bg-soft: #121832;
-  --ink: rgba(245, 247, 255, 0.95);
-  --muted: rgba(245, 247, 255, 0.65);
-  --faint: rgba(245, 247, 255, 0.42);
-  --accent: #6b7cff;
-  --brace: rgba(150, 210, 255, 0.85);
+  /* Core palette */
+  --bg0: #070a13;
+  --bg1: #0a1030;
+  --bg2: #070a1a;
+
+  --panel: rgba(255, 255, 255, 0.04);
+  --panel2: rgba(255, 255, 255, 0.06);
+  --stroke: rgba(255, 255, 255, 0.08);
+
+  --ink: rgba(244, 244, 250, 0.96);
+  --muted: rgba(244, 244, 250, 0.70);
+  --faint: rgba(244, 244, 250, 0.48);
+
+  --accent: #6f86ff;
+  --accent2: #7b95ff;
+
+  --radius: 18px;
+
+  /* Layout rhythm */
+  --container: 1100px;
+  --gutter: 24px;
+  --section-y: 96px;
+  --section-y-sm: 64px;
+
+  /* Header height */
+  --header-h: 72px;
 }
 
-* {
+/* Reset-ish */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, sans-serif;
-  background: radial-gradient(1200px 600px at 50% 30%, rgba(107, 124, 255, 0.14), transparent 60%),
-    linear-gradient(180deg, var(--bg), var(--bg-soft));
   color: var(--ink);
-  line-height: 1.6;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 700px at 50% 20%, rgba(111, 134, 255, 0.22), transparent 58%),
+    radial-gradient(900px 600px at 20% 10%, rgba(123, 149, 255, 0.12), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg2) 70%, #040612);
+  overflow-x: hidden;
 }
 
-.wrap {
-  max-width: 1100px;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(var(--container), calc(100% - (var(--gutter) * 2)));
   margin: 0 auto;
-  padding: 0 24px;
 }
 
-/* Header */
+/* ---------------------------------------
+   HEADER (mobile-safe)
+--------------------------------------- */
+
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
-  background: rgba(11, 16, 32, 0.82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 999;
+  height: var(--header-h);
+  background: rgba(6, 10, 22, 0.60);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .header-inner {
+  height: var(--header-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  gap: 14px;
 }
 
-/* Brand / Logo */
 .brand {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
-  text-decoration: none;
-  color: var(--ink);
+  min-width: 0;
 }
 
-.brand-wordmark {
+.brand-mark {
   font-family: "DM Serif Display", serif;
-  font-size: 1.45rem;
-  letter-spacing: 0.01em;
+  font-size: 22px;
+  color: rgba(111, 134, 255, 0.95);
   line-height: 1;
 }
 
-.brand-strong {
-  color: var(--ink);
-}
-
-.brand-soft {
-  opacity: 0.6;
-  margin-left: 6px;
-}
-
-.brand-brace {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 1.5rem;
-  color: var(--brace);
-  line-height: 1;
-  transform: translateY(-1px);
+.brand-name {
+  font-family: "DM Serif Display", serif;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+  line-height: 1.02;
+  white-space: nowrap;
 }
 
 .brand-llc {
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
+  margin-left: 10px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--faint);
-  transform: translateY(-2px);
+  color: rgba(244, 244, 250, 0.55);
 }
 
-/* Nav */
-.nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: var(--muted);
-  font-size: 0.95rem;
+/* Desktop nav */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-.nav a:hover {
-  color: var(--ink);
+.nav-link {
+  font-size: 14px;
+  color: rgba(244, 244, 250, 0.72);
+  padding: 10px 10px;
+  border-radius: 12px;
+  transition: background 160ms ease, color 160ms ease;
+}
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(244, 244, 250, 0.92);
 }
 
-/* Buttons */
-.btn {
-  background: var(--accent);
-  color: white;
-  padding: 10px 16px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 500;
-  box-shadow: 0 8px 30px rgba(107, 124, 255, 0.18);
+.nav-cta {
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(111, 134, 255, 0.95), rgba(111, 134, 255, 0.72));
+  color: rgba(10, 12, 22, 0.92);
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 10px 22px rgba(111, 134, 255, 0.18);
+  white-space: nowrap;
 }
 
-.btn.small {
-  padding: 8px 14px;
-  font-size: 0.9rem;
+/* Mobile toggle control (hidden checkbox) */
+.nav-toggle {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
 }
 
-.btn.ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: var(--ink);
-  box-shadow: none;
+/* Hamburger button (hidden on desktop) */
+.nav-toggle-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
-.btn.ghost:hover {
-  border-color: rgba(255, 255, 255, 0.28);
+.nav-toggle-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(244, 244, 250, 0.88);
+  border-radius: 2px;
 }
 
-/* Hero */
-.hero {
-  padding: 120px 0 90px;
+/* Mobile nav behavior */
+@media (max-width: 820px) {
+  :root {
+    --gutter: 18px;
+    --header-h: 64px;
+    --section-y: 72px;
+    --section-y-sm: 52px;
+  }
+
+  .brand-name {
+    font-size: 20px;
+  }
+  .brand-llc {
+    display: none; /* prevents crowding like your screenshot */
+  }
+
+  .nav-toggle-btn {
+    display: inline-flex;
+  }
+
+  /* Turn the nav into a dropdown panel */
+  .site-nav {
+    position: absolute;
+    top: calc(var(--header-h) + 10px);
+    right: var(--gutter);
+    left: var(--gutter);
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(10, 14, 32, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 170ms ease, transform 170ms ease;
+  }
+
+  .nav-link {
+    font-size: 15px;
+    padding: 12px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-cta {
+    width: 100%;
+    margin-left: 0;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  /* When toggled open */
+  .nav-toggle:checked ~ .nav-toggle-btn {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  .nav-toggle:checked ~ .site-nav {
+    opacity: 1;
+    transform: translateY(0px);
+    pointer-events: auto;
+  }
 }
 
+/* ---------------------------------------
+   HERO + SECTIONS (mobile spacing fixes)
+--------------------------------------- */
+
+main {
+  padding-top: 16px;
+}
+
+.section {
+  padding: var(--section-y) 0;
+}
+
+.section--tight {
+  padding: var(--section-y-sm) 0;
+}
+
+/* This fixes the “What We Do” block being too low / too airy on mobile */
+@media (max-width: 820px) {
+  .section {
+    padding: 60px 0;
+  }
+  .section--tight {
+    padding: 44px 0;
+  }
+}
+
+/* Typography helpers */
 .kicker {
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-size: 12px;
+  color: rgba(244, 244, 250, 0.55);
 }
 
-.hero h1 {
+.h1 {
   font-family: "DM Serif Display", serif;
-  font-size: clamp(2.6rem, 5vw, 3.6rem);
-  margin: 18px 0 16px;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.02;
+  margin: 14px 0 18px 0;
 }
 
-.lead {
-  max-width: 680px;
-  font-size: 1.1rem;
-  color: var(--muted);
+.lede {
+  max-width: 62ch;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(244, 244, 250, 0.70);
 }
 
-.cta-row {
-  margin-top: 28px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+@media (max-width: 820px) {
+  .lede {
+    font-size: 17px;
+  }
 }
 
-.pill-row {
-  margin-top: 32px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+/* ---------------------------------------
+   CARDS / LIFECYCLE (fix spacing in pic 3)
+--------------------------------------- */
 
-.pill {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-
-/* Sections */
-section {
-  padding: 80px 0;
-}
-
-.definition p {
-  max-width: 760px;
-  font-size: 1.05rem;
-  color: var(--muted);
-}
-
-/* Lifecycle */
-.grid {
+.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 26px;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 24px;
-  border-radius:
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 22px;
+  min-height: 140px;
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: rgba(244, 244, 250, 0.70);
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 18px; /* tighter so it doesn’t feel like a new “page” */
+  }
+
+  .card {
+    padding: 18px;
+    min-height: auto;
+  }
+}
+
+/* ---------------------------------------
+   FOOTER (mobile padding)
+--------------------------------------- */
+
+.site-footer {
+  padding: 40px 0 56px;
+  color: rgba(244, 244, 250, 0.70);
+}
+
+.site-footer .footer-title {
+  font-size: 18px;
+  color: rgba(244, 244, 250, 0.90);
+  margin: 0 0 8px 0;
+}
+
+.site-footer .footer-sub {
+  margin: 0;
+  color: rgba(244, 244, 250, 0.60);
+}
+
+@media (max-width: 820px) {
+  .site-footer {
+    padding: 28px 0 44px;
+  }
+}
