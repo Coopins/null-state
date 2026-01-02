@@ -41,7 +41,7 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 .narrow { max-width: 600px; }
 .text-amber { color: var(--amber); }
 
-/* --- SCANLINE EFFECT --- */
+/* --- SCANLINE EFFECT (Subtle Texture) --- */
 .scanline {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
@@ -58,25 +58,9 @@ nav {
     border-bottom: 1px solid #222;
     font-family: var(--font-mono);
 }
-
-.logo {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #fff;
-}
-
-.prompt {
-    color: var(--amber);
-    font-weight: 900;
-    font-size: 1.8rem;
-    text-shadow: 0 0 15px rgba(255, 153, 0, 0.6);
-    padding-bottom: 4px;
-}
+.logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; }
+.blink { animation: blink 1s infinite; color: var(--amber); }
+@keyframes blink { 50% { opacity: 0; } }
 
 .nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--text-muted); }
 .nav-links a:hover { color: var(--amber); }
@@ -98,8 +82,9 @@ nav {
 .btn.secondary { border-color: #333; color: var(--text-muted); margin-left: 20px; }
 .btn.secondary:hover { border-color: var(--amber); color: var(--amber); }
 
-/* --- SECTIONS --- */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+/* --- PROBLEM SECTION & TIMELINE --- */
+.problem { padding: 80px 0; background: #0f0f0f; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 
 .check-list { list-style: none; margin-top: 20px; font-family: var(--font-mono); }
 .check-list li { margin-bottom: 10px; color: var(--text-muted); }
@@ -108,31 +93,45 @@ nav {
 .icon-check { color: var(--green); margin-right: 10px; }
 
 .timeline {
-    border-left: 2px solid #333; padding-left: 30px; height: 300px;
-    display: flex; flex-direction: column; justify-content: space-between; position: relative;
+    border-left: 2px solid #333;
+    padding-left: 30px;
+    height: 300px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative;
 }
-.timeline::before { content: ''; position: absolute; left: -2px; top: 0; height: 50%; width: 2px; background: var(--amber); }
+.timeline::before {
+    content: ''; position: absolute; left: -2px; top: 0; height: 50%; width: 2px;
+    background: var(--amber); /* Active line visual */
+}
 .point { position: relative; }
-.point::before { content: ''; position: absolute; left: -36px; top: 5px; width: 10px; height: 10px; background: #000; border: 2px solid var(--amber); }
+.point::before {
+    content: ''; position: absolute; left: -36px; top: 5px;
+    width: 10px; height: 10px; background: #000; border: 2px solid var(--amber);
+}
 .point.end::before { border-color: var(--text-muted); }
 .label { display: block; font-family: var(--font-mono); font-weight: bold; color: var(--amber); }
 .desc { display: block; font-size: 0.9rem; color: var(--text-muted); }
 
-/* --- MISSION LOG & SPECIAL STYLES --- */
-.log-entry { position: relative; }
-.log-bar { position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--amber); }
-.mission-log h4 { font-size: 0.9rem; letter-spacing: 0.1em; color: var(--text-muted); }
+/* --- PROTOCOL / DIAGNOSTIC GRID --- */
+.protocol { padding: 100px 0; }
+.section-header { margin-bottom: 60px; max-width: 600px; }
 
-/* --- GRID CARDS --- */
-.diagnostic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.diagnostic-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
 
-.card { background: var(--panel); border: 1px solid #222; padding: 30px; transition: transform 0.2s; }
+.card {
+    background: var(--panel); border: 1px solid #222; padding: 30px;
+    transition: transform 0.2s;
+    height: 100%; /* Ensures cards stretch evenly */
+}
 .card:hover { transform: translateY(-5px); border-color: #444; }
 
 .card-header { font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 15px; display: flex; align-items: center; }
 .signal { margin-right: 10px; font-size: 1.2rem; }
 .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
-.definition { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; height: 60px; }
+.definition { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; height: 60px; } 
 
 .specs { background: #000; padding: 15px; border: 1px solid #222; margin-bottom: 20px; font-family: var(--font-mono); font-size: 0.85rem; }
 .spec-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
@@ -142,27 +141,31 @@ nav {
 /* Status Colors */
 .status-green .signal, .status-green h3 { color: var(--green); }
 .status-green { border-top: 3px solid var(--green); }
+
 .status-yellow .signal, .status-yellow h3 { color: var(--amber); }
 .status-yellow { border-top: 3px solid var(--amber); }
+
 .status-red .signal, .status-red h3 { color: var(--red); }
 .status-red { border-top: 3px solid var(--red); }
 
-/* --- COMPARISON TABLE --- */
-.comparison { background: #0f0f0f; padding: 80px 0; }
-.table-wrapper { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); text-align: left; }
-th { border-bottom: 2px solid var(--amber); padding: 20px; color: var(--amber); }
-td { border-bottom: 1px solid #333; padding: 20px; color: var(--text-muted); }
-td strong { color: #fff; }
+.status-purple .signal, .status-purple h3 { color: var(--purple); }
+.status-purple { border-top: 3px solid var(--purple); }
+
+.status-blue .signal, .status-blue h3 { color: var(--blue); }
+.status-blue { border-top: 3px solid var(--blue); }
 
 /* --- CONTACT --- */
 .contact { padding: 100px 0; text-align: center; }
 .contact h2 { color: #fff; }
 .contact p { margin-bottom: 40px; color: var(--text-muted); }
+
 form { text-align: left; background: var(--panel); padding: 40px; border: 1px solid #333; }
 .form-group { margin-bottom: 20px; }
 label { display: block; font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 10px; color: var(--amber); }
-input, textarea { width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 15px; font-family: var(--font-sans); font-size: 1rem; }
+input, textarea {
+    width: 100%; background: #000; border: 1px solid #333; color: #fff;
+    padding: 15px; font-family: var(--font-sans); font-size: 1rem;
+}
 input:focus, textarea:focus { outline: none; border-color: var(--amber); }
 .full-width { width: 100%; margin-top: 10px; }
 
