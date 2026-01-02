@@ -3,361 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Null State | Strategic Design & Decisions</title>
-    <style>
-        :root {
-            /* Palette - Industrial Dark Mode */
-            --bg-body: #050505;
-            --bg-card: #0f0f0f;
-            --bg-card-hover: #141414;
-            
-            /* The "Technical Orange" - High visibility, serious */
-            --accent-main: #ff5e00; 
-            --accent-dim: rgba(255, 94, 0, 0.15);
-            
-            --border-subtle: #222;
-            --border-highlight: #ff5e00;
-
-            --text-main: #f0f0f0;
-            --text-secondary: #999;
-            --text-muted: #555;
-
-            /* Fonts */
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: "SF Mono", "Monaco", "Courier New", monospace; /* Adds technical character */
-            
-            --radius: 2px; /* Sharper corners for a technical feel */
-            --container-width: 1100px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Typography */
-        h1, h2, h3 {
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-
-        h1 { font-size: clamp(3rem, 5vw, 5rem); line-height: 1; margin-bottom: 2rem; text-transform: uppercase; }
-        h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 1rem; }
-        h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; }
-        
-        p { color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 65ch; font-size: 1.1rem; }
-
-        /* Technical Labels (The "Code" Look) */
-        .tech-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-main);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        /* Layout Utilities */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 8rem 0;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        /* Header */
-        header {
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { 
-            font-weight: 800; 
-            font-size: 1.2rem; 
-            letter-spacing: -0.05em; 
-            color: var(--text-main); 
-            text-decoration: none;
-            border-left: 3px solid var(--accent-main);
-            padding-left: 0.75rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-anchor {
-            border-left: 4px solid var(--accent-main);
-            padding-left: 2rem;
-            margin: 2rem 0 3rem 0;
-            background: linear-gradient(90deg, var(--accent-dim) 0%, transparent 100%); /* Subtle orange glow */
-            padding: 2rem;
-        }
-        
-        .hero-anchor p {
-            font-size: 1.4rem;
-            color: var(--text-main);
-            line-height: 1.4;
-            margin: 0;
-        }
-
-        /* The Button - Industrial Orange */
-        .btn {
-            display: inline-block;
-            background: var(--accent-main);
-            color: #000;
-            padding: 1rem 2.5rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border: 1px solid var(--accent-main);
-        }
-        .btn:hover {
-            background: transparent;
-            color: var(--accent-main);
-        }
-
-        /* Risk Section */
-        .risk-block {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-        /* A subtle tech line decoration */
-        .risk-block::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 100%;
-            background: var(--accent-main);
-        }
-
-        .risk-block strong { color: var(--text-main); border-bottom: 1px solid var(--accent-main); padding-bottom: 2px;}
-
-        /* Comparison Grid */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--text-muted);
-            transform: translateY(-2px);
-        }
-
-        .card-header {
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .checklist { list-style: none; }
-        .checklist li {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Custom Bullet Points */
-        .bad-fit li::before { 
-            content: "×"; 
-            position: absolute; left: 0; top: 0;
-            color: var(--text-muted); 
-            font-weight: bold;
-        }
-        
-        .good-fit li::before { 
-            content: "›"; 
-            position: absolute; left: 0; top: -2px;
-            color: var(--accent-main); 
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .bad-fit-card { opacity: 0.6; }
-        .bad-fit-card:hover { opacity: 1; }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .service-card {
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-subtle);
-            transition: border-color 0.3s ease;
-        }
-        .service-card:hover { border-top: 1px solid var(--accent-main); }
-        
-        .service-number {
-            font-family: var(--font-mono);
-            color: var(--accent-main);
-            margin-bottom: 1rem;
-            display: block;
-            font-size: 0.85rem;
-        }
-
-        /* Footer */
-        footer {
-            padding: 4rem 0;
-            border-top: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .comparison-grid, .services-grid { grid-template-columns: 1fr; }
-            .hero-anchor { padding: 1.5rem; }
-            .hero-anchor p { font-size: 1.1rem; }
-        }
-    </style>
+    <title>NuLL State | Digital Development Operator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <nav>
-                <a href="#" class="logo">NULL STATE</a>
-                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-main);">SYS.STATUS: ONLINE</span>
-            </nav>
-        </header>
+    <div class="scanline"></div>
 
-        <section class="hero">
-            <span class="tech-label">/// SYSTEM DIAGNOSTIC</span>
-            <h1>Stop building<br><span style="color: var(--text-muted);">blindly.</span></h1>
+    <nav>
+        <div class="logo">NULL STATE <span class="blink">_</span></div>
+        <div class="nav-links">
+            <a href="#risk">RISK</a>
+            <a href="#fit">FIT</a>
+            <a href="#protocol">PROTOCOL</a>
+            <a href="#contact" class="nav-btn">INITIALIZE</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="status-indicator">SYSTEM STATUS: <span class="text-amber">ONLINE</span></div>
+            <h1>STOP BUILDING<br><span class="text-amber">BLINDLY.</span></h1>
             
-            <div class="hero-anchor">
-                <p>We are brought in when the cost of making the wrong decision is higher than the cost of slowing down.</p>
+            <p class="hero-sub" style="border-left: 2px solid var(--amber); padding-left: 20px; color: #fff;">
+                We are brought in when the cost of making the wrong decision is higher than the cost of slowing down.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="#contact" class="btn primary">[ DETERMINE READINESS ]</a>
+                <a href="#protocol" class="btn secondary">VIEW PROTOCOLS</a>
             </div>
+        </div>
+    </section>
 
-            <div>
-                <a href="mailto:chris@nullstate.com" class="btn">Let’s Determine Readiness</a>
-            </div>
-        </section>
-
-        <section>
-            <span class="tech-label">01 // THE HIDDEN RISK</span>
-            <div class="risk-block">
-                <h2>Your risk isn't the code. Your risk is building the wrong thing beautifully.</h2>
-                <p>
-                    Most failures we see are not technical; they are strategic. Teams burn political capital and budget executing efficiently on a flawed premise.
-                </p>
-                <p style="color: var(--text-main); margin-bottom: 0;"><strong>Technical debt is fixable. Strategic debt is fatal.</strong></p>
-            </div>
-        </section>
-
-        <section>
-            <span class="tech-label">02 // DECISION THRESHOLD</span>
-            <h2>The Circuit Breaker</h2>
-            <p>We function as a diagnostic stop-gap for high-stakes projects.</p>
-
-            <div class="comparison-grid">
-                <div class="card bad-fit-card">
-                    <div class="card-header">
-                        <h3 style="color: var(--text-muted);">Null State Is a Wrong Fit If:</h3>
+    <section id="risk" class="problem">
+        <div class="container">
+            <div class="grid-2">
+                <div class="content-block">
+                    <h2>THE HIDDEN RISK</h2>
+                    <p>Your risk isn't the code. Your risk is building the wrong thing beautifully.</p>
+                    <p>Most failures are not technical; they are strategic. Teams burn political capital executing efficiently on a flawed premise.</p>
+                    <p style="color: #fff; border: 1px solid #333; padding: 15px; background: #000; display: inline-block;">
+                        <strong>Technical debt is fixable.<br>Strategic debt is fatal.</strong>
+                    </p>
+                </div>
+                <div class="graphic-block">
+                    <div class="timeline">
+                        <div class="point start">
+                            <span class="label">ENTRY</span>
+                            <span class="desc">Diagnose & Authorize</span>
+                        </div>
+                        <div class="line"></div>
+                        <div class="point end">
+                            <span class="label">EXIT</span>
+                            <span class="desc">Stabilize & Kill</span>
+                        </div>
                     </div>
-                    <ul class="checklist bad-fit">
-                        <li>You already know exactly what to build and just need "hands on keyboards."</li>
-                        <li>You measure success by features shipped rather than problems solved.</li>
-                        <li>You are not willing to pause a project even if the diagnosis says "stop."</li>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fit" class="protocol" style="background: #0a0a0a; padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>THE DECISION THRESHOLD</h2>
+                <p>We function as a circuit breaker for high-stakes projects.</p>
+            </div>
+
+            <div class="grid-2" style="align-items: start;">
+                <div class="card" style="opacity: 0.6;">
+                    <h3 style="color: var(--text-muted);">NULL STATE IS THE WRONG FIT</h3>
+                    <ul class="check-list">
+                        <li><span class="icon-x">✕</span> You need "hands on keyboards" immediately.</li>
+                        <li><span class="icon-x">✕</span> You measure success by features shipped.</li>
+                        <li><span class="icon-x">✕</span> You are not willing to stop if the diagnosis says "stop."</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 style="color: var(--accent-main);">Engage Us When:</h3>
-                    </div>
-                    <ul class="checklist good-fit">
-                        <li>A project feels directionally wrong, but momentum makes it hard to stop.</li>
-                        <li>You are burning resources without conviction in the outcome.</li>
-                        <li>You need a defensible Go / No-Go decision before scaling.</li>
+                <div class="card" style="border-color: var(--amber);">
+                    <h3 style="color: var(--amber);">ENGAGE US WHEN</h3>
+                    <ul class="check-list">
+                        <li><span class="icon-check">✓</span> A project feels directionally wrong.</li>
+                        <li><span class="icon-check">✓</span> You are burning resources without conviction.</li>
+                        <li><span class="icon-check">✓</span> You need a defensible Go / No-Go decision.</li>
                     </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <span class="tech-label">03 // PROTOCOLS</span>
-            <h2>How We Engage</h2>
-            <p>We don't sell hours. We sell clarity.</p>
+    <section id="protocol" class="protocol" style="padding-top: 50px;">
+        <div class="container">
+            <div class="section-header">
+                <h2>FORWARD-MOTION DIAGNOSTICS</h2>
+                <p>We price decisions, not hours. Every engagement begins here.</p>
+            </div>
 
-            <div class="services-grid">
-                <div class="service-card">
-                    <span class="service-number">PROTOCOL_01</span>
-                    <h3>The Audit</h3>
-                    <p>A rapid, merciless review of your current product strategy, UX architecture, and market assumptions.</p>
+            <div class="diagnostic-grid">
+               
+                <div class="card status-green">
+                    <div class="card-header">
+                        <span class="signal">●</span> PROCEED
+                    </div>
+                    <h3>GREEN</h3>
+                    <p class="definition">The direction is structurally sound. Safe to build.</p>
+                    <div class="specs">
+                        <div class="spec-row">
+                            <span>ACTION:</span> <strong>Initialization Sprint</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span>PRICE:</span> <strong>$8k - $15k</strong>
+                        </div>
+                    </div>
+                    <p class="details">Includes system spine, repo structure, and First Value delivery.</p>
                 </div>
-                <div class="service-card">
-                    <span class="service-number">PROTOCOL_02</span>
-                    <h3>The Prototype</h3>
-                    <p>Low-fidelity, high-logic testing. We validate the utility before you pay for the fidelity.</p>
+
+                <div class="card status-yellow">
+                    <div class="card-header">
+                        <span class="signal">●</span> REFRAME
+                    </div>
+                    <h3>YELLOW</h3>
+                    <p class="definition">Signal exists, but framing is risky. Ambiguity must collapse.</p>
+                    <div class="specs">
+                        <div class="spec-row">
+                            <span>ACTION:</span> <strong>Narrowing Sprint</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span>PRICE:</span> <strong>$3k - $6k</strong>
+                        </div>
+                    </div>
+                    <p class="details">You pay to remove risk, not to create artifacts. We define "Done."</p>
                 </div>
-                <div class="service-card">
-                    <span class="service-number">PROTOCOL_03</span>
-                    <h3>The Decision</h3>
-                    <p>We provide the data and the framework for the leadership team to commit to a path—or kill the project.</p>
+
+                <div class="card status-red">
+                    <div class="card-header">
+                        <span class="signal">●</span> STOP / PIVOT
+                    </div>
+                    <h3>RED</h3>
+                    <p class="definition">Unsafe to build. Stopping now preserves capital.</p>
+                    <div class="specs">
+                        <div class="spec-row">
+                            <span>ACTION:</span> <strong>Ideation Reset</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span>PRICE:</span> <strong>$2k - $4k</strong>
+                        </div>
+                    </div>
+                    <p class="details">We reset assumptions without attachment.</p>
                 </div>
             </div>
-        </section>
+            
+            <div class="diagnostic-grid" style="margin-top: 30px;">
+                 <div class="card status-purple">
+                    <div class="card-header"><span class="signal">●</span> REALIGN</div>
+                    <h3>RESTRUCTURE</h3>
+                    <p class="definition">System has value, but structure is misaligned.</p>
+                    <div class="specs">
+                        <div class="spec-row"><span>ACTION:</span> <strong>Restructure Sprint</strong></div>
+                        <div class="spec-row"><span>PRICE:</span> <strong>$6k - $12k</strong></div>
+                    </div>
+                </div>
 
-        <section style="border-bottom: none; padding-bottom: 4rem;">
-            <div style="background: var(--bg-card); padding: 4rem; text-align: center; border: 1px solid var(--accent-main);">
-                <span class="tech-label">/// READY STATE</span>
-                <h2 style="margin-bottom: 1rem;">Validate your direction.</h2>
-                <p style="margin: 0 auto 2rem auto;">If you are facing a critical junction in your product lifecycle, let's talk.</p>
-                <a href="mailto:chris@nullstate.com" class="btn">Initialize Contact</a>
+                 <div class="card status-blue">
+                    <div class="card-header"><span class="signal">●</span> STABILIZE</div>
+                    <h3>FINISH</h3>
+                    <p class="definition">System must be locked and protected.</p>
+                    <div class="specs">
+                        <div class="spec-row"><span>ACTION:</span> <strong>Handoff & Exit</strong></div>
+                        <div class="spec-row"><span>PRICE:</span> <strong>$4k - $8k</strong></div>
+                    </div>
+                </div>
             </div>
-        </section>
 
-        <footer>
-            <span>&copy; 2026 Null State.</span>
-            <span>[ SYSTEM: OPERATIONAL ]</span>
-        </footer>
-    </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container narrow">
+            <h2>VALIDATE YOUR DIRECTION</h2>
+            <p>If you are facing a critical junction in your product lifecycle, let's talk.</p>
+           
+            <form action="https://formspree.io/f/xeeogjzb" method="POST">
+                <div class="form-group">
+                    <label>IDENTIFIER (NAME)</label>
+                    <input type="text" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>COORDINATES (EMAIL)</label>
+                    <input type="email" name="email" required placeholder="john@company.com">
+                </div>
+                <div class="form-group">
+                    <label>SYSTEM STATUS (MESSAGE)</label>
+                    <textarea name="message" rows="5" placeholder="Briefly describe the initiative or the crisis..."></textarea>
+                </div>
+                <button type="submit" class="btn primary full-width">DETERMINE READINESS</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="col">
+                    <h4>NULL STATE</h4>
+                    <p>Chris Cooper d/b/a Null State<br>Texas, USA</p>
+                </div>
+                <div class="col right">
+                    <h4>STANDARD PROTOCOLS</h4>
+                    <a href="legal/msa.pdf" target="_blank">[ MASTER SERVICES AGREEMENT ]</a><br>
+                    <a href="legal/nda.pdf" target="_blank">[ NON-DISCLOSURE AGREEMENT ]</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 NULL STATE. ALL SYSTEMS OPERATIONAL.
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
