@@ -62,8 +62,9 @@ nav {
 .blink { animation: blink 1s infinite; color: var(--amber); }
 @keyframes blink { 50% { opacity: 0; } }
 
-.nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--text-muted); }
-.nav-links a:hover { color: var(--amber); }
+/* UPDATED SECTION: Nav links are now orange by default */
+.nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--amber); }
+.nav-links a:hover { color: #fff; /* Changed hover to white for contrast */ }
 .nav-btn { color: var(--amber) !important; border: 1px solid var(--amber); padding: 8px 16px; }
 .nav-btn:hover { background: var(--amber); color: #000 !important; }
 
