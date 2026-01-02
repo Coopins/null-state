@@ -3,271 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuLL State | Technical Operations & Rescue</title>
-    <link rel="stylesheet" href="style.css">
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
+    <title>Null State | Strategic Design & Decisions</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --accent: #ffffff;
+            --danger: #ff4d4d;
+            --spacing-unit: 2rem;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.2rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        p { margin-bottom: 1.5rem; max-width: 65ch; }
+
+        .text-muted { color: var(--text-muted); }
+        .text-highlight { border-left: 2px solid var(--accent); padding-left: 1rem; }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid #222;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.05em; }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-statement {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: var(--text-muted);
+            margin-top: 2rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 2rem;
+        }
+
+        /* The Filter Grid */
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .filter-column ul { list-style: none; }
+        .filter-column li { 
+            margin-bottom: 1rem; 
+            padding-left: 1.5rem; 
+            position: relative;
+        }
+        
+        .fit-bad li::before { content: "×"; position: absolute; left: 0; color: var(--text-muted); }
+        .fit-good li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
+
+        .fit-bad { opacity: 0.6; }
+
+        /* CTA Button */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--bg-color);
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: opacity 0.2s ease;
+            margin-top: 2rem;
+        }
+
+        .btn:hover { opacity: 0.9; }
+
+        /* Footer */
+        footer { padding: 4rem 0; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-grid { grid-template-columns: 1fr; gap: 2rem; }
+            section { padding: 4rem 0; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="scanline"></div>
+    <div class="container">
+        <nav>
+            <div class="logo">NULL STATE</div>
+        </nav>
 
-    <nav>
-        <div class="logo">
-            <span class="prompt">&gt;_</span> NULL STATE
-        </div>
-        <div class="nav-links">
-            <a href="#services">CAPABILITIES</a>
-            <a href="#mission">LOGS</a>
-            <a href="#protocol">PROTOCOL</a>
-            <a href="#contact" class="nav-btn">INITIALIZE</a>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <div class="container">
-            <div class="status-indicator">SYSTEM STATUS: <span class="text-amber">READY</span></div>
-            <h1>WE AUTHORIZE THE START.<br>WE STABILIZE THE FINISH.</h1>
-            <p class="hero-sub">
-                NuLL State is a technical operations firm. We help businesses of all sizes make the right digital decisions, build high-performance assets, and avoid expensive technical mistakes.
-            </p>
-            <div class="hero-actions">
-                <a href="#contact" class="btn primary">[ INITIALIZE DIAGNOSTIC ]</a>
-                <a href="#identity" class="btn secondary">IDENTIFY TARGET</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="identity" class="identity-section" style="padding: 80px 0; border-bottom: 1px solid #222;">
-        <div class="container">
-            <div class="grid-2">
-                <div class="content-block">
-                    <h2>OPERATIONAL TARGETS</h2>
-                    <p style="color: #ccc; margin-bottom: 20px;">We apply enterprise-grade discipline to projects of every size.</p>
-                    <ul class="check-list">
-                        <li><strong style="color:#fff">INDEPENDENT OWNERS:</strong> Who need a digital presence built right the first time.</li>
-                        <li><strong style="color:#fff">FOUNDERS:</strong> With capital at risk who need to know if a build is viable.</li>
-                        <li><strong style="color:#fff">TECHNICAL LEADERS:</strong> Inheriting unstable systems or "ghost code."</li>
-                    </ul>
-                </div>
-                <div class="content-block">
-                    <h2>THE INTERVENTION</h2>
-                    <p style="color: #ccc; margin-bottom: 20px;">Most projects fail because they start without clarity or continue without purpose.</p>
-                    <ul class="check-list">
-                        <li><span class="text-amber">&gt;</span> We authorize the start.</li>
-                        <li><span class="text-amber">&gt;</span> We stabilize the finish.</li>
-                        <li><span class="text-amber">&gt;</span> We kill zombie projects.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="services" style="padding: 100px 0; background: #0f0f0f;">
-        <div class="container">
-            <div class="section-header">
-                <h2>OPERATIONAL CAPABILITIES</h2>
-                <p>Three pillars of execution. From simple deployment to complex rescue.</p>
-            </div>
+        <section class="hero">
+            <h1>Stop building blindly.</h1>
             
-            <div class="diagnostic-grid">
-                
-                <div class="card">
-                    <h3 style="color: #fff; margin-bottom: 15px;">01 // DEPLOYMENT</h3>
-                    <p class="definition" style="height: auto;">New infrastructure built correctly from zero. High-performance assets, not just templates.</p>
-                    <ul class="check-list" style="margin-top: 20px;">
-                        <li><span class="text-amber">+</span> <strong>Web Infrastructure:</strong> Fast, SEO-ready sites.</li>
-                        <li><span class="text-amber">+</span> <strong>MVP Development:</strong> Rapid V1 prototypes.</li>
-                        <li><span class="text-amber">+</span> <strong>E-Commerce:</strong> Shopify/Woo setups that scale.</li>
-                    </ul>
-                    <div class="specs" style="margin-top: 20px;">
-                        <div class="spec-row"><span>RANGE:</span> <strong>$2.5k - $10k+</strong></div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 style="color: #fff; margin-bottom: 15px;">02 // RESCUE</h3>
-                    <p class="definition" style="height: auto;">Stabilization for broken, slow, or insecure systems. We fix what others broke.</p>
-                    <ul class="check-list" style="margin-top: 20px;">
-                        <li><span class="text-amber">+</span> <strong>System Stabilization:</strong> Emergency bug fixes.</li>
-                        <li><span class="text-amber">+</span> <strong>Platform Migration:</strong> Safe data transfer.</li>
-                        <li><span class="text-amber">+</span> <strong>Tech Debt Removal:</strong> Refactoring code.</li>
-                    </ul>
-                    <div class="specs" style="margin-top: 20px;">
-                        <div class="spec-row"><span>RANGE:</span> <strong>$1.5k / Week Sprint</strong></div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 style="color: #fff; margin-bottom: 15px;">03 // OPERATIONS</h3>
-                    <p class="definition" style="height: auto;">Applied AI and automation to remove manual work and overhead.</p>
-                    <ul class="check-list" style="margin-top: 20px;">
-                        <li><span class="text-amber">+</span> <strong>Workflow Automation:</strong> CRM & Lead logic.</li>
-                        <li><span class="text-amber">+</span> <strong>Applied AI:</strong> Custom integration & tools.</li>
-                        <li><span class="text-amber">+</span> <strong>Fractional Ops:</strong> Technical oversight.</li>
-                    </ul>
-                    <div class="specs" style="margin-top: 20px;">
-                        <div class="spec-row"><span>RANGE:</span> <strong>Scope Dependent</strong></div>
-                    </div>
-                </div>
-
+            <div class="hero-statement">
+                We are brought in when the cost of making the wrong decision is higher than the cost of slowing down.
             </div>
-        </div>
-    </section>
 
-    <section id="mission" class="mission-log" style="padding: 100px 0; border-top: 1px solid #222; border-bottom: 1px solid #222;">
-        <div class="container">
-            <h2 style="margin-bottom: 40px;">MISSION LOG: SELECTED WORK</h2>
+            <div style="margin-top: 3rem;">
+                <a href="#contact" class="btn">Let’s determine if you are ready to build</a>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-highlight">
+                <h3>The Hidden Risk</h3>
+                <h2>Your risk isn't the code. Your risk is building the wrong thing beautifully.</h2>
+                <p class="text-muted">
+                    Most failures we see are not technical. They are strategic. 
+                    Teams burn political capital and budget executing efficiently on a flawed premise.
+                </p>
+                <p style="color: var(--text-main); font-weight: 500; font-size: 1.2rem;">
+                    Technical debt is fixable. Strategic debt is fatal.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>The Decision Threshold</h2>
+            <p class="text-muted">We are not a traditional dev shop. We function as a circuit breaker for high-stakes projects.</p>
+
+            <div class="filter-grid">
+                <div class="filter-column fit-bad">
+                    <h3>When Null State Is the Wrong Fit</h3>
+                    <ul>
+                        <li>You already know exactly what to build and just need "hands on keyboards."</li>
+                        <li>You measure success by features shipped rather than problems solved.</li>
+                        <li>You are not willing to pause a project even if the diagnosis says "stop."</li>
+                    </ul>
+                </div>
+
+                <div class="filter-column fit-good">
+                    <h3>When to Engage Us</h3>
+                    <ul>
+                        <li>A project feels directionally wrong, but momentum makes it hard to stop.</li>
+                        <li>You are burning resources without conviction in the outcome.</li>
+                        <li>You need a defensible Go / No-Go decision before scaling.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>How We Engage</h2>
+            <p>We don't sell hours. We sell clarity.</p>
             
-            <div class="log-entry" style="border: 1px solid #333; padding: 40px; background: #050505; position: relative;">
-                <div class="log-bar"></div> <div class="log-header" style="margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px;">
-                    <span class="text-amber" style="font-family: var(--font-mono); font-size: 0.9rem;">PROJECT ID: AI-FLUENCY-ASSESSMENT // STATUS: COMPLETE</span>
-                    <h3 style="font-size: 2rem; color: #fff; margin-top: 10px;">AI-DRIVEN LANGUAGE FLUENCY SYSTEM</h3>
+            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3>01. The Audit</h3>
+                    <p class="text-muted">A rapid, merciless review of your current product strategy, UX architecture, and market assumptions.</p>
                 </div>
-
-                <div class="grid-2">
-                    <div>
-                        <h4 style="color: #888; margin-bottom: 10px;">THE CONTEXT</h4>
-                        <p style="color: #ccc; margin-bottom: 20px;">Most language platforms rely on passive input. Fluency is inferred, not measured. This project addressed the gap between <em>perceived</em> proficiency and <em>actual</em> spoken competence.</p>
-                        
-                        <h4 style="color: #888; margin-bottom: 10px;">WHAT WAS BUILT</h4>
-                        <ul class="check-list">
-                            <li><span class="text-amber">&gt;</span> Automatic audio capture with silence detection.</li>
-                            <li><span class="text-amber">&gt;</span> Real-time speech-to-text processing.</li>
-                            <li><span class="text-amber">&gt;</span> AI-based evaluation of fluency signals.</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 style="color: #888; margin-bottom: 10px;">QUANTIZED EXECUTION</h4>
-                        <div class="specs" style="background: #111;">
-                            <div class="spec-row"><strong class="text-amber">100%</strong> <span>Automated Evaluation Flow</span></div>
-                            <div class="spec-row"><strong class="text-amber">0</strong> <span>Manual Grading Steps</span></div>
-                            <div class="spec-row"><strong class="text-amber">&lt; 2 Sec</strong> <span>Silence Threshold Trigger</span></div>
-                            <div class="spec-row"><strong class="text-amber">1</strong> <span>Single-Screen Workflow</span></div>
-                        </div>
-
-                        <h4 style="color: #888; margin-top: 20px; margin-bottom: 10px;">THE OUTCOME</h4>
-                        <p style="color: #ccc;">Demonstrated that fluency can be evaluated programmatically. Produced a reusable diagnostic architecture applicable to other skill-assessment domains.</p>
-                    </div>
+                <div>
+                    <h3>02. The Prototype</h3>
+                    <p class="text-muted">Low-fidelity, high-logic testing. We validate the utility before you pay for the fidelity.</p>
+                </div>
+                <div>
+                    <h3>03. The Decision</h3>
+                    <p class="text-muted">We provide the data and the framework for the leadership team to commit to a path—or kill the project.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="protocol" class="protocol">
-        <div class="container">
-            <div class="section-header">
-                <h2>THE FORWARD-MOTION DIAGNOSTIC</h2>
-                <p>For complex initiatives, we use a rigid framework to authorize the start. We price decisions, not hope.</p>
-            </div>
+        <section id="contact" style="border-bottom: none; min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+            <h2>Ready to validate your direction?</h2>
+            <p class="text-muted">If you are facing a critical junction in your product lifecycle, let's talk.</p>
+            <a href="mailto:chris@nullstate.com" class="btn">Let’s determine if you are ready to build</a>
+        </section>
 
-            <div class="diagnostic-grid">
-                
-                <div class="card status-green">
-                    <div class="card-header"><span class="signal">●</span> PROCEED</div>
-                    <h3>GREEN</h3>
-                    <p class="definition">The direction is structurally sound. Safe to build.</p>
-                    <div class="specs">
-                        <div class="spec-row"><span>DELIVERABLE:</span> <strong>Build Plan / Live Asset</strong></div>
-                        <div class="spec-row"><span>PRICE:</span> <strong>Scope Dependent</strong></div>
-                    </div>
-                    <p class="details"><strong>You Get:</strong> A build-safe foundation. For small projects, this is the build phase. For large projects, this is the blueprint.</p>
-                </div>
-
-                <div class="card status-yellow">
-                    <div class="card-header"><span class="signal">●</span> REFRAME</div>
-                    <h3>YELLOW</h3>
-                    <p class="definition">Signal exists, but framing is risky. Ambiguity must collapse.</p>
-                    <div class="specs">
-                        <div class="spec-row"><span>DELIVERABLE:</span> <strong>Reframed Scope Doc</strong></div>
-                        <div class="spec-row"><span>PRICE:</span> <strong>$3k - $6k</strong></div>
-                    </div>
-                    <p class="details"><strong>You Get:</strong> A narrowed user definition and reduced scope. We define "Done" before we start.</p>
-                </div>
-
-                <div class="card status-red">
-                    <div class="card-header"><span class="signal">●</span> STOP / PIVOT</div>
-                    <h3>RED</h3>
-                    <p class="definition">Unsafe to build. Stopping now preserves capital.</p>
-                    <div class="specs">
-                        <div class="spec-row"><span>DELIVERABLE:</span> <strong>Risk Report</strong></div>
-                        <div class="spec-row"><span>PRICE:</span> <strong>$2k - $4k</strong></div>
-                    </div>
-                    <p class="details"><strong>You Get:</strong> A written risk analysis. Sometimes the best move is to stop before you spend.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="method" class="comparison">
-        <div class="container">
-            <h2>OPERATIONAL LOGIC</h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>TYPICAL CONSULTANT</th>
-                            <th>NULL STATE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Sells Hours</td><td><strong>Sells Decisions & Outcomes</strong></td></tr>
-                        <tr><td>Optimizes Execution</td><td><strong>Validates Existence</strong></td></tr>
-                        <tr><td>Encourages Continuation</td><td><strong>Knows When to Stop</strong></td></tr>
-                        <tr><td>Measures Activity</td><td><strong>Measures Performance</strong></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container narrow">
-            <h2>INITIATE COMMS</h2>
-            <p>Every engagement begins with the <strong>Forward-Motion Diagnostic</strong>. <br>Fixed fee. Clear verdict.</p>
-            
-            <form action="https://formspree.io/f/xeeogjzb" method="POST">
-                <div class="form-group">
-                    <label>IDENTIFIER (NAME)</label>
-                    <input type="text" name="name" required placeholder="John Doe">
-                </div>
-                <div class="form-group">
-                    <label>COORDINATES (EMAIL)</label>
-                    <input type="email" name="email" required placeholder="john@company.com">
-                </div>
-                <div class="form-group">
-                    <label>SYSTEM STATUS (MESSAGE)</label>
-                    <textarea name="message" rows="5" placeholder="Briefly describe the initiative or the crisis..."></textarea>
-                </div>
-                <button type="submit" class="btn primary full-width">TRANSMIT REQUEST</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="col">
-                    <h4>NULL STATE</h4>
-                    <p>Chris Cooper d/b/a Null State<br>Texas, USA</p>
-                </div>
-                <div class="col right">
-                    <h4>STANDARD PROTOCOLS</h4>
-                    <a href="legal/msa.pdf" target="_blank">[ MASTER SERVICES AGREEMENT ]</a><br>
-                    <a href="legal/nda.pdf" target="_blank">[ NON-DISCLOSURE AGREEMENT ]</a>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2026 NULL STATE. ALL SYSTEMS OPERATIONAL.
-            </div>
-        </div>
-    </footer>
+        <footer>
+            <p>&copy; 2026 Null State. All Rights Reserved.</p>
+        </footer>
+    </div>
 
 </body>
 </html>
