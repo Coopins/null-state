@@ -6,13 +6,23 @@
     <title>Null State | Strategic Design & Decisions</title>
     <style>
         :root {
-            --bg-color: #0f0f0f;
-            --text-main: #f0f0f0;
-            --text-muted: #888888;
-            --accent: #ffffff;
-            --danger: #ff4d4d;
-            --spacing-unit: 2rem;
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            /* Palette - Premium Dark Mode */
+            --bg-body: #050505;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(255, 255, 255, 0.2);
+
+            --text-main: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #52525b;
+
+            --accent-glow: rgba(255, 255, 255, 0.05);
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --radius: 8px;
+            --container-width: 1100px;
         }
 
         * {
@@ -22,7 +32,7 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-body);
             color: var(--text-main);
             font-family: var(--font-main);
             line-height: 1.6;
@@ -30,153 +40,232 @@
         }
 
         /* Typography */
-        h1, h2, h3 {
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
         }
 
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-        h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1.5rem; }
-        h3 { font-size: 1.2rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        p { margin-bottom: 1.5rem; max-width: 65ch; }
+        h1 { font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 1rem; }
+        h3 { font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-bottom: 0.5rem; }
+        p { color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 65ch; font-size: 1.1rem; }
+        
+        .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
 
-        .text-muted { color: var(--text-muted); }
-        .text-highlight { border-left: 2px solid var(--accent); padding-left: 1rem; }
-
-        /* Layout */
+        /* Layout Utilities */
         .container {
-            max-width: 1000px;
+            max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 2rem;
         }
 
         section {
-            padding: 6rem 0;
-            border-bottom: 1px solid #222;
+            padding: 8rem 0;
+            border-bottom: 1px solid var(--border-subtle);
         }
 
-        /* Navigation */
-        nav {
+        /* Header */
+        header {
             padding: 2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
         }
-
-        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.05em; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; color: var(--text-main); text-decoration: none;}
 
         /* Hero Section */
         .hero {
-            min-height: 80vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding-top: 4rem;
         }
 
-        .hero-statement {
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
-            color: var(--text-muted);
-            margin-top: 2rem;
-            border-left: 4px solid var(--accent);
+        .hero-anchor {
+            border-left: 3px solid #fff;
             padding-left: 2rem;
+            margin: 2rem 0 3rem 0;
+        }
+        
+        .hero-anchor p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
         }
 
-        /* The Filter Grid */
-        .filter-grid {
+        /* The Button */
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        /* Feature Cards (Risk Section) */
+        .risk-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem;
+            border-radius: var(--radius);
+        }
+        .risk-block strong { color: #fff; }
+
+        /* Comparison Grid (Decision Threshold) */
+        .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 2rem;
             margin-top: 3rem;
         }
 
-        .filter-column ul { list-style: none; }
-        .filter-column li { 
-            margin-bottom: 1rem; 
-            padding-left: 1.5rem; 
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .card-header {
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist { list-style: none; }
+        .checklist li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
             position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Custom Bullet Points */
+        .bad-fit li::before { 
+            content: "✕"; 
+            position: absolute; left: 0; top: 0;
+            color: var(--text-muted); 
         }
         
-        .fit-bad li::before { content: "×"; position: absolute; left: 0; color: var(--text-muted); }
-        .fit-good li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
-
-        .fit-bad { opacity: 0.6; }
-
-        /* CTA Button */
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--bg-color);
-            padding: 1.2rem 2.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: opacity 0.2s ease;
-            margin-top: 2rem;
+        .good-fit li::before { 
+            content: "→"; 
+            position: absolute; left: 0; top: 0;
+            color: #fff; 
         }
 
-        .btn:hover { opacity: 0.9; }
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .service-number {
+            font-family: monospace;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+        }
 
         /* Footer */
-        footer { padding: 4rem 0; color: var(--text-muted); font-size: 0.9rem; }
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
 
-        /* Responsive */
+        /* Mobile */
         @media (max-width: 768px) {
-            .filter-grid { grid-template-columns: 1fr; gap: 2rem; }
-            section { padding: 4rem 0; }
+            h1 { font-size: 2.5rem; }
+            .comparison-grid, .services-grid { grid-template-columns: 1fr; }
+            .hero-anchor { padding-left: 1.5rem; }
+            .hero-anchor p { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <nav>
-            <div class="logo">NULL STATE</div>
-        </nav>
+        <header>
+            <nav>
+                <a href="#" class="logo">NULL STATE</a>
+                </nav>
+        </header>
 
         <section class="hero">
             <h1>Stop building blindly.</h1>
             
-            <div class="hero-statement">
-                We are brought in when the cost of making the wrong decision is higher than the cost of slowing down.
+            <div class="hero-anchor">
+                <p>We are brought in when the cost of making the wrong decision is higher than the cost of slowing down.</p>
             </div>
 
-            <div style="margin-top: 3rem;">
-                <a href="#contact" class="btn">Let’s determine if you are ready to build</a>
+            <div>
+                <a href="mailto:chris@nullstate.com" class="btn">Let’s determine if you are ready to build</a>
             </div>
         </section>
 
         <section>
-            <div class="text-highlight">
-                <h3>The Hidden Risk</h3>
-                <h2>Your risk isn't the code. Your risk is building the wrong thing beautifully.</h2>
-                <p class="text-muted">
-                    Most failures we see are not technical. They are strategic. 
-                    Teams burn political capital and budget executing efficiently on a flawed premise.
+            <span class="label">The Hidden Risk</span>
+            <div class="risk-block">
+                <h2>Your risk isn't the code.<br>Your risk is building the wrong thing beautifully.</h2>
+                <p>
+                    Most failures we see are not technical. They are strategic. Teams burn political capital and budget executing efficiently on a flawed premise.
                 </p>
-                <p style="color: var(--text-main); font-weight: 500; font-size: 1.2rem;">
-                    Technical debt is fixable. Strategic debt is fatal.
-                </p>
+                <p style="color: #fff; margin-bottom: 0;"><strong>Technical debt is fixable. Strategic debt is fatal.</strong></p>
             </div>
         </section>
 
         <section>
             <h2>The Decision Threshold</h2>
-            <p class="text-muted">We are not a traditional dev shop. We function as a circuit breaker for high-stakes projects.</p>
+            <p>We function as a circuit breaker for high-stakes projects.</p>
 
-            <div class="filter-grid">
-                <div class="filter-column fit-bad">
-                    <h3>When Null State Is the Wrong Fit</h3>
-                    <ul>
+            <div class="comparison-grid">
+                <div class="card" style="opacity: 0.7;">
+                    <div class="card-header">
+                        <h3>When Null State Is the Wrong Fit</h3>
+                    </div>
+                    <ul class="checklist bad-fit">
                         <li>You already know exactly what to build and just need "hands on keyboards."</li>
                         <li>You measure success by features shipped rather than problems solved.</li>
                         <li>You are not willing to pause a project even if the diagnosis says "stop."</li>
                     </ul>
                 </div>
 
-                <div class="filter-column fit-good">
-                    <h3>When to Engage Us</h3>
-                    <ul>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="color: #fff;">When to Engage Us</h3>
+                    </div>
+                    <ul class="checklist good-fit">
                         <li>A project feels directionally wrong, but momentum makes it hard to stop.</li>
                         <li>You are burning resources without conviction in the outcome.</li>
                         <li>You need a defensible Go / No-Go decision before scaling.</li>
@@ -188,31 +277,35 @@
         <section>
             <h2>How We Engage</h2>
             <p>We don't sell hours. We sell clarity.</p>
-            
-            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div>
-                    <h3>01. The Audit</h3>
-                    <p class="text-muted">A rapid, merciless review of your current product strategy, UX architecture, and market assumptions.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-number">01</span>
+                    <h3>The Audit</h3>
+                    <p>A rapid, merciless review of your current product strategy, UX architecture, and market assumptions.</p>
                 </div>
-                <div>
-                    <h3>02. The Prototype</h3>
-                    <p class="text-muted">Low-fidelity, high-logic testing. We validate the utility before you pay for the fidelity.</p>
+                <div class="service-card">
+                    <span class="service-number">02</span>
+                    <h3>The Prototype</h3>
+                    <p>Low-fidelity, high-logic testing. We validate the utility before you pay for the fidelity.</p>
                 </div>
-                <div>
-                    <h3>03. The Decision</h3>
-                    <p class="text-muted">We provide the data and the framework for the leadership team to commit to a path—or kill the project.</p>
+                <div class="service-card">
+                    <span class="service-number">03</span>
+                    <h3>The Decision</h3>
+                    <p>We provide the data and the framework for the leadership team to commit to a path—or kill the project.</p>
                 </div>
             </div>
         </section>
 
-        <section id="contact" style="border-bottom: none; min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+        <section style="text-align: center; border-bottom: none;">
             <h2>Ready to validate your direction?</h2>
-            <p class="text-muted">If you are facing a critical junction in your product lifecycle, let's talk.</p>
+            <p style="margin: 1rem auto;">If you are facing a critical junction in your product lifecycle, let's talk.</p>
+            <br>
             <a href="mailto:chris@nullstate.com" class="btn">Let’s determine if you are ready to build</a>
         </section>
 
         <footer>
-            <p>&copy; 2026 Null State. All Rights Reserved.</p>
+            &copy; 2026 Null State. All Rights Reserved.
         </footer>
     </div>
 
