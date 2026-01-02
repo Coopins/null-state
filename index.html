@@ -1,4 +1,48 @@
-<section id="identity" class="identity-section" style="padding: 80px 0; border-bottom: 1px solid #222;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuLL State | Technical Operations & Rescue</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <nav>
+        <div class="logo">
+            <span class="prompt">&gt;_</span> NULL STATE
+        </div>
+        <div class="nav-links">
+            <a href="#services">CAPABILITIES</a>
+            <a href="#mission">LOGS</a>
+            <a href="#protocol">PROTOCOL</a>
+            <a href="#contact" class="nav-btn">INITIALIZE</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="status-indicator">SYSTEM STATUS: <span class="text-amber">READY</span></div>
+            <h1>WE AUTHORIZE THE START.<br>WE STABILIZE THE FINISH.</h1>
+            <p class="hero-sub">
+                NuLL State is a technical operations firm. We help businesses of all sizes make the right digital decisions, build high-performance assets, and avoid expensive technical mistakes.
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn primary">[ INITIALIZE DIAGNOSTIC ]</a>
+                <a href="#identity" class="btn secondary">IDENTIFY TARGET</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="identity" class="identity-section" style="padding: 80px 0; border-bottom: 1px solid #222;">
         <div class="container">
             <div class="grid-2">
                 <div class="content-block">
@@ -75,12 +119,12 @@
         </div>
     </section>
 
-    <section class="mission-log" style="padding: 100px 0; border-top: 1px solid #222; border-bottom: 1px solid #222;">
+    <section id="mission" class="mission-log" style="padding: 100px 0; border-top: 1px solid #222; border-bottom: 1px solid #222;">
         <div class="container">
             <h2 style="margin-bottom: 40px;">MISSION LOG: SELECTED WORK</h2>
             
-            <div class="log-entry" style="border: 1px solid #333; padding: 40px; background: #050505;">
-                <div class="log-header" style="margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px;">
+            <div class="log-entry" style="border: 1px solid #333; padding: 40px; background: #050505; position: relative;">
+                <div class="log-bar"></div> <div class="log-header" style="margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px;">
                     <span class="text-amber" style="font-family: var(--font-mono); font-size: 0.9rem;">PROJECT ID: AI-FLUENCY-ASSESSMENT // STATUS: COMPLETE</span>
                     <h3 style="font-size: 2rem; color: #fff; margin-top: 10px;">AI-DRIVEN LANGUAGE FLUENCY SYSTEM</h3>
                 </div>
@@ -121,16 +165,109 @@
                 <h2>THE FORWARD-MOTION DIAGNOSTIC</h2>
                 <p>For complex initiatives, we use a rigid framework to authorize the start. We price decisions, not hope.</p>
             </div>
-            ```
 
-### **One CSS Update**
-To make the "Mission Log" look sharp, add this small block to your `style.css`:
+            <div class="diagnostic-grid">
+                
+                <div class="card status-green">
+                    <div class="card-header"><span class="signal">●</span> PROCEED</div>
+                    <h3>GREEN</h3>
+                    <p class="definition">The direction is structurally sound. Safe to build.</p>
+                    <div class="specs">
+                        <div class="spec-row"><span>DELIVERABLE:</span> <strong>Build Plan / Live Asset</strong></div>
+                        <div class="spec-row"><span>PRICE:</span> <strong>Scope Dependent</strong></div>
+                    </div>
+                    <p class="details"><strong>You Get:</strong> A build-safe foundation. For small projects, this is the build phase. For large projects, this is the blueprint.</p>
+                </div>
 
-```css
-/* MISSION LOG STYLING */
-.mission-log h4 { font-size: 0.9rem; letter-spacing: 0.1em; color: var(--text-muted); }
-.log-entry { position: relative; }
-.log-entry::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-    background: var(--amber);
-}
+                <div class="card status-yellow">
+                    <div class="card-header"><span class="signal">●</span> REFRAME</div>
+                    <h3>YELLOW</h3>
+                    <p class="definition">Signal exists, but framing is risky. Ambiguity must collapse.</p>
+                    <div class="specs">
+                        <div class="spec-row"><span>DELIVERABLE:</span> <strong>Reframed Scope Doc</strong></div>
+                        <div class="spec-row"><span>PRICE:</span> <strong>$3k - $6k</strong></div>
+                    </div>
+                    <p class="details"><strong>You Get:</strong> A narrowed user definition and reduced scope. We define "Done" before we start.</p>
+                </div>
+
+                <div class="card status-red">
+                    <div class="card-header"><span class="signal">●</span> STOP / PIVOT</div>
+                    <h3>RED</h3>
+                    <p class="definition">Unsafe to build. Stopping now preserves capital.</p>
+                    <div class="specs">
+                        <div class="spec-row"><span>DELIVERABLE:</span> <strong>Risk Report</strong></div>
+                        <div class="spec-row"><span>PRICE:</span> <strong>$2k - $4k</strong></div>
+                    </div>
+                    <p class="details"><strong>You Get:</strong> A written risk analysis. Sometimes the best move is to stop before you spend.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="method" class="comparison">
+        <div class="container">
+            <h2>OPERATIONAL LOGIC</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>TYPICAL CONSULTANT</th>
+                            <th>NULL STATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sells Hours</td><td><strong>Sells Decisions & Outcomes</strong></td></tr>
+                        <tr><td>Optimizes Execution</td><td><strong>Validates Existence</strong></td></tr>
+                        <tr><td>Encourages Continuation</td><td><strong>Knows When to Stop</strong></td></tr>
+                        <tr><td>Measures Activity</td><td><strong>Measures Performance</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container narrow">
+            <h2>INITIATE COMMS</h2>
+            <p>Every engagement begins with the <strong>Forward-Motion Diagnostic</strong>. <br>Fixed fee. Clear verdict.</p>
+            
+            <form action="https://formspree.io/f/xeeogjzb" method="POST">
+                <div class="form-group">
+                    <label>IDENTIFIER (NAME)</label>
+                    <input type="text" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>COORDINATES (EMAIL)</label>
+                    <input type="email" name="email" required placeholder="john@company.com">
+                </div>
+                <div class="form-group">
+                    <label>SYSTEM STATUS (MESSAGE)</label>
+                    <textarea name="message" rows="5" placeholder="Briefly describe the initiative or the crisis..."></textarea>
+                </div>
+                <button type="submit" class="btn primary full-width">TRANSMIT REQUEST</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="col">
+                    <h4>NULL STATE</h4>
+                    <p>Chris Cooper d/b/a Null State<br>Texas, USA</p>
+                </div>
+                <div class="col right">
+                    <h4>STANDARD PROTOCOLS</h4>
+                    <a href="legal/msa.pdf" target="_blank">[ MASTER SERVICES AGREEMENT ]</a><br>
+                    <a href="legal/nda.pdf" target="_blank">[ NON-DISCLOSURE AGREEMENT ]</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 NULL STATE. ALL SYSTEMS OPERATIONAL.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
