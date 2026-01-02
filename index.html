@@ -6,22 +6,27 @@
     <title>Null State | Strategic Design & Decisions</title>
     <style>
         :root {
-            /* Palette - Premium Dark Mode */
+            /* Palette - Industrial Dark Mode */
             --bg-body: #050505;
-            --bg-card: #111111;
-            --bg-card-hover: #161616;
+            --bg-card: #0f0f0f;
+            --bg-card-hover: #141414;
             
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-highlight: rgba(255, 255, 255, 0.2);
+            /* The "Technical Orange" - High visibility, serious */
+            --accent-main: #ff5e00; 
+            --accent-dim: rgba(255, 94, 0, 0.15);
+            
+            --border-subtle: #222;
+            --border-highlight: #ff5e00;
 
-            --text-main: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #52525b;
+            --text-main: #f0f0f0;
+            --text-secondary: #999;
+            --text-muted: #555;
 
-            --accent-glow: rgba(255, 255, 255, 0.05);
+            /* Fonts */
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SF Mono", "Monaco", "Courier New", monospace; /* Adds technical character */
             
-            --radius: 8px;
+            --radius: 2px; /* Sharper corners for a technical feel */
             --container-width: 1100px;
         }
 
@@ -40,25 +45,27 @@
         }
 
         /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 600;
-            letter-spacing: -0.03em;
+        h1, h2, h3 {
+            font-weight: 700;
             color: var(--text-main);
+            letter-spacing: -0.02em;
         }
 
-        h1 { font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
+        h1 { font-size: clamp(3rem, 5vw, 5rem); line-height: 1; margin-bottom: 2rem; text-transform: uppercase; }
         h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 1rem; }
-        h3 { font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-bottom: 0.5rem; }
-        p { color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 65ch; font-size: 1.1rem; }
+        h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; }
         
-        .label {
-            font-size: 0.85rem;
+        p { color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 65ch; font-size: 1.1rem; }
+
+        /* Technical Labels (The "Code" Look) */
+        .tech-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            color: var(--accent-main);
             margin-bottom: 1rem;
             display: block;
-            font-weight: 600;
         }
 
         /* Layout Utilities */
@@ -79,7 +86,16 @@
             border-bottom: 1px solid var(--border-subtle);
         }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; color: var(--text-main); text-decoration: none;}
+        
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+            letter-spacing: -0.05em; 
+            color: var(--text-main); 
+            text-decoration: none;
+            border-left: 3px solid var(--accent-main);
+            padding-left: 0.75rem;
+        }
 
         /* Hero Section */
         .hero {
@@ -87,48 +103,63 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 4rem;
         }
 
         .hero-anchor {
-            border-left: 3px solid #fff;
+            border-left: 4px solid var(--accent-main);
             padding-left: 2rem;
             margin: 2rem 0 3rem 0;
+            background: linear-gradient(90deg, var(--accent-dim) 0%, transparent 100%); /* Subtle orange glow */
+            padding: 2rem;
         }
         
         .hero-anchor p {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
+            font-size: 1.4rem;
+            color: var(--text-main);
             line-height: 1.4;
+            margin: 0;
         }
 
-        /* The Button */
+        /* The Button - Industrial Orange */
         .btn {
             display: inline-block;
-            background: #fff;
+            background: var(--accent-main);
             color: #000;
-            padding: 1rem 2rem;
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 4px;
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             text-decoration: none;
             transition: all 0.2s ease;
+            border: 1px solid var(--accent-main);
         }
         .btn:hover {
-            background: #e0e0e0;
-            transform: translateY(-1px);
+            background: transparent;
+            color: var(--accent-main);
         }
 
-        /* Feature Cards (Risk Section) */
+        /* Risk Section */
         .risk-block {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             padding: 3rem;
-            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
         }
-        .risk-block strong { color: #fff; }
+        /* A subtle tech line decoration */
+        .risk-block::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--accent-main);
+        }
 
-        /* Comparison Grid (Decision Threshold) */
+        .risk-block strong { color: var(--text-main); border-bottom: 1px solid var(--accent-main); padding-bottom: 2px;}
+
+        /* Comparison Grid */
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -140,12 +171,12 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             padding: 2.5rem;
-            border-radius: var(--radius);
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            border-color: var(--border-highlight);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
         }
 
         .card-header {
@@ -157,7 +188,7 @@
         .checklist { list-style: none; }
         .checklist li {
             margin-bottom: 1rem;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
             position: relative;
             color: var(--text-secondary);
             font-size: 0.95rem;
@@ -165,16 +196,22 @@
 
         /* Custom Bullet Points */
         .bad-fit li::before { 
-            content: "✕"; 
+            content: "×"; 
             position: absolute; left: 0; top: 0;
             color: var(--text-muted); 
+            font-weight: bold;
         }
         
         .good-fit li::before { 
-            content: "→"; 
-            position: absolute; left: 0; top: 0;
-            color: #fff; 
+            content: "›"; 
+            position: absolute; left: 0; top: -2px;
+            color: var(--accent-main); 
+            font-weight: bold;
+            font-size: 1.2rem;
         }
+
+        .bad-fit-card { opacity: 0.6; }
+        .bad-fit-card:hover { opacity: 1; }
 
         /* Services Grid */
         .services-grid {
@@ -185,15 +222,18 @@
         }
         
         .service-card {
-            padding-top: 1rem;
+            padding-top: 1.5rem;
             border-top: 1px solid var(--border-subtle);
+            transition: border-color 0.3s ease;
         }
+        .service-card:hover { border-top: 1px solid var(--accent-main); }
         
         .service-number {
-            font-family: monospace;
-            color: var(--text-muted);
+            font-family: var(--font-mono);
+            color: var(--accent-main);
             margin-bottom: 1rem;
             display: block;
+            font-size: 0.85rem;
         }
 
         /* Footer */
@@ -201,15 +241,18 @@
             padding: 4rem 0;
             border-top: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            display: flex;
+            justify-content: space-between;
         }
 
         /* Mobile */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.8rem; }
             .comparison-grid, .services-grid { grid-template-columns: 1fr; }
-            .hero-anchor { padding-left: 1.5rem; }
-            .hero-anchor p { font-size: 1.2rem; }
+            .hero-anchor { padding: 1.5rem; }
+            .hero-anchor p { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -219,40 +262,43 @@
         <header>
             <nav>
                 <a href="#" class="logo">NULL STATE</a>
-                </nav>
+                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-main);">SYS.STATUS: ONLINE</span>
+            </nav>
         </header>
 
         <section class="hero">
-            <h1>Stop building blindly.</h1>
+            <span class="tech-label">/// SYSTEM DIAGNOSTIC</span>
+            <h1>Stop building<br><span style="color: var(--text-muted);">blindly.</span></h1>
             
             <div class="hero-anchor">
                 <p>We are brought in when the cost of making the wrong decision is higher than the cost of slowing down.</p>
             </div>
 
             <div>
-                <a href="mailto:chris@nullstate.com" class="btn">Let’s determine if you are ready to build</a>
+                <a href="mailto:chris@nullstate.com" class="btn">Let’s Determine Readiness</a>
             </div>
         </section>
 
         <section>
-            <span class="label">The Hidden Risk</span>
+            <span class="tech-label">01 // THE HIDDEN RISK</span>
             <div class="risk-block">
-                <h2>Your risk isn't the code.<br>Your risk is building the wrong thing beautifully.</h2>
+                <h2>Your risk isn't the code. Your risk is building the wrong thing beautifully.</h2>
                 <p>
-                    Most failures we see are not technical. They are strategic. Teams burn political capital and budget executing efficiently on a flawed premise.
+                    Most failures we see are not technical; they are strategic. Teams burn political capital and budget executing efficiently on a flawed premise.
                 </p>
-                <p style="color: #fff; margin-bottom: 0;"><strong>Technical debt is fixable. Strategic debt is fatal.</strong></p>
+                <p style="color: var(--text-main); margin-bottom: 0;"><strong>Technical debt is fixable. Strategic debt is fatal.</strong></p>
             </div>
         </section>
 
         <section>
-            <h2>The Decision Threshold</h2>
-            <p>We function as a circuit breaker for high-stakes projects.</p>
+            <span class="tech-label">02 // DECISION THRESHOLD</span>
+            <h2>The Circuit Breaker</h2>
+            <p>We function as a diagnostic stop-gap for high-stakes projects.</p>
 
             <div class="comparison-grid">
-                <div class="card" style="opacity: 0.7;">
+                <div class="card bad-fit-card">
                     <div class="card-header">
-                        <h3>When Null State Is the Wrong Fit</h3>
+                        <h3 style="color: var(--text-muted);">Null State Is a Wrong Fit If:</h3>
                     </div>
                     <ul class="checklist bad-fit">
                         <li>You already know exactly what to build and just need "hands on keyboards."</li>
@@ -263,7 +309,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 style="color: #fff;">When to Engage Us</h3>
+                        <h3 style="color: var(--accent-main);">Engage Us When:</h3>
                     </div>
                     <ul class="checklist good-fit">
                         <li>A project feels directionally wrong, but momentum makes it hard to stop.</li>
@@ -275,37 +321,41 @@
         </section>
 
         <section>
+            <span class="tech-label">03 // PROTOCOLS</span>
             <h2>How We Engage</h2>
             <p>We don't sell hours. We sell clarity.</p>
 
             <div class="services-grid">
                 <div class="service-card">
-                    <span class="service-number">01</span>
+                    <span class="service-number">PROTOCOL_01</span>
                     <h3>The Audit</h3>
                     <p>A rapid, merciless review of your current product strategy, UX architecture, and market assumptions.</p>
                 </div>
                 <div class="service-card">
-                    <span class="service-number">02</span>
+                    <span class="service-number">PROTOCOL_02</span>
                     <h3>The Prototype</h3>
                     <p>Low-fidelity, high-logic testing. We validate the utility before you pay for the fidelity.</p>
                 </div>
                 <div class="service-card">
-                    <span class="service-number">03</span>
+                    <span class="service-number">PROTOCOL_03</span>
                     <h3>The Decision</h3>
                     <p>We provide the data and the framework for the leadership team to commit to a path—or kill the project.</p>
                 </div>
             </div>
         </section>
 
-        <section style="text-align: center; border-bottom: none;">
-            <h2>Ready to validate your direction?</h2>
-            <p style="margin: 1rem auto;">If you are facing a critical junction in your product lifecycle, let's talk.</p>
-            <br>
-            <a href="mailto:chris@nullstate.com" class="btn">Let’s determine if you are ready to build</a>
+        <section style="border-bottom: none; padding-bottom: 4rem;">
+            <div style="background: var(--bg-card); padding: 4rem; text-align: center; border: 1px solid var(--accent-main);">
+                <span class="tech-label">/// READY STATE</span>
+                <h2 style="margin-bottom: 1rem;">Validate your direction.</h2>
+                <p style="margin: 0 auto 2rem auto;">If you are facing a critical junction in your product lifecycle, let's talk.</p>
+                <a href="mailto:chris@nullstate.com" class="btn">Initialize Contact</a>
+            </div>
         </section>
 
         <footer>
-            &copy; 2026 Null State. All Rights Reserved.
+            <span>&copy; 2026 Null State.</span>
+            <span>[ SYSTEM: OPERATIONAL ]</span>
         </footer>
     </div>
 
