@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuLL State | Digital & AI Consulting Studio</title>
+    <title>NuLL State | Digital & AI Consulting</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
     <style>
-        /* INLINE STYLES FOR NEW SECTIONS */
+        /* INLINE STYLES FOR SIMPLIFIED LAYOUT */
         .project-card {
             background: var(--panel);
             border: 1px solid #333;
@@ -61,7 +61,7 @@
             font-size: 0.8rem;
         }
         
-        /* New Styles for Service Cards Layout */
+        /* New Styles for Simplified Services */
         .service-list {
             list-style: none;
             margin-top: 1.5rem;
@@ -72,7 +72,7 @@
             padding-left: 1.5rem;
             margin-bottom: 0.8rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem; /* Slightly larger for readability */
         }
         .service-list li::before {
             content: "•";
@@ -81,44 +81,29 @@
             left: 0;
             font-weight: bold;
         }
-        .pricing-line {
-            display: block;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #222;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            color: #fff;
-        }
-        .pricing-sub {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: normal;
-            display: block;
-            margin-top: 0.2rem;
-        }
         
-        /* Tier Grid */
-        .tier-grid {
+        /* Outcome Grid */
+        .outcome-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
             margin-top: 3rem;
         }
-        .tier-card {
+        .outcome-card {
             border: 1px solid #222;
             padding: 2rem;
             background: #0a0a0a;
         }
-        .tier-title {
-            color: var(--amber);
+        .outcome-title {
+            color: #fff;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
             display: block;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
         }
-
+        
         /* Core Rule Banner */
         .core-rule {
             background: #0f0f0f;
@@ -147,10 +132,9 @@
     <nav>
         <div class="logo">NuLL STATE <span class="blink">_</span></div>
         <div class="nav-links">
-            <a href="#services">SERVICES</a>
-            <a href="#tiers">ENGAGEMENT TIERS</a>
+            <a href="#how-it-works">HOW IT WORKS</a>
             <a href="#work">WORK</a>
-            <a href="#contact" class="nav-btn">CONTACT</a>
+            <a href="#contact" class="nav-btn">BOOK A DIAGNOSTIC</a>
         </div>
     </nav>
 
@@ -160,154 +144,104 @@
             <h1>START, FIX, OR FINISH<br><span class="text-amber">WITHOUT GUESSWORK.</span></h1>
             
             <div class="hero-anchor">
-                <p>NuLL State helps founders and teams start, clarify, fix, and complete digital and AI projects.</p>
-                <p class="sub-text">We begin with a clear diagnostic and end with clean delivery, handoff, or a confident stop.</p>
+                <p>NuLL State helps founders and teams decide what to build, fix what’s broken, or finish what’s already started.</p>
+                <p class="sub-text">We don’t guess. We look at your situation, tell you the truth, and help you move forward.</p>
             </div>
             
             <div class="hero-actions">
-                <a href="#services" class="btn primary">[ BOOK A DIAGNOSTIC ]</a>
-                <a href="#tiers" class="btn secondary">SEE TIERS</a>
+                <a href="#contact" class="btn primary">[ BOOK A DIAGNOSTIC ]</a>
+                <a href="#how-it-works" class="btn secondary">SEE HOW IT WORKS</a>
             </div>
         </div>
     </section>
 
-    <div class="core-rule">
-        <div class="container">
-            <p>All NuLL State engagements begin with a <span style="color: var(--amber);">Forward-Motion Diagnostic</span> to ensure time, money, and effort are invested in the right direction.</p>
-        </div>
-    </div>
-
-    <section id="services" class="protocol" style="background: #0f0f0f;">
+    <section id="how-it-works" class="protocol" style="background: #0f0f0f;">
         <div class="container">
             <div class="section-header">
-                <h2>SERVICES & PRICING</h2>
-                <p>We sell outcomes, not hours. Every engagement starts with a clear plan.</p>
+                <h2>HOW IT WORKS & WHAT IT COSTS</h2>
+                <p>Simple pricing. Clear outcomes. No surprises.</p>
             </div>
 
-            <div class="diagnostic-grid">
+            <div class="card" style="border-top: 3px solid var(--amber); max-width: 800px; margin: 0 auto;">
+                <div class="card-header">
+                    <span class="signal" style="color: var(--amber);">●</span> STEP 1: START HERE
+                </div>
+                <h3>PROJECT DIAGNOSTIC</h3>
+                <p class="definition">If you’re unsure whether to start, fix, continue, or stop a project, this is the first step.</p>
                 
-                <div class="card" style="border-top: 3px solid var(--amber);">
-                    <div class="card-header">
-                        <span class="signal" style="color: var(--amber);">●</span> START HERE
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;">
+                    <div>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT YOU GET:</strong>
+                        <ul class="service-list">
+                            <li>A clear recommendation on what to do next</li>
+                            <li>An explanation of why</li>
+                            <li>A realistic path forward (or a clear stop)</li>
+                        </ul>
                     </div>
-                    <h3>FORWARD-MOTION DIAGNOSTIC</h3>
-                    <p class="definition">Determine whether a project should be started, clarified, fixed, or stopped.</p>
-                    
-                    <ul class="service-list">
-                        <li>Project context & technical review</li>
-                        <li>Risk, feasibility, and scope clarity</li>
-                        <li>One clear recommendation (Proceed, Fix, Stop)</li>
-                    </ul>
-
-                    <span class="pricing-line">$500 FLAT FEE <span class="pricing-sub">No build commitment required.</span></span>
-                    
-                    <div style="margin-top: 2rem;">
-                        <a href="#contact" class="btn primary" style="width: 100%; text-align: center;">BOOK A DIAGNOSTIC</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="signal">●</span> PLAN
-                    </div>
-                    <h3>DIRECTION & STABILIZATION</h3>
-                    <p class="definition">Establish the right path when a project is viable but unclear or unstable.</p>
-                    
-                    <ul class="service-list">
-                        <li>System direction + sequencing</li>
-                        <li>Architecture clarification</li>
-                        <li>Rescoping + risk reduction</li>
-                    </ul>
-
-                    <span class="pricing-line">QUOTED <span class="pricing-sub">Based on Diagnostic findings.</span></span>
-                    
-                    <div style="margin-top: 2rem;">
-                        <a href="#contact" class="btn secondary" style="width: 100%; text-align: center;">PLAN THE PATH</a>
+                    <div>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT IT IS NOT:</strong>
+                        <ul class="service-list" style="list-style: none; padding-left: 0;">
+                            <li style="padding-left: 0; color: var(--text-muted);">× Not a sales call</li>
+                            <li style="padding-left: 0; color: var(--text-muted);">× Not free ideation</li>
+                            <li style="padding-left: 0; color: var(--text-muted);">× Not a build commitment</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <span class="signal">●</span> BUILD
-                    </div>
-                    <h3>EXECUTION / COMPLETION</h3>
-                    <p class="definition">Build or finish only what is necessary, once scope is clear.</p>
-                    
-                    <ul class="service-list">
-                        <li>Targeted builds</li>
-                        <li>Refactors & automations</li>
-                        <li>Delivery to defined scope</li>
-                    </ul>
-
-                    <span class="pricing-line">QUOTED <span class="pricing-sub">Fixed-scope or milestone pricing.</span></span>
-                    
-                    <div style="margin-top: 2rem;">
-                        <a href="#contact" class="btn secondary" style="width: 100%; text-align: center;">SCOPE A BUILD</a>
-                    </div>
+                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #222; text-align: center;">
+                    <span style="font-family: var(--font-mono); font-size: 1.5rem; color: #fff; display: block; margin-bottom: 1rem;">$500 <span style="font-size: 0.9rem; color: var(--text-muted);">(FIXED)</span></span>
+                    <a href="#contact" class="btn primary" style="width: 100%; max-width: 300px;">BOOK A DIAGNOSTIC</a>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="signal">●</span> EXIT
-                    </div>
-                    <h3>STOP / HANDOFF</h3>
-                    <p class="definition">Make the correct stop, pivot, or transition decision—and execute it cleanly.</p>
-                    
-                    <ul class="service-list">
-                        <li>Stop/pivot recommendation</li>
-                        <li>Documentation + handoff plan</li>
-                        <li>Transition support</li>
-                    </ul>
-
-                    <span class="pricing-line">QUOTED <span class="pricing-sub">Based on complexity.</span></span>
-                    
-                    <div style="margin-top: 2rem;">
-                        <a href="#contact" class="btn secondary" style="width: 100%; text-align: center;">PLAN AN EXIT</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="tiers" class="protocol">
-        <div class="container">
-            <div class="section-header">
-                <h2>ENGAGEMENT TIERS</h2>
-                <p>How clients typically work with us.</p>
             </div>
 
-            <div class="tier-grid">
-                <div class="tier-card">
-                    <span class="tier-title">TIER 1</span>
-                    <h3 style="margin-bottom: 1rem;">DIAGNOSTIC ONLY</h3>
-                    <p style="font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;"><strong>Fixed Price ($500)</strong></p>
-                    <p style="font-size: 0.9rem;">Low commitment. Highest clarity per dollar. Ideal for first-time clients who need to know where they stand.</p>
-                </div>
+            <div style="margin-top: 6rem;">
+                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono);">AFTER THE DIAGNOSTIC, THERE ARE ONLY 4 OUTCOMES:</h3>
+                
+                <div class="outcome-grid">
+                    <div class="outcome-card">
+                        <span class="outcome-title">1. START</span>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Build Something New</strong></p>
+                        <p style="font-size: 0.9rem;">You have a good idea. We help you start it correctly.</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                    </div>
 
-                <div class="tier-card">
-                    <span class="tier-title">TIER 2</span>
-                    <h3 style="margin-bottom: 1rem;">DIAGNOSTIC + DIRECTION</h3>
-                    <p style="font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;"><strong>Quoted after Diagnostic</strong></p>
-                    <p style="font-size: 0.9rem;">Medium commitment. Creates the plan, structure, and architecture to proceed safely.</p>
-                </div>
+                    <div class="outcome-card">
+                        <span class="outcome-title">2. FIX</span>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Something Isn't Working</strong></p>
+                        <p style="font-size: 0.9rem;">The project has value, but something is off. We fix the structure.</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                    </div>
 
-                <div class="tier-card">
-                    <span class="tier-title">TIER 3</span>
-                    <h3 style="margin-bottom: 1rem;">FULL EXECUTION</h3>
-                    <p style="font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;"><strong>Quoted after Diagnostic</strong></p>
-                    <p style="font-size: 0.9rem;">Full engagement. Highest value and fastest results. Delivered via fixed-scope or milestone pricing.</p>
+                    <div class="outcome-card">
+                        <span class="outcome-title">3. FINISH</span>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Get It Done</strong></p>
+                        <p style="font-size: 0.9rem;">The project is close. We help you finish it cleanly.</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                    </div>
+
+                    <div class="outcome-card">
+                        <span class="outcome-title">4. STOP</span>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Don't Waste Time</strong></p>
+                        <p style="font-size: 0.9rem;">The smartest move is to stop or pivot. We provide clarity.</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">PRICING: SOMETIMES $0. SOMETIMES QUOTED.</p>
+                    </div>
                 </div>
             </div>
 
             <div style="margin-top: 4rem; border: 1px solid #333; padding: 2rem; text-align: center;">
-                <h3 style="color: #fff; margin-bottom: 1rem;">PRICING IS INTENTIONALLY SIMPLE.</h3>
-                <p style="max-width: 600px; margin: 0 auto;">Start with a fixed-fee Forward-Motion Diagnostic. If we move forward, Direction and Execution are quoted based on the diagnostic findings and the defined scope.</p>
+                <h3 style="color: #fff; margin-bottom: 1.5rem;">PRICING, SIMPLY</h3>
+                <ul style="list-style: none; padding: 0; display: inline-block; text-align: left;">
+                    <li style="margin-bottom: 10px; color: var(--text-secondary);">✓ The Diagnostic has a fixed price ($500)</li>
+                    <li style="margin-bottom: 10px; color: var(--text-secondary);">✓ Any build, fix, or finish work is quoted after</li>
+                    <li style="margin-bottom: 10px; color: var(--text-secondary);">✓ You will always know the cost before committing</li>
+                    <li style="margin-bottom: 0; color: var(--text-secondary);">✓ No hourly rates. No surprises.</li>
+                </ul>
             </div>
+
         </div>
     </section>
 
-    <section id="work" class="protocol" style="background: #0f0f0f; border-bottom: none;">
+    <section id="work" class="protocol" style="border-bottom: none;">
         <div class="container">
             <div class="section-header">
                 <h2>PROOF OF WORK</h2>
@@ -475,7 +409,7 @@
 
     <section id="contact" class="contact">
         <div class="container narrow">
-            <h2>VALIDATE YOUR DIRECTION</h2>
+            <h2>BOOK A DIAGNOSTIC</h2>
             <p>Tell us what you are trying to build (or fix).</p>
            
             <form action="https://formspree.io/f/xeeogjzb" method="POST">
@@ -491,7 +425,7 @@
                     <label>SYSTEM STATUS (MESSAGE)</label>
                     <textarea name="message" rows="5" placeholder="I need a website for my business... / I have an app that is broken..."></textarea>
                 </div>
-                <button type="submit" class="btn primary full-width">TRANSMIT REQUEST</button>
+                <button type="submit" class="btn primary full-width">BOOK A DIAGNOSTIC ($500)</button>
             </form>
         </div>
     </section>
