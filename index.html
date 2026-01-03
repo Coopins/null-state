@@ -64,7 +64,7 @@
         /* New Styles for Simplified Services */
         .service-list {
             list-style: none;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             padding: 0;
         }
         .service-list li {
@@ -75,11 +75,16 @@
             font-size: 0.95rem; 
         }
         .service-list li::before {
-            content: "•";
-            color: var(--amber);
+            content: "✔";
+            color: var(--green);
             position: absolute;
             left: 0;
             font-weight: bold;
+        }
+        /* Red X style */
+        .service-list.negative li::before {
+            content: "✖";
+            color: var(--red);
         }
         
         /* Outcome Grid */
@@ -94,7 +99,6 @@
             padding: 2rem;
             background: #0a0a0a;
         }
-        /* Removing colored borders for a simpler, cleaner look as requested */
         .outcome-title {
             color: #fff;
             font-family: var(--font-mono);
@@ -123,6 +127,7 @@
         @media (max-width: 768px) {
             .project-grid-layout { grid-template-columns: 1fr; gap: 30px; }
             .project-card { padding: 20px; }
+            .hero h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -160,72 +165,68 @@
         <div class="container">
             <div class="section-header">
                 <h2>HOW IT WORKS & WHAT IT COSTS</h2>
-                <p>Before starting any work, we begin with a <strong>Project Diagnostic</strong> so you know what’s needed, what’s valuable, and what it will likely cost — before making any commitments.</p>
+                <p>Before anything else, we help you get clarity. Every engagement starts the same way.</p>
             </div>
 
-            <div class="card" style="border-top: 3px solid var(--amber); max-width: 800px; margin: 0 auto;">
+            <div class="card" style="border-top: 3px solid var(--amber); max-width: 900px; margin: 0 auto;">
                 <div class="card-header">
-                    <span class="signal" style="color: var(--amber);">●</span> STEP 1: START HERE
+                    <span class="signal" style="color: var(--amber);">●</span> STEP 1: EVERYONE STARTS HERE
                 </div>
                 <h3>PROJECT DIAGNOSTIC</h3>
-                <p class="definition">If you’re unsure whether to start, fix, continue, or stop a project, this is where every engagement begins.</p>
+                <p class="definition">A short, focused assessment of your situation — past, present, future — so you know what to do next and why.</p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;">
                     <div>
-                        <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT YOU GET:</strong>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT IT DELIVERS:</strong>
                         <ul class="service-list">
-                            <li>A clear recommendation on next steps</li>
-                            <li>A concise written report</li>
-                            <li>Realistic path forward or a confident stop</li>
-                            <li>Cost estimate for next phase (if any)</li>
+                            <li>Clear recommendation</li>
+                            <li>Written summary</li>
+                            <li>Defined next steps</li>
+                            <li>Expected cost for the next phase</li>
                         </ul>
                     </div>
                     <div>
                         <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT IT IS NOT:</strong>
-                        <ul class="service-list" style="list-style: none; padding-left: 0;">
-                            <li style="padding-left: 0; color: var(--text-muted);">× Not a free consult</li>
-                            <li style="padding-left: 0; color: var(--text-muted);">× Not just a call</li>
-                            <li style="padding-left: 0; color: var(--text-muted);">× Not a build commitment</li>
+                        <ul class="service-list negative" style="list-style: none; padding-left: 0;">
+                            <li style="padding-left: 0; color: var(--text-muted);"> A free consult</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> A sales call</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> A requirement to build</li>
                         </ul>
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #222; text-align: center;">
-                    <span style="font-family: var(--font-mono); font-size: 1.5rem; color: #fff; display: block; margin-bottom: 1rem;">$500 <span style="font-size: 0.9rem; color: var(--text-muted);">(FIXED PRICE)</span></span>
-                    <a href="#contact" class="btn primary" style="width: 100%; max-width: 350px;">BOOK A PROJECT DIAGNOSTIC</a>
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center;">
+                    <span style="font-family: var(--font-mono); font-size: 2rem; color: #fff; display: block; margin-bottom: 1rem;">$500 <span style="font-size: 1rem; color: var(--text-muted);">(FIXED PRICE)</span></span>
+                    <a href="#contact" class="btn primary" style="width: 100%; max-width: 400px;">BOOK A PROJECT DIAGNOSTIC</a>
                 </div>
             </div>
 
             <div style="margin-top: 6rem;">
-                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono); margin-bottom: 1rem;">AFTER YOUR PROJECT DIAGNOSTIC, THERE ARE ONLY 4 OUTCOMES:</h3>
+                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono); margin-bottom: 1rem;">AFTER THE DIAGNOSTIC, THERE ARE ONLY 4 OUTCOMES:</h3>
                 
                 <div class="outcome-grid">
                     <div class="outcome-card">
                         <span class="outcome-title">🟢 START</span>
-                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Build Something New</strong></p>
-                        <p style="font-size: 0.9rem;">You have a clear idea and need help starting it correctly.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">You have an idea worth building. We help you start <strong>correctly</strong> so everything aligns.</p>
+                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED AFTER DIAGNOSTIC</span></p>
                     </div>
 
                     <div class="outcome-card">
                         <span class="outcome-title">🛠 FIX</span>
-                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Improve What Already Exists</strong></p>
-                        <p style="font-size: 0.9rem;">The project has value, but something isn’t working. We fix structural issues.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">Your project has value but something is off. We diagnose and correct what’s not working.</p>
+                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED AFTER DIAGNOSTIC</span></p>
                     </div>
 
                     <div class="outcome-card">
                         <span class="outcome-title">🎯 FINISH</span>
-                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Get It Across the Line</strong></p>
-                        <p style="font-size: 0.9rem;">The project is close to done — we help you complete it cleanly and professionally.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">Your project is close — we help you <strong>finish it cleanly</strong> and get to real value.</p>
+                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED AFTER DIAGNOSTIC</span></p>
                     </div>
 
                     <div class="outcome-card">
                         <span class="outcome-title">🚫 STOP</span>
-                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Don't Waste Time or Money</strong></p>
-                        <p style="font-size: 0.9rem;">Sometimes the best move is to stop or pivot. We help you do that with clarity.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">PRICING: SOMETIMES $0, SOMETIMES QUOTED</p>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">Sometimes the smartest move is to <strong>stop or pivot</strong>. We help you do that with confidence, not regret.</p>
+                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED OR NO ADDITIONAL COST</span></p>
                     </div>
                 </div>
             </div>
@@ -233,10 +234,10 @@
             <div style="margin-top: 4rem; border: 1px solid #333; padding: 2rem; text-align: center;">
                 <h3 style="color: #fff; margin-bottom: 1.5rem;">PRICING, SIMPLY</h3>
                 <ul style="list-style: none; padding: 0; display: inline-block; text-align: left;">
-                    <li style="margin-bottom: 10px; color: var(--text-secondary);">✓ The Project Diagnostic has a fixed price ($500)</li>
-                    <li style="margin-bottom: 10px; color: var(--text-secondary);">✓ Any build, fix, or finish work is quoted after</li>
-                    <li style="margin-bottom: 10px; color: var(--text-secondary);">✓ You will always know the cost before committing</li>
-                    <li style="margin-bottom: 0; color: var(--text-secondary);">✓ No hourly rates. No surprises.</li>
+                    <li style="margin-bottom: 10px; color: var(--text-secondary);">• The Project Diagnostic is a <strong>fixed price ($500)</strong></li>
+                    <li style="margin-bottom: 10px; color: var(--text-secondary);">• Anything beyond that is <strong>quoted after Diagnostic</strong></li>
+                    <li style="margin-bottom: 10px; color: var(--text-secondary);">• You always know the cost before committing</li>
+                    <li style="margin-bottom: 0; color: var(--text-secondary);">• No hourly rates. No surprises.</li>
                 </ul>
             </div>
 
