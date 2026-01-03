@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
     <style>
-        /* INLINE STYLES FOR PROJECT CARD (To ensure it renders perfectly without touching style.css) */
+        /* INLINE STYLES FOR NEW SECTIONS */
         .project-card {
             background: var(--panel);
             border: 1px solid #333;
@@ -60,6 +60,80 @@
             font-family: var(--font-mono);
             font-size: 0.8rem;
         }
+        
+        /* New Styles for Service Cards Layout */
+        .service-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            padding: 0;
+        }
+        .service-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .service-list li::before {
+            content: "•";
+            color: var(--amber);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .pricing-line {
+            display: block;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #222;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: #fff;
+        }
+        .pricing-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: normal;
+            display: block;
+            margin-top: 0.2rem;
+        }
+        
+        /* Tier Grid */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .tier-card {
+            border: 1px solid #222;
+            padding: 2rem;
+            background: #0a0a0a;
+        }
+        .tier-title {
+            color: var(--amber);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Core Rule Banner */
+        .core-rule {
+            background: #0f0f0f;
+            border-bottom: 1px solid #222;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .core-rule p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
         @media (max-width: 768px) {
             .project-grid-layout { grid-template-columns: 1fr; gap: 30px; }
             .project-card { padding: 20px; }
@@ -74,8 +148,7 @@
         <div class="logo">NuLL STATE <span class="blink">_</span></div>
         <div class="nav-links">
             <a href="#services">SERVICES</a>
-            <a href="#fit">FIT</a>
-            <a href="#protocol">PRICING</a>
+            <a href="#tiers">ENGAGEMENT TIERS</a>
             <a href="#work">WORK</a>
             <a href="#contact" class="nav-btn">CONTACT</a>
         </div>
@@ -84,203 +157,157 @@
     <section class="hero">
         <div class="container">
             <div class="status-indicator">SYSTEM STATUS: <span class="text-amber">ONLINE</span></div>
-            <h1>STOP BUILDING<br><span class="text-amber">BLINDLY.</span></h1>
+            <h1>START, FIX, OR FINISH<br><span class="text-amber">WITHOUT GUESSWORK.</span></h1>
             
             <div class="hero-anchor">
                 <p>NuLL State helps founders and teams start, clarify, fix, and complete digital and AI projects.</p>
-                <p class="sub-text">We begin with clear diagnosis and end with clean delivery, handoff, or a confident stop.</p>
+                <p class="sub-text">We begin with a clear diagnostic and end with clean delivery, handoff, or a confident stop.</p>
             </div>
             
             <div class="hero-actions">
-                <a href="#services" class="btn primary">[ VIEW SERVICES ]</a>
-                <a href="#protocol" class="btn secondary">SEE PRICING</a>
+                <a href="#services" class="btn primary">[ BOOK A DIAGNOSTIC ]</a>
+                <a href="#tiers" class="btn secondary">SEE TIERS</a>
             </div>
         </div>
     </section>
+
+    <div class="core-rule">
+        <div class="container">
+            <p>All NuLL State engagements begin with a <span style="color: var(--amber);">Forward-Motion Diagnostic</span> to ensure time, money, and effort are invested in the right direction.</p>
+        </div>
+    </div>
 
     <section id="services" class="protocol" style="background: #0f0f0f;">
         <div class="container">
             <div class="section-header">
-                <h2>CONSULTING SERVICES</h2>
-                <p>We are a studio focused on outcomes. We engage at any phase of the lifecycle.</p>
+                <h2>SERVICES & PRICING</h2>
+                <p>We sell outcomes, not hours. Every engagement starts with a clear plan.</p>
             </div>
 
             <div class="diagnostic-grid">
-                <div class="card">
+                
+                <div class="card" style="border-top: 3px solid var(--amber);">
                     <div class="card-header">
-                        <span class="signal" style="color: var(--green);">●</span> PHASE 01
+                        <span class="signal" style="color: var(--amber);">●</span> START HERE
                     </div>
-                    <h3>START / DIAGNOSE</h3>
-                    <p class="definition">Early-stage clarity before code is written.</p>
-                    <ul class="check-list">
-                        <li><span class="icon-check">✓</span> Feasibility Checks</li>
-                        <li><span class="icon-check">✓</span> Scope Definition</li>
-                        <li><span class="icon-check">✓</span> Technical Roadmap</li>
+                    <h3>FORWARD-MOTION DIAGNOSTIC</h3>
+                    <p class="definition">Determine whether a project should be started, clarified, fixed, or stopped.</p>
+                    
+                    <ul class="service-list">
+                        <li>Project context & technical review</li>
+                        <li>Risk, feasibility, and scope clarity</li>
+                        <li>One clear recommendation (Proceed, Fix, Stop)</li>
                     </ul>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <span class="signal" style="color: var(--amber);">●</span> PHASE 02
+                    <span class="pricing-line">$500 FLAT FEE <span class="pricing-sub">No build commitment required.</span></span>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="#contact" class="btn primary" style="width: 100%; text-align: center;">BOOK A DIAGNOSTIC</a>
                     </div>
-                    <h3>CLARIFY / FIX</h3>
-                    <p class="definition">Correction for stalled or messy projects.</p>
-                    <ul class="check-list">
-                        <li><span class="icon-check">✓</span> System Audits</li>
-                        <li><span class="icon-check">✓</span> Restructuring</li>
-                        <li><span class="icon-check">✓</span> Direction Correction</li>
-                    </ul>
                 </div>
 
                 <div class="card">
-                    <div class="card-header">
-                        <span class="signal" style="color: var(--blue);">●</span> PHASE 03
-                    </div>
-                    <h3>BUILD / COMPLETE</h3>
-                    <p class="definition">Targeted execution to ship the product.</p>
-                    <ul class="check-list">
-                        <li><span class="icon-check">✓</span> Scoped Delivery</li>
-                        <li><span class="icon-check">✓</span> Code Refactors</li>
-                        <li><span class="icon-check">✓</span> Feature Build-out</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="signal" style="color: var(--red);">●</span> PHASE 04
-                    </div>
-                    <h3>STOP / EXIT</h3>
-                    <p class="definition">Honorable stops and clean transitions.</p>
-                    <ul class="check-list">
-                        <li><span class="icon-check">✓</span> Kill Decisions</li>
-                        <li><span class="icon-check">✓</span> Handoff & Documentation</li>
-                        <li><span class="icon-check">✓</span> Vendor Transition</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="risk" class="problem" style="background: #0a0a0a;">
-        <div class="container">
-            <div class="grid-2">
-                <div class="content-block">
-                    <h2>THE HIDDEN RISK</h2>
-                    <p>Most projects don't fail because of code. They fail because they build the wrong thing, or they build it without a plan.</p>
-                    <div class="alert-box">
-                        <strong>Technical debt is fixable.<br>Strategic debt is fatal.</strong>
-                    </div>
-                </div>
-                <div class="graphic-block">
-                    <div class="timeline">
-                        <div class="point start">
-                            <span class="label">ENTRY</span>
-                            <span class="desc">Plan & Build</span>
-                        </div>
-                        <div class="line"></div>
-                        <div class="point end">
-                            <span class="label">EXIT</span>
-                            <span class="desc">Launch & Handover</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fit" class="protocol">
-        <div class="container">
-            <div class="section-header">
-                <h2>IS THIS THE RIGHT FIT?</h2>
-                <p>We work best with clients who value structure and clarity.</p>
-            </div>
-
-            <div class="grid-2" style="align-items: start;">
-                <div class="card bad-fit">
-                    <h3 style="color: var(--text-muted);">WE ARE A WRONG FIT IF:</h3>
-                    <ul class="check-list">
-                        <li><span class="icon-x">✕</span> You want the cheapest possible option (we price for quality).</li>
-                        <li><span class="icon-x">✕</span> You want to skip the planning phase and "just start coding."</li>
-                        <li><span class="icon-x">✕</span> You are not willing to be involved in the review process.</li>
-                    </ul>
-                </div>
-
-                <div class="card good-fit">
-                    <h3 style="color: var(--amber);">ENGAGE US IF:</h3>
-                    <ul class="check-list">
-                        <li><span class="icon-check">✓</span> You need a professional build that scales.</li>
-                        <li><span class="icon-check">✓</span> You have a "zombie project" that is consuming money but not working.</li>
-                        <li><span class="icon-check">✓</span> You need a clear technical partner, not just a freelancer.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="protocol" class="protocol" style="background: #0f0f0f;">
-        <div class="container">
-            <div class="section-header">
-                <h2>ENGAGEMENT TIERS</h2>
-                <p>Transparent pricing for clear outcomes. Choose your starting point.</p>
-            </div>
-
-            <div class="diagnostic-grid">
-               
-                <div class="card status-green">
-                    <div class="card-header">
-                        <span class="signal">●</span> BUILD
-                    </div>
-                    <h3>THE LAUNCH</h3>
-                    <p class="definition">For new websites, apps, or products. We go from zero to live.</p>
-                    <div class="specs">
-                        <div class="spec-row">
-                            <span>OUTPUT:</span> <strong>Live Product</strong>
-                        </div>
-                        <div class="spec-row">
-                            <span>ESTIMATE:</span> <strong>Custom Quote</strong>
-                        </div>
-                    </div>
-                    <p class="details">Complete design, development, and deployment. You own the code.</p>
-                </div>
-
-                <div class="card status-yellow">
-                    <div class="card-header">
-                        <span class="signal">●</span> REPAIR
-                    </div>
-                    <h3>THE RESCUE</h3>
-                    <p class="definition">For broken sites or stalled apps. We assess and repair.</p>
-                    <div class="specs">
-                        <div class="spec-row">
-                            <span>OUTPUT:</span> <strong>Stabilized System</strong>
-                        </div>
-                        <div class="spec-row">
-                            <span>ESTIMATE:</span> <strong>$1.5k - $5k</strong>
-                        </div>
-                    </div>
-                    <p class="details">We audit the code, fix critical bugs, and get you back online.</p>
-                </div>
-
-                <div class="card status-red">
                     <div class="card-header">
                         <span class="signal">●</span> PLAN
                     </div>
-                    <h3>THE BLUEPRINT</h3>
-                    <p class="definition">Feasibility and architecture before you build.</p>
-                    <div class="specs">
-                        <div class="spec-row">
-                            <span>OUTPUT:</span> <strong>Action Plan</strong>
-                        </div>
-                        <div class="spec-row">
-                            <span>ESTIMATE:</span> <strong>$500 - $1.5k</strong>
-                        </div>
+                    <h3>DIRECTION & STABILIZATION</h3>
+                    <p class="definition">Establish the right path when a project is viable but unclear or unstable.</p>
+                    
+                    <ul class="service-list">
+                        <li>System direction + sequencing</li>
+                        <li>Architecture clarification</li>
+                        <li>Rescoping + risk reduction</li>
+                    </ul>
+
+                    <span class="pricing-line">QUOTED <span class="pricing-sub">Based on Diagnostic findings.</span></span>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="#contact" class="btn secondary" style="width: 100%; text-align: center;">PLAN THE PATH</a>
                     </div>
-                    <p class="details">Low-risk entry. We define exactly what needs to be built so you don't waste money.</p>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="signal">●</span> BUILD
+                    </div>
+                    <h3>EXECUTION / COMPLETION</h3>
+                    <p class="definition">Build or finish only what is necessary, once scope is clear.</p>
+                    
+                    <ul class="service-list">
+                        <li>Targeted builds</li>
+                        <li>Refactors & automations</li>
+                        <li>Delivery to defined scope</li>
+                    </ul>
+
+                    <span class="pricing-line">QUOTED <span class="pricing-sub">Fixed-scope or milestone pricing.</span></span>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="#contact" class="btn secondary" style="width: 100%; text-align: center;">SCOPE A BUILD</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="signal">●</span> EXIT
+                    </div>
+                    <h3>STOP / HANDOFF</h3>
+                    <p class="definition">Make the correct stop, pivot, or transition decision—and execute it cleanly.</p>
+                    
+                    <ul class="service-list">
+                        <li>Stop/pivot recommendation</li>
+                        <li>Documentation + handoff plan</li>
+                        <li>Transition support</li>
+                    </ul>
+
+                    <span class="pricing-line">QUOTED <span class="pricing-sub">Based on complexity.</span></span>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="#contact" class="btn secondary" style="width: 100%; text-align: center;">PLAN AN EXIT</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="work" class="protocol" style="border-bottom: none;">
+    <section id="tiers" class="protocol">
+        <div class="container">
+            <div class="section-header">
+                <h2>ENGAGEMENT TIERS</h2>
+                <p>How clients typically work with us.</p>
+            </div>
+
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <span class="tier-title">TIER 1</span>
+                    <h3 style="margin-bottom: 1rem;">DIAGNOSTIC ONLY</h3>
+                    <p style="font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;"><strong>Fixed Price ($500)</strong></p>
+                    <p style="font-size: 0.9rem;">Low commitment. Highest clarity per dollar. Ideal for first-time clients who need to know where they stand.</p>
+                </div>
+
+                <div class="tier-card">
+                    <span class="tier-title">TIER 2</span>
+                    <h3 style="margin-bottom: 1rem;">DIAGNOSTIC + DIRECTION</h3>
+                    <p style="font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;"><strong>Quoted after Diagnostic</strong></p>
+                    <p style="font-size: 0.9rem;">Medium commitment. Creates the plan, structure, and architecture to proceed safely.</p>
+                </div>
+
+                <div class="tier-card">
+                    <span class="tier-title">TIER 3</span>
+                    <h3 style="margin-bottom: 1rem;">FULL EXECUTION</h3>
+                    <p style="font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;"><strong>Quoted after Diagnostic</strong></p>
+                    <p style="font-size: 0.9rem;">Full engagement. Highest value and fastest results. Delivered via fixed-scope or milestone pricing.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; border: 1px solid #333; padding: 2rem; text-align: center;">
+                <h3 style="color: #fff; margin-bottom: 1rem;">PRICING IS INTENTIONALLY SIMPLE.</h3>
+                <p style="max-width: 600px; margin: 0 auto;">Start with a fixed-fee Forward-Motion Diagnostic. If we move forward, Direction and Execution are quoted based on the diagnostic findings and the defined scope.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="protocol" style="background: #0f0f0f; border-bottom: none;">
         <div class="container">
             <div class="section-header">
                 <h2>PROOF OF WORK</h2>
