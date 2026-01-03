@@ -87,13 +87,14 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
         .outcome-card {
             border: 1px solid #222;
             padding: 2rem;
             background: #0a0a0a;
         }
+        /* Removing colored borders for a simpler, cleaner look as requested */
         .outcome-title {
             color: #fff;
             font-family: var(--font-mono);
@@ -196,34 +197,34 @@
             </div>
 
             <div style="margin-top: 6rem;">
-                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono);">AFTER YOUR PROJECT DIAGNOSTIC, THERE ARE ONLY 4 OUTCOMES:</h3>
+                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono); margin-bottom: 1rem;">AFTER YOUR PROJECT DIAGNOSTIC, THERE ARE ONLY 4 OUTCOMES:</h3>
                 
                 <div class="outcome-grid">
                     <div class="outcome-card">
-                        <span class="outcome-title" style="color: var(--green); border-color: var(--green);">🟢 START</span>
+                        <span class="outcome-title">🟢 START</span>
                         <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Build Something New</strong></p>
                         <p style="font-size: 0.9rem;">You have a clear idea and need help starting it correctly.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
                     </div>
 
                     <div class="outcome-card">
-                        <span class="outcome-title" style="color: var(--amber); border-color: var(--amber);">🛠 FIX</span>
+                        <span class="outcome-title">🛠 FIX</span>
                         <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Improve What Already Exists</strong></p>
-                        <p style="font-size: 0.9rem;">The project has value, but something isn’t working. We fix structural issues before more time or money is spent.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                        <p style="font-size: 0.9rem;">The project has value, but something isn’t working. We fix structural issues.</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
                     </div>
 
                     <div class="outcome-card">
-                        <span class="outcome-title" style="color: var(--blue); border-color: var(--blue);">🎯 FINISH</span>
+                        <span class="outcome-title">🎯 FINISH</span>
                         <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Get It Across the Line</strong></p>
                         <p style="font-size: 0.9rem;">The project is close to done — we help you complete it cleanly and professionally.</p>
-                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">PRICING: QUOTED AFTER DIAGNOSTIC</p>
                     </div>
 
                     <div class="outcome-card">
-                        <span class="outcome-title" style="color: var(--red); border-color: var(--red);">🚫 STOP</span>
+                        <span class="outcome-title">🚫 STOP</span>
                         <p style="color: #fff; margin-bottom: 0.5rem;"><strong>Don't Waste Time or Money</strong></p>
-                        <p style="font-size: 0.9rem;">Sometimes the best move is to stop or pivot. We help you do that with clarity and confidence.</p>
+                        <p style="font-size: 0.9rem;">Sometimes the best move is to stop or pivot. We help you do that with clarity.</p>
                         <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">PRICING: SOMETIMES $0, SOMETIMES QUOTED</p>
                     </div>
                 </div>
@@ -426,7 +427,7 @@
                     <label>SYSTEM STATUS (MESSAGE)</label>
                     <textarea name="message" rows="5" placeholder="I need a website for my business... / I have an app that is broken..."></textarea>
                 </div>
-                <button type="submit" class="btn primary full-width">BOOK A PROJECT DIAGNOSTIC</button>
+                <button type="submit" class="btn primary full-width">BOOK A PROJECT DIAGNOSTIC ($500)</button>
             </form>
         </div>
     </section>
