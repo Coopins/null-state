@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuLL State | Digital & AI Consulting</title>
+    <title>NuLL State | Decision Infrastructure</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
     <style>
-        /* INLINE STYLES FOR SIMPLIFIED LAYOUT & MOBILE OPTIMIZATION */
+        /* INLINE STYLES FOR FRAMEWORK LAYOUT & MOBILE OPTIMIZATION */
         
-        /* Base styles for Cards */
         .project-card {
             background: var(--panel);
             border: 1px solid #333;
@@ -57,35 +56,27 @@
         }
         .service-list li {
             position: relative;
-            /* Increased padding to prevent overlap */
-            padding-left: 2rem; 
+            padding-left: 1.5rem;
             margin-bottom: 0.8rem;
             color: var(--text-secondary);
             font-size: 0.95rem; 
-            line-height: 1.4;
         }
         .service-list li::before {
-            /* Using standard checkmark */
-            content: "✔"; 
-            /* Forced Green Hex */
-            color: #00ff41 !important; 
+            content: "✔";
+            color: var(--green);
             position: absolute;
             left: 0;
-            top: 0;
             font-weight: bold;
-            font-family: sans-serif; /* Forces text rendering over emoji */
         }
         .service-list.negative li::before {
-            /* Using Heavy Multiplication X */
-            content: "✖"; 
-            /* Forced Red Hex */
-            color: #ff3333 !important; 
+            content: "✖";
+            color: var(--red);
         }
         
         /* Outcome Grid */
         .outcome-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -93,33 +84,30 @@
             border: 1px solid #222;
             padding: 2rem;
             background: #0a0a0a;
+            position: relative;
+        }
+        .outcome-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #222;
+        }
+        .outcome-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
         }
         .outcome-title {
             color: #fff;
             font-family: var(--font-mono);
             font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: block;
-            border-bottom: 1px solid #222;
-            padding-bottom: 10px;
+            font-weight: 700;
         }
         
-        /* Core Rule Banner */
-        .core-rule {
-            background: #0f0f0f;
-            border-bottom: 1px solid #222;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        .core-rule p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        /* --- SCROLL NAVIGATION ARROWS --- */
+        /* Scroll Navigation */
         .scroll-nav {
             position: fixed;
             right: 30px;
@@ -156,12 +144,24 @@
             transform: translateY(10px);
         }
 
+        /* Mode A / Mode B Blocks */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+        .mode-block h4 { color: var(--amber); font-size: 0.9rem; margin-bottom: 5px; }
+        .mode-block p { font-size: 0.9rem; color: var(--text-muted); }
+
         /* --- MOBILE RESPONSIVE OVERRIDES --- */
         @media (max-width: 768px) {
             
             /* Fix Navigation: Make it visible and stacked */
             .nav-links { 
-                display: flex !important; /* Force display */
+                display: flex !important;
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
@@ -184,21 +184,22 @@
             .hero h1 { font-size: 2rem !important; margin-bottom: 1rem; }
             .hero-anchor p { font-size: 1.1rem; }
             
+            /* Mode Grid Stack */
+            .mode-grid { grid-template-columns: 1fr; gap: 15px; }
+
             /* Fix Layout Grids */
             .project-grid-layout { grid-template-columns: 1fr; gap: 30px; }
             .project-card { padding: 25px 20px; }
             
-            /* Fix Scroll Buttons (Move up to avoid Safari bottom bar) */
+            /* Fix Scroll Buttons */
             .scroll-nav { right: 15px; bottom: 80px; }
             .scroll-btn { width: 40px; height: 40px; background: rgba(0,0,0,0.8); }
 
-            /* Fix Form Inputs (Prevent iOS zoom) */
+            /* Fix Form Inputs */
             input, textarea { font-size: 16px !important; }
             
             /* Card Mobile Tweaks */
             .card { padding: 20px; }
-            
-            /* IMPORTANT: Force the split lists to stack vertically on mobile */
             .split-mobile { 
                 grid-template-columns: 1fr !important; 
                 gap: 30px !important;
@@ -227,16 +228,26 @@
     <section class="hero">
         <div class="container">
             <div class="status-indicator">SYSTEM STATUS: <span class="text-amber">ONLINE</span></div>
-            <h1>START, FIX, OR FINISH<br><span class="text-amber">WITHOUT GUESSWORK.</span></h1>
+            <h1>DECISION INFRASTRUCTURE<br><span class="text-amber">FOR DIGITAL PROJECTS.</span></h1>
             
             <div class="hero-anchor">
-                <p>NuLL State helps founders and teams decide what to build, fix what’s broken, or finish what’s already started — with clear recommendations and transparent pricing.</p>
-                <p class="sub-text">We begin with a Project Diagnostic and always show you the cost before commitment.</p>
+                <p>We diagnose first. Nothing proceeds without a decision. Nothing is priced without responsibility.</p>
+                
+                <div class="mode-grid">
+                    <div class="mode-block">
+                        <h4>MODE A: DIAGNOSTIC (DEFAULT)</h4>
+                        <p>We evaluate, judge, and decide. You retain execution control.</p>
+                    </div>
+                    <div class="mode-block">
+                        <h4>MODE B: EXECUTION (EARNED)</h4>
+                        <p>We assume responsibility for outcomes—only after a GREEN decision.</p>
+                    </div>
+                </div>
             </div>
             
             <div class="hero-actions">
                 <a href="#how-it-works" class="btn primary">[ BOOK DIAGNOSTIC ]</a>
-                <a href="#work" class="btn secondary">SEE CASE STUDIES</a>
+                <a href="#work" class="btn secondary">SEE DECISIONS</a>
             </div>
         </div>
     </section>
@@ -244,81 +255,99 @@
     <section id="how-it-works" class="protocol" style="background: #0f0f0f;">
         <div class="container">
             <div class="section-header">
-                <h2>HOW IT WORKS & WHAT IT COSTS</h2>
-                <p>Before anything else, we help you get clarity. Every engagement starts the same way.</p>
+                <h2>THE FORWARD-MOTION SYSTEM</h2>
+                <p>Every engagement begins with the <strong>Forward-Motion Diagnostic</strong>. We price decisions, not hope.</p>
             </div>
 
             <div class="card" style="border-top: 3px solid var(--amber); max-width: 900px; margin: 0 auto;">
                 <div class="card-header">
-                    <span class="signal" style="color: var(--amber);">●</span> STEP 1: EVERYONE STARTS HERE
+                    <span class="signal" style="color: var(--amber);">●</span> MANDATORY ENTRY POINT
                 </div>
-                <h3>PROJECT DIAGNOSTIC</h3>
-                <p class="definition">A short, focused assessment of your situation — past, present, future — so you know what to do next and why.</p>
+                <h3>FORWARD-MOTION DIAGNOSTIC</h3>
+                <p class="definition">We evaluate structure, risk, and direction before anyone commits to building.</p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;" class="split-mobile">
                     <div>
-                        <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT IT DELIVERS:</strong>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">YOU RECEIVE:</strong>
                         <ul class="service-list">
-                            <li>Clear recommendation</li>
-                            <li>Written summary</li>
-                            <li>Defined next steps</li>
-                            <li>Expected cost for the next phase</li>
+                            <li>A written Decision Report (Green/Narrow/Stop)</li>
+                            <li>Clear explanation of why the decision was made</li>
+                            <li>Defined next steps (if applicable)</li>
                         </ul>
                     </div>
                     <div>
-                        <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT IT IS NOT:</strong>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">YOU DO NOT RECEIVE:</strong>
                         <ul class="service-list negative" style="list-style: none; padding-left: 0;">
-                            <li style="padding-left: 0; color: var(--text-muted);"> A free consult</li>
-                            <li style="padding-left: 0; color: var(--text-muted);"> A sales call</li>
-                            <li style="padding-left: 0; color: var(--text-muted);"> A requirement to build</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> Code or Prototypes</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> Feature Roadmaps</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> False promises</li>
                         </ul>
                     </div>
                 </div>
 
                 <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center;">
-                    <span style="font-family: var(--font-mono); font-size: 2rem; color: #fff; display: block; margin-bottom: 1rem;">$500 <span style="font-size: 1rem; color: var(--text-muted);">(FIXED PRICE)</span></span>
-                    <a href="#contact" class="btn primary" style="width: 100%; max-width: 400px;">BOOK A PROJECT DIAGNOSTIC</a>
+                    <span style="font-family: var(--font-mono); font-size: 2rem; color: #fff; display: block; margin-bottom: 1rem;">$500 <span style="font-size: 1rem; color: var(--text-muted);">(FIXED FEE)</span></span>
+                    <a href="#contact" class="btn primary" style="width: 100%; max-width: 400px;">BOOK DIAGNOSTIC</a>
                 </div>
             </div>
 
             <div style="margin-top: 6rem;">
-                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono); margin-bottom: 1rem;">AFTER THE DIAGNOSTIC, THERE ARE ONLY 4 OUTCOMES:</h3>
+                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono); margin-bottom: 1rem;">THE DIAGNOSTIC PRODUCES ONE OF THREE DECISIONS:</h3>
                 
                 <div class="outcome-grid">
-                    <div class="outcome-card">
-                        <span class="outcome-title">🟢 START</span>
-                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">You have an idea worth building. We help you start <strong>correctly</strong> so everything aligns.</p>
-                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED AFTER DIAGNOSTIC</span></p>
+                    <div class="outcome-card" style="border-top: 1px solid var(--green);">
+                        <div class="outcome-header">
+                            <span class="outcome-dot" style="background: var(--green);"></span>
+                            <span class="outcome-title" style="color: var(--green);">GREEN</span>
+                        </div>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>PROCEED TO BUILD</strong></p>
+                        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">The direction is sound. We authorize the build and deploy the system spine.</p>
+                        
+                        <div style="background: #111; padding: 15px; border: 1px solid #333;">
+                            <span style="display: block; font-size: 0.8rem; color: var(--text-muted);">UNLOCKS:</span>
+                            <strong style="color: #fff; display: block; margin-top: 5px;">Initialization Sprint</strong>
+                            <span style="color: var(--amber); font-family: var(--font-mono); font-size: 0.9rem;">$8,000 - $15,000</span>
+                        </div>
                     </div>
 
-                    <div class="outcome-card">
-                        <span class="outcome-title">🛠 FIX</span>
-                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">Your project has value but something is off. We diagnose and correct what’s not working.</p>
-                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED AFTER DIAGNOSTIC</span></p>
+                    <div class="outcome-card" style="border-top: 1px solid var(--amber);">
+                        <div class="outcome-header">
+                            <span class="outcome-dot" style="background: var(--amber);"></span>
+                            <span class="outcome-title" style="color: var(--amber);">NARROW</span>
+                        </div>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>REFRAME & FOCUS</strong></p>
+                        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Signal exists, but the plan is risky. Ambiguity must be removed before code is written.</p>
+                        
+                        <div style="background: #111; padding: 15px; border: 1px solid #333;">
+                            <span style="display: block; font-size: 0.8rem; color: var(--text-muted);">UNLOCKS:</span>
+                            <strong style="color: #fff; display: block; margin-top: 5px;">Narrowing Sprint</strong>
+                            <span style="color: var(--amber); font-family: var(--font-mono); font-size: 0.9rem;">$3,000 - $6,000</span>
+                        </div>
                     </div>
 
-                    <div class="outcome-card">
-                        <span class="outcome-title">🎯 FINISH</span>
-                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">Your project is close — we help you <strong>finish it cleanly</strong> and get to real value.</p>
-                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--amber);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED AFTER DIAGNOSTIC</span></p>
-                    </div>
-
-                    <div class="outcome-card">
-                        <span class="outcome-title">🚫 STOP</span>
-                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">Sometimes the smartest move is to <strong>stop or pivot</strong>. We help you do that with confidence, not regret.</p>
-                        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">NEXT STEP PRICING:<br><span style="color: #fff;">QUOTED OR NO ADDITIONAL COST</span></p>
+                    <div class="outcome-card" style="border-top: 1px solid var(--red);">
+                        <div class="outcome-header">
+                            <span class="outcome-dot" style="background: var(--red);"></span>
+                            <span class="outcome-title" style="color: var(--red);">STOP</span>
+                        </div>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>DO NOT BUILD</strong></p>
+                        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Unsafe to build as framed. Stopping now preserves capital and energy.</p>
+                        
+                        <div style="background: #111; padding: 15px; border: 1px solid #333;">
+                            <span style="display: block; font-size: 0.8rem; color: var(--text-muted);">OPTIONAL:</span>
+                            <strong style="color: #fff; display: block; margin-top: 5px;">Pivot / Ideation Sprint</strong>
+                            <span style="color: var(--amber); font-family: var(--font-mono); font-size: 0.9rem;">$2,000 - $4,000</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 4rem; border: 1px solid #333; padding: 2rem; text-align: center;">
-                <h3 style="color: #fff; margin-bottom: 1.5rem;">PRICING, SIMPLY</h3>
-                <ul style="list-style: none; padding: 0; display: inline-block; text-align: left;">
-                    <li style="margin-bottom: 10px; color: var(--text-secondary);">• The Project Diagnostic is a <strong>fixed price ($500)</strong></li>
-                    <li style="margin-bottom: 10px; color: var(--text-secondary);">• Anything beyond that is <strong>quoted after Diagnostic</strong></li>
-                    <li style="margin-bottom: 10px; color: var(--text-secondary);">• You always know the cost before committing</li>
-                    <li style="margin-bottom: 0; color: var(--text-secondary);">• No hourly rates. No surprises.</li>
-                </ul>
+                <h3 style="color: #fff; margin-bottom: 1rem;">BROKEN PROJECT?</h3>
+                <p style="max-width: 600px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                    If you have a system that exists but is failing, we enter via the <strong>Restructure Diagnostic</strong>. If the system is salvageable, we execute a Realignment Sprint ($6k - $12k).
+                </p>
+                <a href="#contact" class="nav-btn">[ DIAGNOSE MY BROKEN SYSTEM ]</a>
             </div>
 
         </div>
@@ -327,8 +356,8 @@
     <section id="work" class="protocol" style="border-bottom: none;">
         <div class="container">
             <div class="section-header">
-                <h2>PROOF OF WORK</h2>
-                <p>We don't just talk theory. We build complex systems.</p>
+                <h2>DECISION LOG</h2>
+                <p>We don't just build. We judge.</p>
             </div>
 
             <div class="project-card">
@@ -339,11 +368,11 @@
 
                 <div class="project-grid-layout">
                     <div>
-                        <h4 style="color: #fff; margin-bottom: 10px;">CONTEXT</h4>
-                        <p style="font-size: 0.95rem; margin-bottom: 30px;">
-                            Most language-learning platforms rely on passive input and surface-level metrics. Fluency is inferred, not measured. This project addressed the gap between <em>perceived</em> proficiency and <em>actual</em> spoken competence.
-                        </p>
-
+                        <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
+                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
+                            <p style="font-size: 0.9rem; color: #fff;">Clear primary user, measurable outcome, low-risk path to first value.</p>
+                        </div>
+                        
                         <h4 style="color: #fff; margin-bottom: 10px;">WHAT WAS BUILT</h4>
                         <ul class="project-list" style="list-style: none; padding: 0;">
                             <li>Automatic audio capture with silence detection</li>
@@ -355,29 +384,17 @@
 
                     <div>
                         <h4 style="color: #fff; margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
-                        
                         <div class="stat-block">
-                            <span>PIPELINE</span>
-                            <strong>End-to-End Automated</strong>
+                            <span>ENTRY STATE</span>
+                            <strong>Existing Idea</strong>
                         </div>
                         <div class="stat-block">
                             <span>LATENCY</span>
                             <strong>&lt; 2 Seconds</strong>
                         </div>
                         <div class="stat-block">
-                            <span>MANUAL STEPS</span>
-                            <strong>Zero (0)</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>WORKFLOW</span>
-                            <strong>Single-Screen</strong>
-                        </div>
-
-                        <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
-                            <h4 style="color: var(--amber); margin-bottom: 10px;">OUTCOME</h4>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">
-                                Demonstrated that fluency can be evaluated programmatically, not heuristically. Validated AI-driven curriculum generation tied directly to performance.
-                            </p>
+                            <span>OUTCOME</span>
+                            <strong>Initialization Sprint</strong>
                         </div>
                     </div>
                 </div>
@@ -385,103 +402,38 @@
 
             <div class="project-card">
                 <div class="project-header">
-                    <span class="tech-label">CASE STUDY: 02 // IN DEVELOPMENT</span>
-                    <h3>WANDER UPON: GEOSPATIAL DISCOVERY ENGINE</h3>
+                    <span class="tech-label">CASE STUDY: 02 // GEOSPATIAL ENGINE</span>
+                    <h3>WANDER UPON</h3>
                 </div>
 
                 <div class="project-grid-layout">
                     <div>
-                        <h4 style="color: #fff; margin-bottom: 10px;">CONTEXT</h4>
-                        <p style="font-size: 0.95rem; margin-bottom: 30px;">
-                            Traditional travel apps are cluttered with sponsored content and linear lists. Wander Upon utilizes geospatial data to create a serendipitous discovery engine for local exploration.
-                        </p>
+                        <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
+                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
+                            <p style="font-size: 0.9rem; color: #fff;">Problem definition verified. Scope locked to discovery engine only.</p>
+                        </div>
 
                         <h4 style="color: #fff; margin-bottom: 10px;">CURRENT BUILD</h4>
                         <ul class="project-list" style="list-style: none; padding: 0;">
                             <li>Real-time geolocation discovery algorithms</li>
                             <li>Curated "experience" data pipelines</li>
                             <li>Minimalist, map-first user interface</li>
-                            <li>Context-aware filtering system</li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 style="color: #fff; margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
-                        
+                        <div class="stat-block">
+                            <span>ENTRY STATE</span>
+                            <strong>Start Diagnostic</strong>
+                        </div>
                         <div class="stat-block">
                             <span>STATUS</span>
                             <strong>Active Alpha</strong>
                         </div>
                         <div class="stat-block">
-                            <span>STACK</span>
-                            <strong>[ RESTRICTED ]</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>COVERAGE</span>
-                            <strong>Global Vectors</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>LATENCY</span>
-                            <strong>&lt; 100ms Target</strong>
-                        </div>
-
-                        <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
-                            <h4 style="color: var(--amber); margin-bottom: 10px;">OUTCOME TARGET</h4>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">
-                                To reduce "decision fatigue" in travel by replacing list-based searching with proximity-based wandering.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <span class="tech-label">CASE STUDY: 03 // IN DEVELOPMENT</span>
-                    <h3>CREATIVITY ENGINE: NON-LINEAR IDEATION</h3>
-                </div>
-
-                <div class="project-grid-layout">
-                    <div>
-                        <h4 style="color: #fff; margin-bottom: 10px;">CONTEXT</h4>
-                        <p style="font-size: 0.95rem; margin-bottom: 30px;">
-                            Most productivity tools force linear thinking. This platform provides an infinite spatial canvas for connecting disparate ideas, designed for rapid "unblocking" of creative workflows.
-                        </p>
-
-                        <h4 style="color: #fff; margin-bottom: 10px;">CURRENT BUILD</h4>
-                        <ul class="project-list" style="list-style: none; padding: 0;">
-                            <li>Infinite-canvas spatial architecture</li>
-                            <li>Local-first data synchronization (Offline mode)</li>
-                            <li>Rapid capture interface for mobile & desktop</li>
-                            <li>Visual relationship mapping between notes</li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 style="color: #fff; margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
-                        
-                        <div class="stat-block">
-                            <span>STATUS</span>
-                            <strong>Private Beta</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>SYNC SPEED</span>
-                            <strong>Instant (Local)</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>PLATFORM</span>
-                            <strong>Cross-Platform</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>DATA</span>
-                            <strong>Encrypted</strong>
-                        </div>
-
-                        <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
-                            <h4 style="color: var(--amber); margin-bottom: 10px;">OUTCOME TARGET</h4>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">
-                                To provide a friction-free environment for capturing and connecting high-velocity thoughts without structure penalties.
-                            </p>
+                            <span>OUTCOME</span>
+                            <strong>Build & Stabilize</strong>
                         </div>
                     </div>
                 </div>
@@ -492,7 +444,7 @@
 
     <section id="contact" class="contact">
         <div class="container narrow">
-            <h2>BOOK A PROJECT DIAGNOSTIC</h2>
+            <h2>BOOK A DIAGNOSTIC</h2>
             <p>Tell us what you are trying to build (or fix).</p>
            
             <form action="https://formspree.io/f/xeeogjzb" method="POST">
@@ -506,9 +458,9 @@
                 </div>
                 <div class="form-group">
                     <label>SYSTEM STATUS (MESSAGE)</label>
-                    <textarea name="message" rows="5" placeholder="I need a website for my business... / I have an app that is broken..."></textarea>
+                    <textarea name="message" rows="5" placeholder="I have an idea for... / I have a broken system that needs..."></textarea>
                 </div>
-                <button type="submit" class="btn primary full-width">BOOK A PROJECT DIAGNOSTIC ($500)</button>
+                <button type="submit" class="btn primary full-width">BOOK DIAGNOSTIC ($500)</button>
             </form>
         </div>
     </section>
@@ -536,20 +488,17 @@
         const upBtn = document.getElementById('scrollUp');
         const downBtn = document.getElementById('scrollDown');
 
-        // Function to check scroll position
         function updateScrollButtons() {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
             const docHeight = document.documentElement.scrollHeight;
 
-            // Handle UP button (Hide if at top)
             if (scrollY < 100) {
                 upBtn.classList.add('hidden');
             } else {
                 upBtn.classList.remove('hidden');
             }
 
-            // Handle DOWN button (Hide if at bottom)
             if (scrollY + windowHeight >= docHeight - 50) {
                 downBtn.classList.add('hidden');
             } else {
@@ -557,14 +506,10 @@
             }
         }
 
-        // Click Events
         upBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
         downBtn.onclick = () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
 
-        // Scroll Event Listener
         window.addEventListener('scroll', updateScrollButtons);
-
-        // Initial check on load
         updateScrollButtons();
     </script>
 
