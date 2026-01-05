@@ -72,43 +72,43 @@ nav {
     background-color: var(--bg);
     transition: background-color 0.3s, border-color 0.3s;
     position: relative;
-    z-index: 9999; /* Base Nav Level */
+    z-index: 9999;
 }
 .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); z-index: 10001; position: relative; }
 .blink { animation: blink 1s infinite; color: var(--amber); }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* Controls Container */
-.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-right { display: flex; align-items: center; gap: 30px; }
 
 /* Desktop Links */
 .nav-links { display: flex; align-items: center; gap: 30px; } 
-.nav-links a { font-size: 0.9rem; color: var(--amber); font-weight: 600; }
+.nav-links a { font-size: 0.9rem; color: var(--amber); font-weight: 600; cursor: pointer; }
 .nav-links a:hover { color: var(--text-bright); }
 
-/* Theme Toggle (Always Visible, High Z-Index) */
+/* Theme Toggle */
 .theme-toggle {
     background: none; border: none; cursor: pointer;
     color: var(--text-muted); font-size: 1.2rem;
     transition: color 0.3s;
     padding: 5px;
     display: flex; align-items: center;
-    z-index: 10001; /* Above Menu Overlay */
+    z-index: 10001; 
     position: relative;
 }
 .theme-toggle:hover { color: var(--amber); }
 
-/* Hamburger (Hidden on Desktop, Highest Z-Index) */
+/* Hamburger */
 .hamburger {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 5px;
-    z-index: 10002; /* Topmost element */
+    padding: 0;
+    z-index: 10002; 
     position: relative;
     width: 30px;
-    height: 25px;
+    height: 20px;
 }
 .hamburger span {
     display: block;
@@ -119,15 +119,14 @@ nav {
     left: 0;
     transition: all 0.3s ease-in-out;
 }
-/* Positioning the bars */
 .hamburger span:nth-child(1) { top: 0; }
-.hamburger span:nth-child(2) { top: 10px; }
-.hamburger span:nth-child(3) { top: 20px; }
+.hamburger span:nth-child(2) { top: 9px; }
+.hamburger span:nth-child(3) { top: 18px; }
 
 /* Hamburger to X Animation */
-.hamburger.open span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+.hamburger.open span:nth-child(1) { top: 9px; transform: rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+.hamburger.open span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
 
 
 /* --- HERO --- */
@@ -179,6 +178,38 @@ body.light-mode .card { background-color: var(--panel); border-color: var(--bord
 .definition { font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; min-height: 50px; } 
 .details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 
+/* --- LIST STYLING FIXES (Mobile & Color) --- */
+.service-list {
+    list-style: none;
+    margin-top: 1rem;
+    padding: 0;
+}
+.service-list li {
+    position: relative;
+    /* Increased padding to prevent overlap with icon */
+    padding-left: 2.5rem; 
+    margin-bottom: 0.8rem;
+    color: var(--text-main);
+    font-size: 0.95rem; 
+    line-height: 1.4;
+}
+.service-list li::before {
+    /* \FE0E forces Text presentation (not Emoji) */
+    content: "\2714\FE0E"; 
+    color: var(--green);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif; /* Fallback font helps prevent emoji rendering */
+}
+.service-list.negative li::before {
+    /* \FE0E forces Text presentation (not Emoji) */
+    content: "\2716\FE0E"; 
+    color: var(--red);
+}
+
 /* --- CONTACT --- */
 .contact { padding: 100px 0; text-align: center; }
 .contact h2 { color: var(--text-bright); }
@@ -209,7 +240,7 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
     
     .hamburger { display: block; }
     
-    /* Full Screen Overlay Menu */
+    /* Full Screen Overlay */
     .nav-links {
         display: block; 
         position: fixed;
@@ -218,10 +249,9 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
         width: 100%;
         height: 100vh;
         background-color: var(--bg);
-        padding-top: 120px; /* Space for top controls */
-        z-index: 10000; /* Behind hamburger (10002) */
+        padding-top: 120px;
+        z-index: 10000; /* Behind hamburger */
         
-        /* Animation */
         opacity: 0;
         visibility: hidden;
         transform: translateY(-20px);
@@ -245,18 +275,16 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
         letter-spacing: 0.05em;
         width: auto;
         color: var(--text-bright);
-        border-bottom: 2px solid transparent;
         margin-left: 0;
     }
     
     .nav-links a:hover {
         color: var(--amber);
-        border-bottom: 2px solid var(--amber);
     }
 
     .nav-right { gap: 15px; }
 
-    /* Other Mobile Fixes */
+    /* Fixes for Mobile Layouts */
     h1 { font-size: 2.2rem; }
     .hero { padding: 80px 0; }
     .btn { display: block; width: 100%; text-align: center; margin: 0 0 15px 0; }
