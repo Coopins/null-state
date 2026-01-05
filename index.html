@@ -247,8 +247,7 @@
                     </div>
                 </div>
                 <div style="margin-top: 30px; text-align: center; border-top: 1px solid var(--border); padding-top: 20px;">
-                    <strong style="color: var(--text-bright);">FIXED FEE: $500</strong>
-                    <br><br>
+                    <br>
                     <a href="#contact" class="btn primary">BOOK DIAGNOSTIC</a>
                 </div>
             </div>
@@ -417,7 +416,7 @@
     </footer>
 
     <script>
-        // Scroll Logic
+        // 1. Scroll Buttons Logic (Up/Down Arrows)
         const upBtn = document.getElementById('scrollUp');
         const downBtn = document.getElementById('scrollDown');
 
@@ -445,7 +444,7 @@
         window.addEventListener('scroll', updateScrollButtons);
         updateScrollButtons();
 
-        // Theme Toggle Logic
+        // 2. Theme Toggle Logic
         const toggleBtn = document.getElementById('themeToggle');
         const body = document.body;
 
@@ -467,7 +466,7 @@
             }
         });
 
-        // Hamburger Menu Logic
+        // 3. Hamburger Menu Toggle Logic
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
 
@@ -476,11 +475,30 @@
             hamburger.classList.toggle('open');
         });
 
-        // Close menu when a link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('open');
+        // 4. MASTER LINK HANDLER (Clean URLs + Smooth Scroll + Mobile Close)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Prevent the browser from adding #hash to the URL
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return; // Ignore empty links
+
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close the mobile menu if it's currently open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.classList.remove('open');
+                    }
+
+                    // Smooth scroll to the target section
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
     </script>
