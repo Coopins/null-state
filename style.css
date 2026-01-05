@@ -2,25 +2,23 @@
 :root {
     /* DARK MODE (DEFAULT) */
     --bg: #0a0a0a;
-    --panel: #111111;       /* Cards, Sections */
-    --element-bg: #000000;  /* Inputs, Stat blocks, Deepest blacks */
+    --panel: #111111;       
+    --element-bg: #000000;  
     
-    --text-main: #e0e0e0;   /* Body text */
-    --text-bright: #ffffff; /* Headings, Strong text */
-    --text-muted: #888888;  /* Subtext */
+    --text-main: #e0e0e0;   
+    --text-bright: #ffffff; 
+    --text-muted: #888888;  
     
-    --border: #333333;      /* Standard borders */
-    --border-dim: #222222;  /* Subtle borders */
+    --border: #333333;      
+    --border-dim: #222222;  
     
-    /* THE AMBER PALETTE (Remains Constant) */
+    /* THE AMBER PALETTE */
     --amber: #ff9900;
     --amber-dim: rgba(255, 153, 0, 0.1);
     
     /* STATUS COLORS */
     --green: #00ff41;
     --red: #ff3333;
-    --blue: #00ccff;
-    --purple: #bf00ff;
     
     --font-mono: 'JetBrains Mono', monospace;
     --font-sans: 'Inter', sans-serif;
@@ -62,10 +60,9 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 
 /* --- UTILITIES --- */
 .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-.narrow { max-width: 600px; }
 .text-amber { color: var(--amber); }
 
-/* --- SCANLINE EFFECT (Hidden in Light Mode for cleanliness) --- */
+/* --- SCANLINE EFFECT --- */
 .scanline {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
@@ -84,18 +81,37 @@ nav {
     font-family: var(--font-mono);
     background-color: var(--bg);
     transition: background-color 0.3s, border-color 0.3s;
+    position: relative;
+    z-index: 1001; /* Above hero */
 }
 .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); }
 .blink { animation: blink 1s infinite; color: var(--amber); }
 @keyframes blink { 50% { opacity: 0; } }
 
-.nav-links { display: flex; align-items: center; } /* Ensure flex for alignment */
+.nav-links { display: flex; align-items: center; } 
 .nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--amber); }
 .nav-links a:hover { color: var(--text-bright); }
 .nav-btn { color: var(--amber) !important; border: 1px solid var(--amber); padding: 8px 16px; }
 .nav-btn:hover { background: var(--amber); color: #000 !important; }
 
-/* Theme Toggle Button */
+/* HAMBURGER MENU (Hidden on Desktop) */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002;
+}
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--amber);
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
 .theme-toggle {
     background: none; border: none; cursor: pointer;
     color: var(--text-muted); margin-left: 20px; font-size: 1.1rem;
@@ -138,23 +154,19 @@ nav {
 }
 
 .card {
-    background: var(--bg); /* Inverted logic for cards inside panels */
+    background: var(--bg); 
     border: 1px solid var(--border); 
     padding: 30px;
     transition: transform 0.2s, border-color 0.3s, background-color 0.3s;
     height: 100%;
 }
-/* In Light mode, if the section is grey, the card should be white. */
 body.light-mode .protocol { background-color: var(--bg); }
 body.light-mode .card { background-color: var(--panel); border-color: var(--border); }
-
-.card:hover { transform: translateY(-5px); border-color: var(--text-muted); }
 
 .card-header { font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 15px; display: flex; align-items: center; color: var(--text-muted); }
 .signal { margin-right: 10px; font-size: 1.2rem; }
 .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-bright); }
 .definition { font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; min-height: 50px; } 
-
 .details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 
 /* --- CONTACT --- */
@@ -183,8 +195,45 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
 
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .grid-2 { grid-template-columns: 1fr; }
-    .nav-links { display: none; } 
-    .timeline { display: none; }
+    /* Header Fixes */
+    nav { padding: 20px; }
+    
+    /* Hamburger Visible */
+    .hamburger { display: block; }
+    
+    /* Hide Links by default, show when active */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--panel);
+        border-bottom: 1px solid var(--amber);
+        flex-direction: column;
+        padding: 20px 0;
+        gap: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    
+    /* Active State for JS Toggle */
+    .nav-links.active { display: flex; }
+    
+    .nav-links a { margin-left: 0; font-size: 1.1rem; }
+    .theme-toggle { margin-left: 0; margin-top: 10px; font-size: 1.5rem; }
+
+    /* Hero Fixes */
+    h1 { font-size: 2.2rem; }
+    .hero { padding: 80px 0; }
+    .btn { display: block; width: 100%; text-align: center; margin: 0 0 15px 0; }
+    .btn.secondary { margin-left: 0; }
+    
+    /* Grid Fixes */
+    .grid-2, .diagnostic-grid, .footer-grid, .project-grid-layout, .mode-grid { 
+        grid-template-columns: 1fr; 
+    }
+    .split-mobile { grid-template-columns: 1fr !important; gap: 30px !important; }
+    
+    /* Scroll Nav Position */
+    .scroll-nav { bottom: 80px; right: 20px; }
 }
