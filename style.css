@@ -88,17 +88,17 @@ nav {
 .blink { animation: blink 1s infinite; color: var(--amber); }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* Controls Container (Holds Links + Toggle + Hamburger) */
+/* Controls Container */
 .nav-right { display: flex; align-items: center; gap: 20px; }
 
-/* Desktop: Links are visible in a row */
-.nav-links { display: flex; align-items: center; } 
-.nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--amber); }
+/* Desktop Links */
+.nav-links { display: flex; align-items: center; gap: 30px; } 
+.nav-links a { font-size: 0.9rem; color: var(--amber); position: relative; }
 .nav-links a:hover { color: var(--text-bright); }
 .nav-btn { color: var(--amber) !important; border: 1px solid var(--amber); padding: 8px 16px; }
 .nav-btn:hover { background: var(--amber); color: #000 !important; }
 
-/* Theme Toggle (Always Visible) */
+/* Theme Toggle */
 .theme-toggle {
     background: none; border: none; cursor: pointer;
     color: var(--text-muted); font-size: 1.2rem;
@@ -106,7 +106,6 @@ nav {
     padding: 5px;
     display: flex; align-items: center;
     z-index: 1002;
-    margin-left: 20px; /* Spacing from links on desktop */
 }
 .theme-toggle:hover { color: var(--amber); }
 
@@ -127,6 +126,12 @@ nav {
     margin: 6px 0;
     transition: 0.3s;
 }
+
+/* Hamburger to X Animation */
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
 
 /* --- HERO --- */
 .hero { padding: 120px 0; border-bottom: 1px solid var(--border-dim); }
@@ -201,52 +206,74 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
 .col a:hover { color: var(--amber); }
 .copyright { text-align: center; color: var(--text-muted); }
 
-/* --- MOBILE RESPONSIVE --- */
+/* --- MOBILE RESPONSIVE (THE OVERHAUL) --- */
 @media (max-width: 768px) {
-    /* Header Fixes */
     nav { padding: 20px; }
     
-    /* Toggle visible, Hamburger visible */
     .hamburger { display: block; }
     
-    /* Nav Links: The Dropdown Menu */
+    /* Full Screen Overlay Menu */
     .nav-links {
-        display: none; /* Hidden by default */
-        position: absolute;
-        top: 100%; 
+        display: block; 
+        position: fixed;
+        top: 0; 
         left: 0;
         width: 100%;
-        background-color: var(--panel);
-        border-bottom: 1px solid var(--border);
+        height: 100vh; /* Full viewport height */
+        background-color: var(--bg); /* Use main background color */
+        padding-top: 100px; /* Space for top bar */
+        z-index: 10000;
+        
+        /* Animation State: Hidden */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+        
+        /* Flex Alignment */
+        display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
-        gap: 25px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        z-index: 1000;
+        gap: 40px;
     }
     
-    /* Class added via JS to show menu */
-    .nav-links.active { display: flex; }
+    /* Animation State: Visible */
+    .nav-links.active { 
+        opacity: 1; 
+        visibility: visible; 
+        transform: translateY(0);
+    }
     
-    .nav-links a { margin-left: 0; font-size: 1.1rem; width: 100%; text-align: center; }
+    /* Big Touchable Links */
+    .nav-links a { 
+        font-size: 1.5rem; 
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        width: auto;
+        color: var(--text-bright);
+        border-bottom: 2px solid transparent;
+    }
     
-    /* Ensure the toggle sits next to hamburger, outside the dropdown */
-    .nav-right { gap: 15px; }
-    .theme-toggle { margin-left: 0; } /* Remove desktop margin */
+    .nav-links a:hover {
+        color: var(--amber);
+        border-bottom: 2px solid var(--amber);
+    }
+    
+    /* The Button in the menu */
+    .nav-links .nav-btn {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        padding: 15px 40px;
+    }
 
-    /* Hero Fixes */
+    .nav-right { gap: 15px; }
+
+    /* Other Mobile Fixes */
     h1 { font-size: 2.2rem; }
     .hero { padding: 80px 0; }
     .btn { display: block; width: 100%; text-align: center; margin: 0 0 15px 0; }
     .btn.secondary { margin-left: 0; }
-    
-    /* Grid Fixes */
-    .grid-2, .diagnostic-grid, .footer-grid, .project-grid-layout, .mode-grid { 
-        grid-template-columns: 1fr; 
-    }
+    .grid-2, .diagnostic-grid, .footer-grid, .project-grid-layout, .mode-grid { grid-template-columns: 1fr; }
     .split-mobile { grid-template-columns: 1fr !important; gap: 30px !important; }
-    
-    /* Scroll Nav Position */
     .scroll-nav { bottom: 80px; right: 20px; }
 }
