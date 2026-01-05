@@ -91,6 +91,7 @@ nav {
 /* Controls Container (Holds Links + Toggle + Hamburger) */
 .nav-right { display: flex; align-items: center; gap: 20px; }
 
+/* Desktop: Links are visible in a row */
 .nav-links { display: flex; align-items: center; } 
 .nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--amber); }
 .nav-links a:hover { color: var(--text-bright); }
@@ -105,6 +106,7 @@ nav {
     padding: 5px;
     display: flex; align-items: center;
     z-index: 1002;
+    margin-left: 20px; /* Spacing from links on desktop */
 }
 .theme-toggle:hover { color: var(--amber); }
 
@@ -231,6 +233,7 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
     
     /* Ensure the toggle sits next to hamburger, outside the dropdown */
     .nav-right { gap: 15px; }
+    .theme-toggle { margin-left: 0; } /* Remove desktop margin */
 
     /* Hero Fixes */
     h1 { font-size: 2.2rem; }
