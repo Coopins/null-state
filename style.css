@@ -178,7 +178,7 @@ body.light-mode .card { background-color: var(--panel); border-color: var(--bord
 .definition { font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; min-height: 50px; } 
 .details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 
-/* --- LIST STYLING FIXES (Mobile & Color) --- */
+/* --- LIST FIXES (Applied Globally) --- */
 .service-list {
     list-style: none;
     margin-top: 1rem;
@@ -186,7 +186,7 @@ body.light-mode .card { background-color: var(--panel); border-color: var(--bord
 }
 .service-list li {
     position: relative;
-    /* Increased padding to prevent overlap with icon */
+    /* FIX: Increased padding so text doesn't touch icon */
     padding-left: 2.5rem; 
     margin-bottom: 0.8rem;
     color: var(--text-main);
@@ -194,20 +194,19 @@ body.light-mode .card { background-color: var(--panel); border-color: var(--bord
     line-height: 1.4;
 }
 .service-list li::before {
-    /* \FE0E forces Text presentation (not Emoji) */
-    content: "\2714\FE0E"; 
-    color: var(--green);
+    /* FIX: \FE0E forces text rendering (not emoji) */
+    content: "✔\FE0E"; 
+    color: var(--green) !important;
     position: absolute;
     left: 0;
     top: 0;
     font-weight: bold;
-    font-size: 1.2rem;
-    font-family: Arial, sans-serif; /* Fallback font helps prevent emoji rendering */
+    font-family: Arial, sans-serif; /* Prevents emoji font loading */
 }
 .service-list.negative li::before {
-    /* \FE0E forces Text presentation (not Emoji) */
-    content: "\2716\FE0E"; 
-    color: var(--red);
+    /* FIX: \FE0E forces text rendering */
+    content: "✖\FE0E"; 
+    color: var(--red) !important;
 }
 
 /* --- CONTACT --- */
@@ -250,7 +249,7 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
         height: 100vh;
         background-color: var(--bg);
         padding-top: 120px;
-        z-index: 10000; /* Behind hamburger */
+        z-index: 10000; 
         
         opacity: 0;
         visibility: hidden;
