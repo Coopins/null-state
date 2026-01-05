@@ -82,7 +82,7 @@ nav {
     background-color: var(--bg);
     transition: background-color 0.3s, border-color 0.3s;
     position: relative;
-    z-index: 1001; /* Above hero */
+    z-index: 1001; /* High z-index to stay on top */
 }
 .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); }
 .blink { animation: blink 1s infinite; color: var(--amber); }
@@ -94,7 +94,16 @@ nav {
 .nav-btn { color: var(--amber) !important; border: 1px solid var(--amber); padding: 8px 16px; }
 .nav-btn:hover { background: var(--amber); color: #000 !important; }
 
-/* HAMBURGER MENU (Hidden on Desktop) */
+/* THEME TOGGLE */
+.theme-toggle {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-muted); margin-left: 20px; font-size: 1.1rem;
+    transition: color 0.3s;
+    padding: 5px;
+}
+.theme-toggle:hover { color: var(--amber); }
+
+/* HAMBURGER MENU (Default Hidden) */
 .hamburger {
     display: none;
     background: none;
@@ -111,14 +120,6 @@ nav {
     margin: 5px 0;
     transition: 0.3s;
 }
-
-.theme-toggle {
-    background: none; border: none; cursor: pointer;
-    color: var(--text-muted); margin-left: 20px; font-size: 1.1rem;
-    transition: color 0.3s;
-    padding: 5px;
-}
-.theme-toggle:hover { color: var(--amber); }
 
 /* --- HERO --- */
 .hero { padding: 120px 0; border-bottom: 1px solid var(--border-dim); }
@@ -198,28 +199,30 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
     /* Header Fixes */
     nav { padding: 20px; }
     
-    /* Hamburger Visible */
+    /* Show Hamburger */
     .hamburger { display: block; }
     
-    /* Hide Links by default, show when active */
+    /* Mobile Menu Styles */
     .nav-links {
-        display: none;
+        display: none; /* Hidden by default */
         position: absolute;
-        top: 70px;
+        top: 100%; /* Position right below nav bar */
         left: 0;
         width: 100%;
         background-color: var(--panel);
-        border-bottom: 1px solid var(--amber);
+        border-bottom: 1px solid var(--border);
         flex-direction: column;
+        align-items: center;
         padding: 20px 0;
         gap: 20px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        z-index: 1000;
     }
     
-    /* Active State for JS Toggle */
+    /* Class added via JS to show menu */
     .nav-links.active { display: flex; }
     
-    .nav-links a { margin-left: 0; font-size: 1.1rem; }
+    .nav-links a { margin-left: 0; font-size: 1.1rem; width: 100%; text-align: center; padding: 10px 0; }
     .theme-toggle { margin-left: 0; margin-top: 10px; font-size: 1.5rem; }
 
     /* Hero Fixes */
