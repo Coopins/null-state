@@ -82,11 +82,14 @@ nav {
     background-color: var(--bg);
     transition: background-color 0.3s, border-color 0.3s;
     position: relative;
-    z-index: 1001; /* High z-index to stay on top */
+    z-index: 1001;
 }
-.logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); }
+.logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); z-index: 1002; }
 .blink { animation: blink 1s infinite; color: var(--amber); }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* Controls Container (Holds Links + Toggle + Hamburger) */
+.nav-right { display: flex; align-items: center; gap: 20px; }
 
 .nav-links { display: flex; align-items: center; } 
 .nav-links a { margin-left: 30px; font-size: 0.9rem; color: var(--amber); }
@@ -94,22 +97,24 @@ nav {
 .nav-btn { color: var(--amber) !important; border: 1px solid var(--amber); padding: 8px 16px; }
 .nav-btn:hover { background: var(--amber); color: #000 !important; }
 
-/* THEME TOGGLE */
+/* Theme Toggle (Always Visible) */
 .theme-toggle {
     background: none; border: none; cursor: pointer;
-    color: var(--text-muted); margin-left: 20px; font-size: 1.1rem;
+    color: var(--text-muted); font-size: 1.2rem;
     transition: color 0.3s;
     padding: 5px;
+    display: flex; align-items: center;
+    z-index: 1002;
 }
 .theme-toggle:hover { color: var(--amber); }
 
-/* HAMBURGER MENU (Default Hidden) */
+/* Hamburger (Hidden on Desktop) */
 .hamburger {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
     z-index: 1002;
 }
 .hamburger span {
@@ -117,7 +122,7 @@ nav {
     width: 25px;
     height: 2px;
     background-color: var(--amber);
-    margin: 5px 0;
+    margin: 6px 0;
     transition: 0.3s;
 }
 
@@ -199,31 +204,33 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
     /* Header Fixes */
     nav { padding: 20px; }
     
-    /* Show Hamburger */
+    /* Toggle visible, Hamburger visible */
     .hamburger { display: block; }
     
-    /* Mobile Menu Styles */
+    /* Nav Links: The Dropdown Menu */
     .nav-links {
         display: none; /* Hidden by default */
         position: absolute;
-        top: 100%; /* Position right below nav bar */
+        top: 100%; 
         left: 0;
         width: 100%;
         background-color: var(--panel);
         border-bottom: 1px solid var(--border);
         flex-direction: column;
         align-items: center;
-        padding: 20px 0;
-        gap: 20px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        padding: 30px 0;
+        gap: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         z-index: 1000;
     }
     
     /* Class added via JS to show menu */
     .nav-links.active { display: flex; }
     
-    .nav-links a { margin-left: 0; font-size: 1.1rem; width: 100%; text-align: center; padding: 10px 0; }
-    .theme-toggle { margin-left: 0; margin-top: 10px; font-size: 1.5rem; }
+    .nav-links a { margin-left: 0; font-size: 1.1rem; width: 100%; text-align: center; }
+    
+    /* Ensure the toggle sits next to hamburger, outside the dropdown */
+    .nav-right { gap: 15px; }
 
     /* Hero Fixes */
     h1 { font-size: 2.2rem; }
