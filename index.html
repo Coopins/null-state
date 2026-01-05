@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
     <style>
-        /* INLINE STYLES FOR SIMPLIFIED LAYOUT */
+        /* INLINE STYLES FOR SIMPLIFIED LAYOUT & SCROLL NAV */
         .project-card {
             background: var(--panel);
             border: 1px solid #333;
@@ -61,7 +61,7 @@
             font-size: 0.8rem;
         }
         
-        /* Service List Styles */
+        /* New Styles for Simplified Services */
         .service-list {
             list-style: none;
             margin-top: 1rem;
@@ -123,16 +123,63 @@
             font-weight: 500;
         }
 
+        /* --- SCROLL NAVIGATION ARROWS --- */
+        .scroll-nav {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        .scroll-btn {
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--amber);
+            color: var(--amber);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 1;
+            /* Tech Styling */
+            font-family: var(--font-mono);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .scroll-btn:hover {
+            background: var(--amber);
+            color: #000;
+            transform: translateY(-2px);
+        }
+        /* Class to hide arrows when not needed */
+        .scroll-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+        }
+
         @media (max-width: 768px) {
             .project-grid-layout { grid-template-columns: 1fr; gap: 30px; }
             .project-card { padding: 20px; }
             .hero h1 { font-size: 2.2rem; }
+            /* Adjust arrows for mobile */
+            .scroll-nav { right: 20px; bottom: 20px; }
+            .scroll-btn { width: 40px; height: 40px; }
         }
     </style>
 </head>
 <body>
 
     <div class="scanline"></div>
+
+    <div class="scroll-nav">
+        <button id="scrollUp" class="scroll-btn" title="Scroll to Top">▲</button>
+        <button id="scrollDown" class="scroll-btn" title="Scroll to Bottom">▼</button>
+    </div>
 
     <nav>
         <div class="logo">NuLL STATE <span class="blink">_</span></div>
@@ -450,6 +497,42 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const upBtn = document.getElementById('scrollUp');
+        const downBtn = document.getElementById('scrollDown');
+
+        // Function to check scroll position
+        function updateScrollButtons() {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+
+            // Handle UP button (Hide if at top)
+            if (scrollY < 100) {
+                upBtn.classList.add('hidden');
+            } else {
+                upBtn.classList.remove('hidden');
+            }
+
+            // Handle DOWN button (Hide if at bottom)
+            if (scrollY + windowHeight >= docHeight - 50) {
+                downBtn.classList.add('hidden');
+            } else {
+                downBtn.classList.remove('hidden');
+            }
+        }
+
+        // Click Events
+        upBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        downBtn.onclick = () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+
+        // Scroll Event Listener
+        window.addEventListener('scroll', updateScrollButtons);
+
+        // Initial check on load
+        updateScrollButtons();
+    </script>
 
 </body>
 </html>
