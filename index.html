@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
     <style>
-        /* INLINE STYLES FOR SIMPLIFIED LAYOUT & SCROLL NAV */
+        /* INLINE STYLES FOR SIMPLIFIED LAYOUT & MOBILE OPTIMIZATION */
+        
+        /* Base styles for Cards */
         .project-card {
             background: var(--panel);
             border: 1px solid #333;
@@ -46,22 +48,8 @@
             justify-content: space-between;
         }
         .stat-block strong { color: #fff; }
-        .project-list li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-            color: var(--text-main);
-        }
-        .project-list li::before {
-            content: ">>";
-            position: absolute;
-            left: 0;
-            color: var(--amber);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-        }
         
-        /* New Styles for Simplified Services */
+        /* Service Lists */
         .service-list {
             list-style: none;
             margin-top: 1rem;
@@ -146,7 +134,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             opacity: 1;
-            /* Tech Styling */
             font-family: var(--font-mono);
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
@@ -155,20 +142,55 @@
             color: #000;
             transform: translateY(-2px);
         }
-        /* Class to hide arrows when not needed */
         .scroll-btn.hidden {
             opacity: 0;
             pointer-events: none;
             transform: translateY(10px);
         }
 
+        /* --- MOBILE RESPONSIVE OVERRIDES --- */
         @media (max-width: 768px) {
+            
+            /* Fix Navigation: Make it visible and stacked */
+            .nav-links { 
+                display: flex !important; /* Force display since style.css hides it */
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                margin-top: 20px;
+                width: 100%;
+            }
+            .nav-links a { 
+                margin-left: 0 !important; 
+                display: block;
+                padding: 10px 0;
+            }
+            nav {
+                flex-direction: column;
+                padding: 20px;
+                align-items: center;
+            }
+            .logo { margin-bottom: 5px; }
+
+            /* Fix Hero Typography */
+            .hero h1 { font-size: 2rem !important; margin-bottom: 1rem; }
+            .hero-anchor p { font-size: 1.1rem; }
+            
+            /* Fix Layout Grids */
             .project-grid-layout { grid-template-columns: 1fr; gap: 30px; }
-            .project-card { padding: 20px; }
-            .hero h1 { font-size: 2.2rem; }
-            /* Adjust arrows for mobile */
-            .scroll-nav { right: 20px; bottom: 20px; }
-            .scroll-btn { width: 40px; height: 40px; }
+            .project-card { padding: 25px 20px; }
+            
+            /* Fix Scroll Buttons (Move up to avoid Safari bottom bar) */
+            .scroll-nav { right: 15px; bottom: 80px; }
+            .scroll-btn { width: 40px; height: 40px; background: rgba(0,0,0,0.8); }
+
+            /* Fix Form Inputs (Prevent iOS zoom) */
+            input, textarea { font-size: 16px !important; }
+            
+            /* Card Mobile Tweaks */
+            .card { padding: 20px; }
+            .diagnostic-grid > div > div { display: block !important; grid-template-columns: 1fr !important; } 
+            /* Forces the 'What You Get' split to stack */
         }
     </style>
 </head>
@@ -221,7 +243,7 @@
                 <h3>PROJECT DIAGNOSTIC</h3>
                 <p class="definition">A short, focused assessment of your situation — past, present, future — so you know what to do next and why.</p>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;" class="split-mobile">
                     <div>
                         <strong style="color: #fff; display: block; margin-bottom: 10px;">WHAT IT DELIVERS:</strong>
                         <ul class="service-list">
