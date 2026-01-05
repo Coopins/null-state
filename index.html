@@ -57,21 +57,29 @@
         }
         .service-list li {
             position: relative;
-            padding-left: 1.5rem;
+            /* Increased padding to prevent overlap */
+            padding-left: 2rem; 
             margin-bottom: 0.8rem;
             color: var(--text-secondary);
             font-size: 0.95rem; 
+            line-height: 1.4;
         }
         .service-list li::before {
-            content: "✔";
-            color: var(--green);
+            /* Using standard checkmark */
+            content: "✔"; 
+            /* Forced Green Hex */
+            color: #00ff41 !important; 
             position: absolute;
             left: 0;
+            top: 0;
             font-weight: bold;
+            font-family: sans-serif; /* Forces text rendering over emoji */
         }
         .service-list.negative li::before {
-            content: "✖";
-            color: var(--red);
+            /* Using Heavy Multiplication X */
+            content: "✖"; 
+            /* Forced Red Hex */
+            color: #ff3333 !important; 
         }
         
         /* Outcome Grid */
@@ -153,7 +161,7 @@
             
             /* Fix Navigation: Make it visible and stacked */
             .nav-links { 
-                display: flex !important; /* Force display since style.css hides it */
+                display: flex !important; /* Force display */
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
@@ -189,8 +197,12 @@
             
             /* Card Mobile Tweaks */
             .card { padding: 20px; }
-            .diagnostic-grid > div > div { display: block !important; grid-template-columns: 1fr !important; } 
-            /* Forces the 'What You Get' split to stack */
+            
+            /* IMPORTANT: Force the split lists to stack vertically on mobile */
+            .split-mobile { 
+                grid-template-columns: 1fr !important; 
+                gap: 30px !important;
+            } 
         }
     </style>
 </head>
