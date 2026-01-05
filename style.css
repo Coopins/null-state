@@ -1,22 +1,15 @@
 /* --- RESET & VARIABLES --- */
 :root {
-    /* DARK MODE (DEFAULT) */
     --bg: #0a0a0a;
     --panel: #111111;       
     --element-bg: #000000;  
-    
     --text-main: #e0e0e0;   
     --text-bright: #ffffff; 
     --text-muted: #888888;  
-    
     --border: #333333;      
     --border-dim: #222222;  
-    
-    /* THE AMBER PALETTE */
     --amber: #ff9900;
     --amber-dim: rgba(255, 153, 0, 0.1);
-    
-    /* STATUS COLORS */
     --green: #00ff41;
     --red: #ff3333;
     
@@ -29,14 +22,11 @@ body.light-mode {
     --bg: #ffffff;
     --panel: #f4f4f4;
     --element-bg: #ffffff;
-    
     --text-main: #333333;
     --text-bright: #000000;
     --text-muted: #666666;
-    
     --border: #e0e0e0;
     --border-dim: #f0f0f0;
-    
     --amber-dim: rgba(255, 153, 0, 0.15); 
 }
 
@@ -82,9 +72,9 @@ nav {
     background-color: var(--bg);
     transition: background-color 0.3s, border-color 0.3s;
     position: relative;
-    z-index: 1001;
+    z-index: 9999; /* Base Nav Level */
 }
-.logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); z-index: 1002; }
+.logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-bright); z-index: 10001; position: relative; }
 .blink { animation: blink 1s infinite; color: var(--amber); }
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -93,44 +83,51 @@ nav {
 
 /* Desktop Links */
 .nav-links { display: flex; align-items: center; gap: 30px; } 
-.nav-links a { font-size: 0.9rem; color: var(--amber); position: relative; }
+.nav-links a { font-size: 0.9rem; color: var(--amber); font-weight: 600; }
 .nav-links a:hover { color: var(--text-bright); }
-.nav-btn { color: var(--amber) !important; border: 1px solid var(--amber); padding: 8px 16px; }
-.nav-btn:hover { background: var(--amber); color: #000 !important; }
 
-/* Theme Toggle */
+/* Theme Toggle (Always Visible, High Z-Index) */
 .theme-toggle {
     background: none; border: none; cursor: pointer;
     color: var(--text-muted); font-size: 1.2rem;
     transition: color 0.3s;
     padding: 5px;
     display: flex; align-items: center;
-    z-index: 1002;
+    z-index: 10001; /* Above Menu Overlay */
+    position: relative;
 }
 .theme-toggle:hover { color: var(--amber); }
 
-/* Hamburger (Hidden on Desktop) */
+/* Hamburger (Hidden on Desktop, Highest Z-Index) */
 .hamburger {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 5px;
-    z-index: 1002;
+    z-index: 10002; /* Topmost element */
+    position: relative;
+    width: 30px;
+    height: 25px;
 }
 .hamburger span {
     display: block;
-    width: 25px;
+    width: 100%;
     height: 2px;
     background-color: var(--amber);
-    margin: 6px 0;
-    transition: 0.3s;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease-in-out;
 }
+/* Positioning the bars */
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 10px; }
+.hamburger span:nth-child(3) { top: 20px; }
 
 /* Hamburger to X Animation */
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.hamburger.open span:nth-child(1) { top: 10px; transform: rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+.hamburger.open span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
 
 
 /* --- HERO --- */
@@ -206,7 +203,7 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
 .col a:hover { color: var(--amber); }
 .copyright { text-align: center; color: var(--text-muted); }
 
-/* --- MOBILE RESPONSIVE (THE OVERHAUL) --- */
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
     nav { padding: 20px; }
     
@@ -219,32 +216,29 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
         top: 0; 
         left: 0;
         width: 100%;
-        height: 100vh; /* Full viewport height */
-        background-color: var(--bg); /* Use main background color */
-        padding-top: 100px; /* Space for top bar */
-        z-index: 10000;
+        height: 100vh;
+        background-color: var(--bg);
+        padding-top: 120px; /* Space for top controls */
+        z-index: 10000; /* Behind hamburger (10002) */
         
-        /* Animation State: Hidden */
+        /* Animation */
         opacity: 0;
         visibility: hidden;
         transform: translateY(-20px);
         transition: all 0.3s ease-in-out;
         
-        /* Flex Alignment */
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 40px;
     }
     
-    /* Animation State: Visible */
     .nav-links.active { 
         opacity: 1; 
         visibility: visible; 
         transform: translateY(0);
     }
     
-    /* Big Touchable Links */
     .nav-links a { 
         font-size: 1.5rem; 
         font-weight: 700;
@@ -252,18 +246,12 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
         width: auto;
         color: var(--text-bright);
         border-bottom: 2px solid transparent;
+        margin-left: 0;
     }
     
     .nav-links a:hover {
         color: var(--amber);
         border-bottom: 2px solid var(--amber);
-    }
-    
-    /* The Button in the menu */
-    .nav-links .nav-btn {
-        margin-top: 20px;
-        font-size: 1.2rem;
-        padding: 15px 40px;
     }
 
     .nav-right { gap: 15px; }
