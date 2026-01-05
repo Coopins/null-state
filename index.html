@@ -17,15 +17,6 @@
         .project-grid-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; }
         .stat-block { background: var(--element-bg); padding: 20px; border: 1px solid var(--border); margin-bottom: 10px; font-family: var(--font-mono); font-size: 0.9rem; display: flex; justify-content: space-between; transition: background-color 0.3s, border-color 0.3s; }
         .stat-block strong { color: var(--text-bright); }
-        
-        /* Updated List Padding for No Overlap */
-        .service-list { list-style: none; margin-top: 1rem; padding: 0; }
-        .service-list li { position: relative; padding-left: 2.5rem; margin-bottom: 0.8rem; color: var(--text-main); font-size: 0.95rem; line-height: 1.4; }
-        
-        /* Added \FE0E to content to force text rendering (Green/Red) instead of Black Emoji */
-        .service-list li::before { content: "\2714\FE0E"; color: var(--green); position: absolute; left: 0; top: 0; font-weight: bold; font-family: Arial, sans-serif; }
-        .service-list.negative li::before { content: "\2716\FE0E"; color: var(--red); }
-        
         .outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
         .outcome-card { border: 1px solid var(--border); padding: 2rem; background: var(--panel); position: relative; display: flex; flex-direction: column; justify-content: space-between; transition: background-color 0.3s, border-color 0.3s; }
         .outcome-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
@@ -43,8 +34,8 @@
         .stop-section { border-left: 3px solid var(--red); background: rgba(255, 51, 51, 0.05); padding: 40px; margin-top: 60px; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; } 
-            .nav-links.active { display: flex !important; }
+            .nav-links { display: flex; visibility: hidden; opacity: 0; } 
+            .nav-links.active { visibility: visible !important; opacity: 1 !important; }
             .nav-right { order: 2; display: flex; align-items: center; gap: 15px; }
             .logo { margin-bottom: 0; }
             .hero h1 { font-size: 1.8rem !important; margin-bottom: 1rem; }
@@ -242,9 +233,9 @@
                     <div>
                         <strong style="color: var(--text-bright); display: block; margin-bottom: 10px;">YOU DO NOT RECEIVE:</strong>
                         <ul class="service-list negative" style="list-style: none; padding-left: 0;">
-                            <li style="padding-left: 0; color: var(--text-muted);"> Code or UI</li>
-                            <li style="padding-left: 0; color: var(--text-muted);"> Feature Specs</li>
-                            <li style="padding-left: 0; color: var(--text-muted);"> Roadmaps</li>
+                            <li style="color: var(--text-muted);"> Code or UI</li>
+                            <li style="color: var(--text-muted);"> Feature Specs</li>
+                            <li style="color: var(--text-muted);"> Roadmaps</li>
                         </ul>
                     </div>
                 </div>
