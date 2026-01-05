@@ -15,8 +15,12 @@
         .project-header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 30px; }
         .tech-label { font-family: var(--font-mono); color: var(--amber); font-size: 0.8rem; letter-spacing: 0.1em; display: block; margin-bottom: 10px; }
         .project-grid-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; }
-        .stat-block { background: var(--element-bg); padding: 20px; border: 1px solid var(--border); margin-bottom: 10px; font-family: var(--font-mono); font-size: 0.9rem; display: flex; justify-content: space-between; transition: background-color 0.3s, border-color 0.3s; }
+        .stat-block { background: var(--element-bg); padding: 20px; border: 1px solid var(--border); margin-bottom: 10px; font-family: var(--font-mono); font-size: 0.85rem; display: flex; justify-content: space-between; transition: background-color 0.3s, border-color 0.3s; }
         .stat-block strong { color: var(--text-bright); }
+        .service-list { list-style: none; margin-top: 1rem; padding: 0; }
+        .service-list li { position: relative; padding-left: 2.5rem; margin-bottom: 0.8rem; color: var(--text-main); font-size: 0.95rem; line-height: 1.4; }
+        .service-list li::before { content: "\2714\FE0E"; color: var(--green); position: absolute; left: 0; top: 0; font-weight: bold; font-family: Arial, sans-serif; }
+        .service-list.negative li::before { content: "\2716\FE0E"; color: var(--red); }
         .outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
         .outcome-card { border: 1px solid var(--border); padding: 2rem; background: var(--panel); position: relative; display: flex; flex-direction: column; justify-content: space-between; transition: background-color 0.3s, border-color 0.3s; }
         .outcome-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
@@ -32,6 +36,11 @@
         .mode-block h4 { color: var(--amber); font-size: 0.9rem; margin-bottom: 5px; }
         .mode-block p { font-size: 0.9rem; color: var(--text-muted); }
         .stop-section { border-left: 3px solid var(--red); background: rgba(255, 51, 51, 0.05); padding: 40px; margin-top: 60px; }
+        
+        /* New Style for Context Sections */
+        .context-box { margin-bottom: 20px; border-left: 2px solid var(--border); padding-left: 15px; }
+        .context-label { display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px; font-family: var(--font-mono); text-transform: uppercase; }
+        .nda-note { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-top: 15px; border-top: 1px solid var(--border); padding-top: 10px; }
 
         @media (max-width: 768px) {
             .nav-links { display: flex; visibility: hidden; opacity: 0; } 
@@ -69,9 +78,7 @@
                 <a href="#work">DECISIONS</a>
                 <a href="#contact">CONTACT</a>
             </div>
-
             <button id="themeToggle" class="theme-toggle" title="Toggle Light/Dark Mode">☀</button>
-
             <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
                 <span></span><span></span><span></span>
             </button>
@@ -268,7 +275,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>DECISION LOG</h2>
-                <p>Diagnostic discipline in action.</p>
+                <p>These examples demonstrate decision discipline in action. Execution details may vary; the diagnostic rigor does not.</p>
             </div>
 
             <div class="project-card">
@@ -278,41 +285,88 @@
                 </div>
                 <div class="project-grid-layout">
                     <div>
+                        <div class="context-box">
+                            <span class="context-label">CONTEXT:</span>
+                            <p style="font-size: 0.9rem; color: var(--text-main);">A language learning platform needing real-time vocal analysis without massive cloud costs.</p>
+                        </div>
+                        
                         <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
-                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">ENTRY STATE: START DIAGNOSTIC</span><br>
                             <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
                             <p style="font-size: 0.9rem; color: var(--text-bright); margin-top: 5px;"><strong>Why:</strong> Clear primary user, measurable outcome, low-risk path to first value.</p>
                         </div>
+                        
                         <h4 style="color: var(--text-bright); margin-bottom: 10px;">OUTCOME</h4>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Authorized execution → Initialization Sprint → Stabilized system.</p>
+                        
+                        <p class="nda-note">Client identity protected by NDA. Technical data reflects system behavior.</p>
                     </div>
                     <div>
                         <h4 style="color: var(--text-bright); margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
                         <div class="stat-block"><span>LATENCY</span><strong>&lt; 2 Seconds</strong></div>
                         <div class="stat-block"><span>PIPELINE</span><strong>Automated</strong></div>
+                        <div class="stat-block"><span>COST</span><strong>Optimized</strong></div>
                     </div>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-header">
-                    <span class="tech-label">CASE STUDY: 02 // GEOSPATIAL ENGINE</span>
-                    <h3>WANDER UPON</h3>
+                    <span class="tech-label">CASE STUDY: 02 // SYSTEMS ARCHITECTURE</span>
+                    <h3>BOUNDLESS WEATHER</h3>
                 </div>
                 <div class="project-grid-layout">
                     <div>
-                        <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
-                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">ENTRY STATE: START DIAGNOSTIC</span><br>
-                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
-                            <p style="font-size: 0.9rem; color: var(--text-bright); margin-top: 5px;"><strong>Why:</strong> Problem definition verified. Scope locked to discovery engine only.</p>
+                        <div class="context-box">
+                            <span class="context-label">CONTEXT:</span>
+                            <p style="font-size: 0.9rem; color: var(--text-main);">A real-time platform delivering location-specific insights without overwhelming users.</p>
                         </div>
+
+                        <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
+                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
+                            <p style="font-size: 0.9rem; color: var(--text-bright); margin-top: 5px;"><strong>Why:</strong> Clear user intent, well-defined signal boundaries, and scalable architecture.</p>
+                        </div>
+                        
                         <h4 style="color: var(--text-bright); margin-bottom: 10px;">OUTCOME</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Authorized execution → Build → Active Alpha.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Authorized execution → Initialization Sprint → Core platform stabilized.</p>
+                        
+                        <p class="nda-note">This system is under active development. Proprietary logic is withheld.</p>
                     </div>
                     <div>
                         <h4 style="color: var(--text-bright); margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
-                        <div class="stat-block"><span>STATUS</span><strong>Active Alpha</strong></div>
-                        <div class="stat-block"><span>COVERAGE</span><strong>Global</strong></div>
+                        <div class="stat-block"><span>INGESTION</span><strong>Automated</strong></div>
+                        <div class="stat-block"><span>SCALING</span><strong>Elastic</strong></div>
+                        <div class="stat-block"><span>STATUS</span><strong>Live Alpha</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="tech-label">CASE STUDY: 03 // DEVELOPER INFRASTRUCTURE</span>
+                    <h3>REFACTOR RIG</h3>
+                </div>
+                <div class="project-grid-layout">
+                    <div>
+                        <div class="context-box">
+                            <span class="context-label">CONTEXT:</span>
+                            <p style="font-size: 0.9rem; color: var(--text-main);">A system to evaluate and modernize legacy codebases with strict safety constraints.</p>
+                        </div>
+
+                        <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
+                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
+                            <p style="font-size: 0.9rem; color: var(--text-bright); margin-top: 5px;"><strong>Why:</strong> Clear problem definition, constrained execution surface, and measurable value.</p>
+                        </div>
+                        
+                        <h4 style="color: var(--text-bright); margin-bottom: 10px;">OUTCOME</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Authorized execution → Build → Operational pipeline.</p>
+                        
+                        <p class="nda-note">Internal tool deployment. Implementation details protected.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-bright); margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
+                        <div class="stat-block"><span>SAFETY</span><strong>Deterministic</strong></div>
+                        <div class="stat-block"><span>SCOPE</span><strong>Bounded</strong></div>
+                        <div class="stat-block"><span>TYPE</span><strong>System-Level</strong></div>
                     </div>
                 </div>
             </div>
