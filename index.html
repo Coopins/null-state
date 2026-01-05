@@ -85,6 +85,9 @@
             padding: 2rem;
             background: #0a0a0a;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .outcome-header {
             display: flex;
@@ -107,6 +110,23 @@
             font-weight: 700;
         }
         
+        /* Optional/Pivot Block Styling */
+        .pivot-block {
+            background: #111;
+            padding: 15px;
+            border: 1px solid #333;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .pivot-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+        }
+
         /* Scroll Navigation */
         .scroll-nav {
             position: fixed;
@@ -144,22 +164,16 @@
             transform: translateY(10px);
         }
 
-        /* Mode A / Mode B Blocks */
-        .mode-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-            border-top: 1px solid #222;
-            padding-top: 20px;
+        /* Stop Section */
+        .stop-section {
+            border-left: 3px solid var(--red);
+            background: rgba(255, 51, 51, 0.05);
+            padding: 40px;
+            margin-top: 60px;
         }
-        .mode-block h4 { color: var(--amber); font-size: 0.9rem; margin-bottom: 5px; }
-        .mode-block p { font-size: 0.9rem; color: var(--text-muted); }
 
         /* --- MOBILE RESPONSIVE OVERRIDES --- */
         @media (max-width: 768px) {
-            
-            /* Fix Navigation: Make it visible and stacked */
             .nav-links { 
                 display: flex !important;
                 flex-direction: column;
@@ -179,31 +193,15 @@
                 align-items: center;
             }
             .logo { margin-bottom: 5px; }
-
-            /* Fix Hero Typography */
-            .hero h1 { font-size: 2rem !important; margin-bottom: 1rem; }
-            .hero-anchor p { font-size: 1.1rem; }
-            
-            /* Mode Grid Stack */
-            .mode-grid { grid-template-columns: 1fr; gap: 15px; }
-
-            /* Fix Layout Grids */
+            .hero h1 { font-size: 1.8rem !important; margin-bottom: 1rem; }
+            .hero-anchor p { font-size: 1rem; }
             .project-grid-layout { grid-template-columns: 1fr; gap: 30px; }
             .project-card { padding: 25px 20px; }
-            
-            /* Fix Scroll Buttons */
             .scroll-nav { right: 15px; bottom: 80px; }
             .scroll-btn { width: 40px; height: 40px; background: rgba(0,0,0,0.8); }
-
-            /* Fix Form Inputs */
             input, textarea { font-size: 16px !important; }
-            
-            /* Card Mobile Tweaks */
             .card { padding: 20px; }
-            .split-mobile { 
-                grid-template-columns: 1fr !important; 
-                gap: 30px !important;
-            } 
+            .split-mobile { grid-template-columns: 1fr !important; gap: 30px !important; } 
         }
     </style>
 </head>
@@ -219,8 +217,8 @@
     <nav>
         <div class="logo">NuLL STATE <span class="blink">_</span></div>
         <div class="nav-links">
-            <a href="#how-it-works">HOW IT WORKS</a>
-            <a href="#work">CASE STUDIES</a>
+            <a href="#how-we-work">HOW WE WORK</a>
+            <a href="#work">DECISIONS</a>
             <a href="#contact" class="nav-btn">BOOK DIAGNOSTIC</a>
         </div>
     </nav>
@@ -232,170 +230,201 @@
             
             <div class="hero-anchor">
                 <p>We diagnose first. Nothing proceeds without a decision. Nothing is priced without responsibility.</p>
-                
-                <div class="mode-grid">
-                    <div class="mode-block">
-                        <h4>MODE A: DIAGNOSTIC (DEFAULT)</h4>
-                        <p>We evaluate, judge, and decide. You retain execution control.</p>
-                    </div>
-                    <div class="mode-block">
-                        <h4>MODE B: EXECUTION (EARNED)</h4>
-                        <p>We assume responsibility for outcomes—only after a GREEN decision.</p>
-                    </div>
-                </div>
+                <p class="sub-text" style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Execution is optional — and only happens after a direction earns a GREEN decision.</p>
             </div>
             
             <div class="hero-actions">
-                <a href="#how-it-works" class="btn primary">[ BOOK DIAGNOSTIC ]</a>
+                <a href="#how-we-work" class="btn primary">[ BOOK DIAGNOSTIC ]</a>
                 <a href="#work" class="btn secondary">SEE DECISIONS</a>
             </div>
         </div>
     </section>
 
-    <section id="how-it-works" class="protocol" style="background: #0f0f0f;">
+    <section id="how-we-work" class="protocol" style="background: #0f0f0f;">
         <div class="container">
             <div class="section-header">
-                <h2>THE FORWARD-MOTION SYSTEM</h2>
+                <h2>HOW WE WORK</h2>
                 <p>Every engagement begins with the <strong>Forward-Motion Diagnostic</strong>. We price decisions, not hope.</p>
             </div>
 
-            <div class="card" style="border-top: 3px solid var(--amber); max-width: 900px; margin: 0 auto;">
-                <div class="card-header">
-                    <span class="signal" style="color: var(--amber);">●</span> MANDATORY ENTRY POINT
-                </div>
-                <h3>FORWARD-MOTION DIAGNOSTIC</h3>
-                <p class="definition">We evaluate structure, risk, and direction before anyone commits to building.</p>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;" class="split-mobile">
-                    <div>
-                        <strong style="color: #fff; display: block; margin-bottom: 10px;">YOU RECEIVE:</strong>
-                        <ul class="service-list">
-                            <li>A written Decision Report (Green/Narrow/Stop)</li>
-                            <li>Clear explanation of why the decision was made</li>
-                            <li>Defined next steps (if applicable)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <strong style="color: #fff; display: block; margin-bottom: 10px;">YOU DO NOT RECEIVE:</strong>
-                        <ul class="service-list negative" style="list-style: none; padding-left: 0;">
-                            <li style="padding-left: 0; color: var(--text-muted);"> Code or Prototypes</li>
-                            <li style="padding-left: 0; color: var(--text-muted);"> Feature Roadmaps</li>
-                            <li style="padding-left: 0; color: var(--text-muted);"> False promises</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center;">
-                    <span style="font-family: var(--font-mono); font-size: 2rem; color: #fff; display: block; margin-bottom: 1rem;">$500 <span style="font-size: 1rem; color: var(--text-muted);">(FIXED FEE)</span></span>
-                    <a href="#contact" class="btn primary" style="width: 100%; max-width: 400px;">BOOK DIAGNOSTIC</a>
-                </div>
+            <div style="background: var(--panel); border: 1px solid var(--amber); padding: 30px; margin-bottom: 50px; text-align: center;">
+                <h3 style="color: #fff; margin-bottom: 10px;">FIXED DIAGNOSTIC FEE: $500 (UPFRONT)</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 700px; margin: 0 auto;">The diagnostic is a decision product, not a discovery workshop. It produces one of three outcomes:</p>
             </div>
 
-            <div style="margin-top: 6rem;">
-                <h3 style="text-align: center; color: var(--text-muted); font-weight: normal; font-family: var(--font-mono); margin-bottom: 1rem;">THE DIAGNOSTIC PRODUCES ONE OF THREE DECISIONS:</h3>
-                
-                <div class="outcome-grid">
-                    <div class="outcome-card" style="border-top: 1px solid var(--green);">
+            <div class="outcome-grid">
+                <div class="outcome-card" style="border-top: 1px solid var(--green);">
+                    <div>
                         <div class="outcome-header">
                             <span class="outcome-dot" style="background: var(--green);"></span>
                             <span class="outcome-title" style="color: var(--green);">GREEN</span>
                         </div>
-                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>PROCEED TO BUILD</strong></p>
-                        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">The direction is sound. We authorize the build and deploy the system spine.</p>
-                        
-                        <div style="background: #111; padding: 15px; border: 1px solid #333;">
-                            <span style="display: block; font-size: 0.8rem; color: var(--text-muted);">UNLOCKS:</span>
-                            <strong style="color: #fff; display: block; margin-top: 5px;">Initialization Sprint</strong>
-                            <span style="color: var(--amber); font-family: var(--font-mono); font-size: 0.9rem;">$8,000 - $15,000</span>
-                        </div>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>PROCEED</strong></p>
+                        <p style="font-size: 0.9rem;">Direction is sound. Optional execution may be authorized.</p>
                     </div>
+                    
+                    <div class="pivot-block" style="border-color: var(--green);">
+                        <span class="pivot-label">UNLOCKS (OPTIONAL):</span>
+                        <strong style="color: #fff;">Initialization Sprint</strong><br>
+                        <span style="color: var(--green); font-family: var(--font-mono);">$8,000 - $15,000</span>
+                    </div>
+                </div>
 
-                    <div class="outcome-card" style="border-top: 1px solid var(--amber);">
+                <div class="outcome-card" style="border-top: 1px solid var(--amber);">
+                    <div>
                         <div class="outcome-header">
                             <span class="outcome-dot" style="background: var(--amber);"></span>
                             <span class="outcome-title" style="color: var(--amber);">NARROW</span>
                         </div>
-                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>REFRAME & FOCUS</strong></p>
-                        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Signal exists, but the plan is risky. Ambiguity must be removed before code is written.</p>
-                        
-                        <div style="background: #111; padding: 15px; border: 1px solid #333;">
-                            <span style="display: block; font-size: 0.8rem; color: var(--text-muted);">UNLOCKS:</span>
-                            <strong style="color: #fff; display: block; margin-top: 5px;">Narrowing Sprint</strong>
-                            <span style="color: var(--amber); font-family: var(--font-mono); font-size: 0.9rem;">$3,000 - $6,000</span>
-                        </div>
+                        <p style="color: #fff; margin-bottom: 0.5rem;"><strong>REFRAME</strong></p>
+                        <p style="font-size: 0.9rem;">Signal exists, but the current framing introduces avoidable risk. Building now would harden uncertainty into structure.</p>
                     </div>
+                    
+                    <div class="pivot-block">
+                        <span class="pivot-label">OPTIONAL (ONLY IF REQUESTED):</span>
+                        <strong style="color: #fff;">Narrowing / Pivot Sprint</strong><br>
+                        <span style="color: var(--amber); font-family: var(--font-mono);">$3,000 - $6,000</span>
+                        <p style="margin-top: 5px; font-size: 0.8rem; color: #888;">Short, fixed-scope effort to collapse ambiguity. Does not imply building.</p>
+                    </div>
+                </div>
 
-                    <div class="outcome-card" style="border-top: 1px solid var(--red);">
+                <div class="outcome-card" style="border-top: 1px solid var(--red);">
+                    <div>
                         <div class="outcome-header">
                             <span class="outcome-dot" style="background: var(--red);"></span>
                             <span class="outcome-title" style="color: var(--red);">STOP</span>
                         </div>
                         <p style="color: #fff; margin-bottom: 0.5rem;"><strong>DO NOT BUILD</strong></p>
-                        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Unsafe to build as framed. Stopping now preserves capital and energy.</p>
-                        
-                        <div style="background: #111; padding: 15px; border: 1px solid #333;">
-                            <span style="display: block; font-size: 0.8rem; color: var(--text-muted);">OPTIONAL:</span>
-                            <strong style="color: #fff; display: block; margin-top: 5px;">Pivot / Ideation Sprint</strong>
-                            <span style="color: var(--amber); font-family: var(--font-mono); font-size: 0.9rem;">$2,000 - $4,000</span>
-                        </div>
+                        <p style="font-size: 0.9rem;">The direction, as framed, is structurally unsound. Proceeding would increase cost without increasing clarity.</p>
+                    </div>
+                    
+                    <div class="pivot-block">
+                        <span class="pivot-label">OPTIONAL (ONLY IF REQUESTED):</span>
+                        <strong style="color: #fff;">Pivot / Ideation Sprint</strong><br>
+                        <span style="color: var(--amber); font-family: var(--font-mono);">$2,000 - $4,000</span>
+                        <p style="margin-top: 5px; font-size: 0.8rem; color: #888;">Explore new directions. New ideas must re-enter via a fresh Diagnostic.</p>
                     </div>
                 </div>
             </div>
-
-            <div style="margin-top: 4rem; border: 1px solid #333; padding: 2rem; text-align: center;">
-                <h3 style="color: #fff; margin-bottom: 1rem;">BROKEN PROJECT?</h3>
-                <p style="max-width: 600px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
-                    If you have a system that exists but is failing, we enter via the <strong>Restructure Diagnostic</strong>. If the system is salvageable, we execute a Realignment Sprint ($6k - $12k).
-                </p>
-                <a href="#contact" class="nav-btn">[ DIAGNOSE MY BROKEN SYSTEM ]</a>
+            
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">We engage at any phase of the project lifecycle — but all entry points require diagnosis first.</p>
             </div>
 
         </div>
     </section>
 
-    <section id="work" class="protocol" style="border-bottom: none;">
+    <section class="protocol">
+        <div class="container">
+            <div class="diagnostic-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="signal">●</span> START
+                    </div>
+                    <h3>NEW PROJECTS</h3>
+                    <p class="definition">All new projects begin with the <strong>Forward-Motion Diagnostic ($500)</strong>.</p>
+                    <ul class="service-list">
+                        <li><strong style="color:var(--green)">GREEN:</strong> Initialization Sprint ($8k-$15k)</li>
+                        <li><strong style="color:var(--amber)">NARROW:</strong> Focused reframing ($3k-$6k)</li>
+                        <li><strong style="color:var(--red)">STOP:</strong> Do not build as framed</li>
+                    </ul>
+                    <p class="details" style="margin-top: 20px;">We build only what earns a GREEN decision.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="signal" style="color: var(--amber);">●</span> RESTRUCTURE
+                    </div>
+                    <h3>BROKEN OR STALLED PROJECTS</h3>
+                    <p class="definition">We diagnose before we fix. Fixing without diagnosis compounds risk.</p>
+                    <ul class="service-list">
+                        <li><strong>If value exists:</strong> Realignment Sprint ($6k-$12k)</li>
+                        <li><strong>If direction is broken:</strong> STOP decision</li>
+                    </ul>
+                    <p class="details" style="margin-top: 20px;">We audit code and structure to identify the fault lines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem" style="background: #0f0f0f;">
+        <div class="container">
+            <div class="card" style="max-width: 800px; margin: 0 auto; border-top: 3px solid var(--amber);">
+                <div class="card-header">
+                    <span class="signal" style="color: var(--amber);">●</span> THE PRODUCT
+                </div>
+                <h3>FORWARD-MOTION DIAGNOSTIC</h3>
+                <p class="definition">This diagnostic evaluates structure, risk, and direction before any build commitment.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2rem;" class="split-mobile">
+                    <div>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">YOU RECEIVE:</strong>
+                        <ul class="service-list">
+                            <li>A written decision report (GREEN / NARROW / STOP)</li>
+                            <li>Clear reasoning for the decision</li>
+                            <li>Optional next steps (no pressure)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #fff; display: block; margin-bottom: 10px;">YOU DO NOT RECEIVE:</strong>
+                        <ul class="service-list negative" style="list-style: none; padding-left: 0;">
+                            <li style="padding-left: 0; color: var(--text-muted);"> Code or UI</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> Feature Specs</li>
+                            <li style="padding-left: 0; color: var(--text-muted);"> Roadmaps</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; text-align: center; border-top: 1px solid #333; padding-top: 20px;">
+                    <strong style="color: #fff;">FIXED FEE: $500</strong>
+                    <br><br>
+                    <a href="#contact" class="btn primary">BOOK DIAGNOSTIC</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="protocol">
+        <div class="container">
+            <div class="stop-section">
+                <h3 style="color: var(--red); margin-bottom: 20px;">WHEN WE SAY STOP</h3>
+                <p style="color: #fff; font-size: 1.1rem; margin-bottom: 20px;">Not every idea should be built. If your diagnostic receives a STOP decision:</p>
+                <ul class="service-list" style="margin-bottom: 20px;">
+                    <li style="color: #fff;">You receive a written report explaining why</li>
+                    <li style="color: #fff;">The reasoning is logical, not emotional</li>
+                    <li style="color: #fff;">There is no pressure to continue</li>
+                    <li style="color: #fff;">There is no upsell to “try anyway”</li>
+                </ul>
+                <p style="color: var(--text-muted); font-size: 0.95rem;"><strong>What STOP Does Not Mean:</strong> It does not mean “you’re done forever.” If you want help exploring new directions, we can facilitate a bounded pivot ($2k–$4k) — deliberately, and without pressure.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="protocol" style="background: #0f0f0f; border-bottom: none;">
         <div class="container">
             <div class="section-header">
                 <h2>DECISION LOG</h2>
-                <p>We don't just build. We judge.</p>
+                <p>Diagnostic discipline in action.</p>
             </div>
 
             <div class="project-card">
                 <div class="project-header">
                     <span class="tech-label">CASE STUDY: 01 // ARCHITECTURE & AI</span>
-                    <h3>AI-DRIVEN FLUENCY ASSESSMENT SYSTEM</h3>
+                    <h3>AI-DRIVEN FLUENCY ASSESSMENT</h3>
                 </div>
-
                 <div class="project-grid-layout">
                     <div>
                         <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
+                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">ENTRY STATE: START DIAGNOSTIC</span><br>
                             <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
-                            <p style="font-size: 0.9rem; color: #fff;">Clear primary user, measurable outcome, low-risk path to first value.</p>
+                            <p style="font-size: 0.9rem; color: #fff; margin-top: 5px;"><strong>Why:</strong> Clear primary user, measurable outcome, low-risk path to first value.</p>
                         </div>
-                        
-                        <h4 style="color: #fff; margin-bottom: 10px;">WHAT WAS BUILT</h4>
-                        <ul class="project-list" style="list-style: none; padding: 0;">
-                            <li>Automatic audio capture with silence detection</li>
-                            <li>Real-time speech-to-text processing</li>
-                            <li>AI-based evaluation of fluency signals</li>
-                            <li>Modular architecture designed for extension</li>
-                        </ul>
+                        <h4 style="color: #fff; margin-bottom: 10px;">OUTCOME</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Authorized execution → Initialization Sprint → Stabilized system.</p>
                     </div>
-
                     <div>
                         <h4 style="color: #fff; margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
-                        <div class="stat-block">
-                            <span>ENTRY STATE</span>
-                            <strong>Existing Idea</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>LATENCY</span>
-                            <strong>&lt; 2 Seconds</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>OUTCOME</span>
-                            <strong>Initialization Sprint</strong>
-                        </div>
+                        <div class="stat-block"><span>LATENCY</span><strong>&lt; 2 Seconds</strong></div>
+                        <div class="stat-block"><span>PIPELINE</span><strong>Automated</strong></div>
                     </div>
                 </div>
             </div>
@@ -405,36 +434,20 @@
                     <span class="tech-label">CASE STUDY: 02 // GEOSPATIAL ENGINE</span>
                     <h3>WANDER UPON</h3>
                 </div>
-
                 <div class="project-grid-layout">
                     <div>
                         <div style="margin-bottom: 20px; border-left: 2px solid var(--green); padding-left: 15px;">
+                            <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">ENTRY STATE: START DIAGNOSTIC</span><br>
                             <span style="color: var(--green); font-weight: bold; font-size: 0.8rem;">DECISION: GREEN</span>
-                            <p style="font-size: 0.9rem; color: #fff;">Problem definition verified. Scope locked to discovery engine only.</p>
+                            <p style="font-size: 0.9rem; color: #fff; margin-top: 5px;"><strong>Why:</strong> Problem definition verified. Scope locked to discovery engine only.</p>
                         </div>
-
-                        <h4 style="color: #fff; margin-bottom: 10px;">CURRENT BUILD</h4>
-                        <ul class="project-list" style="list-style: none; padding: 0;">
-                            <li>Real-time geolocation discovery algorithms</li>
-                            <li>Curated "experience" data pipelines</li>
-                            <li>Minimalist, map-first user interface</li>
-                        </ul>
+                        <h4 style="color: #fff; margin-bottom: 10px;">OUTCOME</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Authorized execution → Build → Active Alpha.</p>
                     </div>
-
                     <div>
                         <h4 style="color: #fff; margin-bottom: 15px;">QUANTIZED EXECUTION</h4>
-                        <div class="stat-block">
-                            <span>ENTRY STATE</span>
-                            <strong>Start Diagnostic</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>STATUS</span>
-                            <strong>Active Alpha</strong>
-                        </div>
-                        <div class="stat-block">
-                            <span>OUTCOME</span>
-                            <strong>Build & Stabilize</strong>
-                        </div>
+                        <div class="stat-block"><span>STATUS</span><strong>Active Alpha</strong></div>
+                        <div class="stat-block"><span>COVERAGE</span><strong>Global</strong></div>
                     </div>
                 </div>
             </div>
@@ -444,7 +457,7 @@
 
     <section id="contact" class="contact">
         <div class="container narrow">
-            <h2>BOOK A DIAGNOSTIC</h2>
+            <h2>BOOK DIAGNOSTIC</h2>
             <p>Tell us what you are trying to build (or fix).</p>
            
             <form action="https://formspree.io/f/xeeogjzb" method="POST">
