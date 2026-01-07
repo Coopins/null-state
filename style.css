@@ -176,11 +176,10 @@ nav {
     perspective: 1000px; 
 }
 
-/* --- FLIP CONTAINER (THE FIX) --- */
-/* We switch from absolute to grid stacking so the container GROWS with content */
+/* --- FLIP CONTAINER --- */
 .flip-container { 
     background-color: transparent; 
-    height: auto; /* Allow growth */
+    height: auto; 
     min-height: 550px; 
     position: relative; 
     flex: 1 1 300px;
@@ -196,7 +195,7 @@ nav {
     transition: transform 0.6s; 
     transform-style: preserve-3d;
     
-    /* CSS GRID STACKING: This prevents the overlap */
+    /* CSS GRID STACKING: Ensures card takes height of tallest face */
     display: grid;
     grid-template-areas: "card";
 }
@@ -205,15 +204,11 @@ nav {
 
 /* FRONT & BACK FACES */
 .front, .back { 
-    /* Stack both faces in the same grid cell */
     grid-area: card;
-    
-    /* Relative allows the parent to see the height */
     position: relative; 
     width: 100%; 
     height: 100%; 
     backface-visibility: hidden; 
-    
     padding: 2.5rem; 
     border: 1px solid var(--border); 
     background: var(--panel); 
@@ -388,14 +383,20 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
     .split-mobile { grid-template-columns: 1fr !important; gap: 30px !important; }
     .scroll-nav { bottom: 80px; right: 20px; }
     
-    /* CARD OVERLAP FIX FOR MOBILE */
+    /* --- CARD FIX FOR OVERLAP --- */
     .outcome-grid {
         flex-direction: column;
         align-items: center;
+        gap: 40px; /* Explicit gap */
     }
+    
     .flip-container { 
-        /* Auto height prevents overlap on mobile */
+        /* Reset any height constraints causing overlap */
         height: auto; 
+        min-height: auto; /* Override desktop min-height */
         max-width: 100%;
+        width: 100%;
+        margin-bottom: 20px; /* Physical barrier between cards */
+        flex: 0 0 auto;
     } 
 }
