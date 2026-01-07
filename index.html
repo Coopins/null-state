@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><rect x=%2225%22 y=%2225%22 width=%2250%22 height=%2250%22 fill=%22%23ff9900%22/></svg>">
     <style>
-        /* INLINE STYLES FOR FRAMEWORK LAYOUT */
+        /* INLINE STYLES FOR FLIP CARDS & LAYOUT */
         .project-card { background: var(--panel); border: 1px solid var(--border); padding: 40px; margin-top: 30px; transition: background-color 0.3s, border-color 0.3s; }
         .project-header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 30px; }
         .tech-label { font-family: var(--font-mono); color: var(--amber); font-size: 0.8rem; letter-spacing: 0.1em; display: block; margin-bottom: 10px; }
@@ -21,13 +21,33 @@
         .service-list li { position: relative; padding-left: 2.5rem; margin-bottom: 0.8rem; color: var(--text-main); font-size: 0.95rem; line-height: 1.4; }
         .service-list li::before { content: "\2714\FE0E"; color: var(--green); position: absolute; left: 0; top: 0; font-weight: bold; font-family: Arial, sans-serif; }
         .service-list.negative li::before { content: "\2716\FE0E"; color: var(--red); }
-        .outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .outcome-card { border: 1px solid var(--border); padding: 2rem; background: var(--panel); position: relative; display: flex; flex-direction: column; justify-content: space-between; transition: background-color 0.3s, border-color 0.3s; }
+        
+        /* Flip Card Logic */
+        .outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; perspective: 1000px; }
+        .flip-container { background-color: transparent; height: 480px; position: relative; } /* Fixed height ensures flip stability */
+        .flipper { position: relative; width: 100%; height: 100%; text-align: left; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-container.flipped .flipper { transform: rotateY(180deg); }
+        .front, .back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; padding: 2rem; border: 1px solid var(--border); background: var(--panel); display: flex; flex-direction: column; justify-content: space-between; }
+        .back { transform: rotateY(180deg); background: var(--element-bg); overflow-y: auto; } /* Back is slightly darker */
+        
         .outcome-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
         .outcome-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
         .outcome-title { color: var(--text-bright); font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; }
-        .pivot-block { background: var(--element-bg); padding: 15px; border: 1px solid var(--border); margin-top: 20px; font-size: 0.85rem; transition: background-color 0.3s, border-color 0.3s; }
+        
+        .pivot-block { background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid var(--border); margin-top: auto; font-size: 0.85rem; }
         .pivot-label { display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px; font-family: var(--font-mono); text-transform: uppercase; }
+        .flip-btn { background: none; border: 1px solid var(--amber); color: var(--amber); font-family: var(--font-mono); font-size: 0.8rem; padding: 8px 12px; cursor: pointer; margin-top: 15px; width: 100%; text-align: center; transition: all 0.2s; }
+        .flip-btn:hover { background: var(--amber); color: #000; }
+        .close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; }
+        .close-btn:hover { color: var(--red); }
+
+        .timebox-badge { display: inline-block; font-size: 0.75rem; font-family: var(--font-mono); background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; margin-top: 8px; color: var(--text-muted); border: 1px solid var(--border); width: fit-content; }
+        
+        /* Deliverable List Styling on Back of Card */
+        .deliverable-list { list-style: none; padding: 0; margin: 0; }
+        .deliverable-list li { margin-bottom: 12px; font-size: 0.85rem; color: var(--text-main); line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
+        .deliverable-list strong { color: var(--text-bright); display: block; margin-bottom: 2px; font-family: var(--font-mono); font-size: 0.8rem; }
+
         .scroll-nav { position: fixed; right: 30px; bottom: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
         .scroll-btn { background: var(--panel); border: 1px solid var(--amber); color: var(--amber); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; opacity: 1; font-family: var(--font-mono); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
         .scroll-btn:hover { background: var(--amber); color: #000; transform: translateY(-2px); }
@@ -37,7 +57,6 @@
         .mode-block p { font-size: 0.9rem; color: var(--text-muted); }
         .stop-section { border-left: 3px solid var(--red); background: rgba(255, 51, 51, 0.05); padding: 40px; margin-top: 60px; }
         
-        /* New Style for Context Sections */
         .context-box { margin-bottom: 20px; border-left: 2px solid var(--border); padding-left: 15px; }
         .context-label { display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px; font-family: var(--font-mono); text-transform: uppercase; }
         .nda-note { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-top: 15px; border-top: 1px solid var(--border); padding-top: 10px; }
@@ -57,6 +76,7 @@
             input, textarea { font-size: 16px !important; }
             .card { padding: 20px; }
             .split-mobile { grid-template-columns: 1fr !important; gap: 30px !important; } 
+            .flip-container { height: 550px; } /* Taller on mobile for content */
         }
     </style>
 </head>
@@ -116,7 +136,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>HOW WE WORK</h2>
-                <p>We price decisions, not hope.</p>
+                <p>We price decisions, not hope. We charge for clarity, risk reduction, and tangible artifacts.</p>
             </div>
 
             <div style="background: var(--panel); border: 1px solid var(--amber); padding: 30px; margin-bottom: 50px; text-align: center; transition: background-color 0.3s;">
@@ -125,58 +145,112 @@
             </div>
 
             <div class="outcome-grid">
-                <div class="outcome-card" style="border-top: 1px solid var(--green);">
-                    <div>
-                        <div class="outcome-header">
-                            <span class="outcome-dot" style="background: var(--green);"></span>
-                            <span class="outcome-title" style="color: var(--green);">GREEN</span>
+                
+                <div class="flip-container" id="card1">
+                    <div class="flipper">
+                        <div class="front" style="border-top: 1px solid var(--green);">
+                            <div>
+                                <div class="outcome-header">
+                                    <span class="outcome-dot" style="background: var(--green);"></span>
+                                    <span class="outcome-title" style="color: var(--green);">GREEN</span>
+                                </div>
+                                <p style="color: var(--text-bright); margin-bottom: 0.5rem;"><strong>PROCEED</strong></p>
+                                <p style="font-size: 0.9rem; color: var(--text-main);">Direction is sound. Execution is authorized.</p>
+                                <span class="timebox-badge">TIMELINE: 2–3 WEEKS</span>
+                            </div>
+                            <div class="pivot-block" style="border: 1px solid var(--green); background: rgba(0, 255, 65, 0.05);">
+                                <span class="pivot-label" style="color: var(--green);">NEXT STEP:</span>
+                                <strong style="color: var(--text-bright);">Initialization Sprint</strong><br>
+                                <span style="color: var(--green); font-family: var(--font-mono);">$5,000 - $10,000</span>
+                                <button class="flip-btn" onclick="toggleFlip('card1')">SEE WHAT'S INCLUDED ↻</button>
+                            </div>
                         </div>
-                        <p style="color: var(--text-bright); margin-bottom: 0.5rem;"><strong>PROCEED</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-main);">Direction is sound. Optional execution may be authorized.</p>
-                    </div>
-                    
-                    <div class="pivot-block" style="border: 1px solid var(--green); background: rgba(0, 255, 65, 0.05);">
-                        <span class="pivot-label" style="color: var(--green);">UNLOCKS (OPTIONAL):</span>
-                        <strong style="color: var(--text-bright);">Initialization Sprint</strong><br>
-                        <span style="color: var(--green); font-family: var(--font-mono);">$8,000 - $15,000</span>
+                        <div class="back" style="border-top: 1px solid var(--green);">
+                            <button class="close-btn" onclick="toggleFlip('card1')" title="Close">×</button>
+                            <h4 style="color: var(--green); margin-bottom: 15px; font-family: var(--font-mono);">BUILD ARTIFACTS</h4>
+                            <ul class="deliverable-list">
+                                <li><strong>Walking Skeleton</strong>Functional system spine (repo, database, auth) wired end‑to‑end.</li>
+                                <li><strong>Critical Path Flow</strong>Single most important user journey built & verified.</li>
+                                <li><strong>Scope Lock Registry</strong>Boundary document listing what is OUT of scope.</li>
+                                <li><strong>Transferable Codebase</strong>Clean architecture any developer can extend.</li>
+                            </ul>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto; border-top: 1px solid var(--border); padding-top: 10px;">
+                                <em>High End ($10k): Multi-user roles, compliance needs, or 3rd party integrations.</em>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="outcome-card" style="border-top: 1px solid var(--amber);">
-                    <div>
-                        <div class="outcome-header">
-                            <span class="outcome-dot" style="background: var(--amber);"></span>
-                            <span class="outcome-title" style="color: var(--amber);">NARROW</span>
+                <div class="flip-container" id="card2">
+                    <div class="flipper">
+                        <div class="front" style="border-top: 1px solid var(--amber);">
+                            <div>
+                                <div class="outcome-header">
+                                    <span class="outcome-dot" style="background: var(--amber);"></span>
+                                    <span class="outcome-title" style="color: var(--amber);">NARROW</span>
+                                </div>
+                                <p style="color: var(--text-bright); margin-bottom: 0.5rem;"><strong>REFRAME</strong></p>
+                                <p style="font-size: 0.9rem; color: var(--text-main);">Signal exists, but scope is currently unsafe.</p>
+                                <span class="timebox-badge">TIMELINE: 1–2 WEEKS</span>
+                            </div>
+                            <div class="pivot-block" style="border: 1px solid var(--amber); background: rgba(255, 153, 0, 0.05);">
+                                <span class="pivot-label" style="color: var(--amber);">NEXT STEP:</span>
+                                <strong style="color: var(--text-bright);">Scope Collapse Sprint</strong><br>
+                                <span style="color: var(--amber); font-family: var(--font-mono);">$4,000 - $7,000</span>
+                                <button class="flip-btn" onclick="toggleFlip('card2')">SEE WHAT'S INCLUDED ↻</button>
+                            </div>
                         </div>
-                        <p style="color: var(--text-bright); margin-bottom: 0.5rem;"><strong>REFRAME</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-main);">Signal exists, but the current framing introduces avoidable risk.</p>
-                    </div>
-                    
-                    <div class="pivot-block" style="border: 1px solid var(--amber); background: rgba(255, 153, 0, 0.05);">
-                        <span class="pivot-label" style="color: var(--amber);">OPTIONAL (ONLY IF REQUESTED):</span>
-                        <strong style="color: var(--text-bright);">Narrowing / Pivot Sprint</strong><br>
-                        <span style="color: var(--amber); font-family: var(--font-mono);">$3,000 - $6,000</span>
-                        <p style="margin-top: 5px; font-size: 0.8rem; color: var(--text-muted);">Short, fixed-scope effort to collapse ambiguity.</p>
+                        <div class="back" style="border-top: 1px solid var(--amber);">
+                            <button class="close-btn" onclick="toggleFlip('card2')" title="Close">×</button>
+                            <h4 style="color: var(--amber); margin-bottom: 15px; font-family: var(--font-mono);">ENGINEERING SPECS</h4>
+                            <ul class="deliverable-list">
+                                <li><strong>Cut List Specification</strong>Audit of removed features acting as a "do-not-build" firewall.</li>
+                                <li><strong>Golden Thread Schematics</strong>Visual logic map of the exact remaining user journey.</li>
+                                <li><strong>Revised Data Schema</strong>Simplified database design proving technical viability.</li>
+                                <li><strong>Green Light Report</strong>Updated Decision Report authorizing the new scope.</li>
+                            </ul>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto; border-top: 1px solid var(--border); padding-top: 10px;">
+                                <em>Value: You invest ~$4k now to avoid spending $20k+ on a bloated build later.</em>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="outcome-card" style="border-top: 1px solid var(--red);">
-                    <div>
-                        <div class="outcome-header">
-                            <span class="outcome-dot" style="background: var(--red);"></span>
-                            <span class="outcome-title" style="color: var(--red);">STOP</span>
+                <div class="flip-container" id="card3">
+                    <div class="flipper">
+                        <div class="front" style="border-top: 1px solid var(--red);">
+                            <div>
+                                <div class="outcome-header">
+                                    <span class="outcome-dot" style="background: var(--red);"></span>
+                                    <span class="outcome-title" style="color: var(--red);">STOP</span>
+                                </div>
+                                <p style="color: var(--text-bright); margin-bottom: 0.5rem;"><strong>DO NOT BUILD</strong></p>
+                                <p style="font-size: 0.9rem; color: var(--text-main);">Direction is unsound. Proceeding increases cost.</p>
+                                <span class="timebox-badge">TIMELINE: 1–2 WEEKS</span>
+                            </div>
+                            <div class="pivot-block" style="border: 1px solid var(--red); background: rgba(255, 51, 51, 0.05);">
+                                <span class="pivot-label" style="color: var(--red);">OPTIONAL:</span>
+                                <strong style="color: var(--text-bright);">Discovery Sprint</strong><br>
+                                <span style="color: var(--amber); font-family: var(--font-mono);">$3,000 - $6,000</span>
+                                <button class="flip-btn" onclick="toggleFlip('card3')">SEE WHAT'S INCLUDED ↻</button>
+                            </div>
                         </div>
-                        <p style="color: var(--text-bright); margin-bottom: 0.5rem;"><strong>DO NOT BUILD</strong></p>
-                        <p style="font-size: 0.9rem; color: var(--text-main);">The direction is structurally unsound. Proceeding would increase cost.</p>
-                    </div>
-                    
-                    <div class="pivot-block" style="border: 1px solid var(--red); background: rgba(255, 51, 51, 0.05);">
-                        <span class="pivot-label" style="color: var(--red);">OPTIONAL (ONLY IF REQUESTED):</span>
-                        <strong style="color: var(--text-bright);">Pivot / Ideation Sprint</strong><br>
-                        <span style="color: var(--amber); font-family: var(--font-mono);">$2,000 - $4,000</span>
-                        <p style="margin-top: 5px; font-size: 0.8rem; color: var(--text-muted);">Explore new directions via fresh Diagnostic.</p>
+                        <div class="back" style="border-top: 1px solid var(--red);">
+                            <button class="close-btn" onclick="toggleFlip('card3')" title="Close">×</button>
+                            <h4 style="color: var(--red); margin-bottom: 15px; font-family: var(--font-mono);">ASSET RESCUE</h4>
+                            <ul class="deliverable-list">
+                                <li><strong>IP & Asset Audit</strong>Inventory of code/data/insights you can reuse.</li>
+                                <li><strong>Market Signal Dossier</strong>Evidence that a new direction has a real audience.</li>
+                                <li><strong>Re-Entry Roadmap</strong>Step-by-step plan for the new concept.</li>
+                                <li><strong>New Decision Report</strong>Valid GREEN (or Yellow) report for the new idea.</li>
+                            </ul>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: auto; border-top: 1px solid var(--border); padding-top: 10px;">
+                                <em>High End ($6k): Large existing codebase or multiple stakeholders to align.</em>
+                            </p>
+                        </div>
                     </div>
                 </div>
+
             </div>
             
             <div style="margin-top: 40px; text-align: center;">
@@ -196,9 +270,9 @@
                     <h3>NEW PROJECTS</h3>
                     <p class="definition">All new projects begin with the <strong>Forward-Motion Diagnostic ($500)</strong>.</p>
                     <ul class="service-list">
-                        <li><strong style="color:var(--green)">GREEN:</strong> Initialization Sprint ($8k-$15k)</li>
-                        <li><strong style="color:var(--amber)">NARROW:</strong> Focused reframing ($3k-$6k)</li>
-                        <li><strong style="color:var(--red)">STOP:</strong> Do not build as framed</li>
+                        <li><strong style="color:var(--green)">GREEN:</strong> Initialization ($5k-$10k)</li>
+                        <li><strong style="color:var(--amber)">NARROW:</strong> Scope Collapse ($4k-$7k)</li>
+                        <li><strong style="color:var(--red)">STOP:</strong> Discovery Sprint ($3k-$6k)</li>
                     </ul>
                     <p class="details" style="margin-top: 20px;">We build only what earns a GREEN decision.</p>
                 </div>
@@ -210,7 +284,8 @@
                     <h3>BROKEN OR STALLED PROJECTS</h3>
                     <p class="definition">We diagnose before we fix. Fixing without diagnosis compounds risk.</p>
                     <ul class="service-list">
-                        <li><strong>If value exists:</strong> Realignment Sprint ($6k-$12k)</li>
+                        <li><strong>If value exists:</strong> Restructure Sprint ($10k-$20k)</li>
+                        <li><strong>Timeline:</strong> Typically 3–6 weeks</li>
                         <li><strong>If direction is broken:</strong> STOP decision</li>
                     </ul>
                     <p class="details" style="margin-top: 20px;">We audit code and structure to identify the fault lines.</p>
@@ -232,8 +307,8 @@
                     <div>
                         <strong style="color: var(--text-bright); display: block; margin-bottom: 10px;">YOU RECEIVE:</strong>
                         <ul class="service-list">
-                            <li>A written decision report (GREEN / NARROW / STOP)</li>
-                            <li>Clear reasoning for the decision</li>
+                            <li>A portable Execution Protocol (Yours to keep)</li>
+                            <li>Clear decision (GREEN / NARROW / STOP)</li>
                             <li>Optional next steps (no pressure)</li>
                         </ul>
                     </div>
@@ -247,7 +322,7 @@
                     </div>
                 </div>
                 <div style="margin-top: 30px; text-align: center; border-top: 1px solid var(--border); padding-top: 20px;">
-                    <br>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">We don't charge for momentum. We charge for clarity, risk reduction, and responsibility.</p>
                     <a href="#contact" class="btn primary">BOOK DIAGNOSTIC</a>
                 </div>
             </div>
@@ -265,7 +340,7 @@
                     <li style="color: var(--text-main);">There is no pressure to continue</li>
                     <li style="color: var(--text-main);">There is no upsell to “try anyway”</li>
                 </ul>
-                <p style="color: var(--text-muted); font-size: 0.95rem;"><strong>What STOP Does Not Mean:</strong> It does not mean “you’re done forever.” If you want help exploring new directions, we can facilitate a bounded pivot — deliberately, and without pressure.</p>
+                <p style="color: var(--text-muted); font-size: 0.95rem;"><strong>What STOP Does Not Mean:</strong> It does not mean “you’re done forever.” A "Stop" decision is a product. It creates immediate capital preservation.</p>
             </div>
         </div>
     </section>
@@ -410,13 +485,13 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2026 NULL STATE. ALL SYSTEMS OPERATIONAL.
+                &copy; 2026 NULL STATE. THE FORWARD-MOTION PROTOCOL&trade; IS A PROPRIETARY FRAMEWORK OF NULL STATE.
             </div>
         </div>
     </footer>
 
     <script>
-        // 1. Scroll Buttons Logic (Up/Down Arrows)
+        // Scroll Logic
         const upBtn = document.getElementById('scrollUp');
         const downBtn = document.getElementById('scrollDown');
 
@@ -444,7 +519,7 @@
         window.addEventListener('scroll', updateScrollButtons);
         updateScrollButtons();
 
-        // 2. Theme Toggle Logic
+        // Theme Toggle Logic
         const toggleBtn = document.getElementById('themeToggle');
         const body = document.body;
 
@@ -466,7 +541,7 @@
             }
         });
 
-        // 3. Hamburger Menu Toggle Logic
+        // Hamburger Menu Logic
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
 
@@ -475,25 +550,19 @@
             hamburger.classList.toggle('open');
         });
 
-        // 4. MASTER LINK HANDLER (Clean URLs + Smooth Scroll + Mobile Close)
+        // MASTER LINK HANDLER
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Prevent the browser from adding #hash to the URL
                 e.preventDefault();
-
                 const targetId = this.getAttribute('href');
-                if (targetId === '#') return; // Ignore empty links
-
+                if (targetId === '#') return;
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // Close the mobile menu if it's currently open
                     if (navLinks.classList.contains('active')) {
                         navLinks.classList.remove('active');
                         hamburger.classList.remove('open');
                     }
-
-                    // Smooth scroll to the target section
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
@@ -501,6 +570,12 @@
                 }
             });
         });
+
+        // FLIP CARD LOGIC
+        function toggleFlip(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('flipped');
+        }
     </script>
 
 </body>
