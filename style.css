@@ -157,7 +157,8 @@ nav {
 }
 .btn.primary { background: var(--amber); color: #000; }
 .btn.primary:hover { background: var(--text-bright); }
-.btn.secondary { border-color: var(--border); color: var(--text-muted); margin-left: 20px; }
+/* UPDATED: Changed color from text-muted to text-bright for visibility */
+.btn.secondary { border-color: var(--border); color: var(--text-bright); margin-left: 20px; }
 .btn.secondary:hover { border-color: var(--amber); color: var(--amber); }
 
 /* --- PROTOCOLS & CARDS --- */
