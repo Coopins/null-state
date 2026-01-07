@@ -31,7 +31,7 @@ body.light-mode {
     --border-dim: #f0f0f0;
     --amber-dim: rgba(255, 153, 0, 0.15); 
     
-    /* FIX: Darker text colors for readability on white background */
+    /* Darker text colors for readability on white background */
     --green: #009926; 
     --amber: #cc7a00;
     --red: #cc0000;
@@ -176,15 +176,13 @@ nav {
     perspective: 1000px; 
 }
 
-/* --- FLIP CONTAINER (GRID STACKING FIX) --- */
+/* --- FLIP CONTAINER (THE FIX) --- */
+/* We switch from absolute to grid stacking so the container GROWS with content */
 .flip-container { 
     background-color: transparent; 
-    /* Changed to auto so it grows with text */
-    height: auto;
+    height: auto; /* Allow growth */
     min-height: 550px; 
     position: relative; 
-    
-    /* Flex sizing for the grid row */
     flex: 1 1 300px;
     max-width: 400px;
     width: 100%;
@@ -198,7 +196,7 @@ nav {
     transition: transform 0.6s; 
     transform-style: preserve-3d;
     
-    /* CSS Grid Stacking: This is the fix for overlapping */
+    /* CSS GRID STACKING: This prevents the overlap */
     display: grid;
     grid-template-areas: "card";
 }
@@ -207,10 +205,10 @@ nav {
 
 /* FRONT & BACK FACES */
 .front, .back { 
-    /* Stack faces on top of each other */
+    /* Stack both faces in the same grid cell */
     grid-area: card;
     
-    /* Relative positioning allows parent to see height */
+    /* Relative allows the parent to see the height */
     position: relative; 
     width: 100%; 
     height: 100%; 
@@ -228,7 +226,6 @@ nav {
 .back { 
     transform: rotateY(180deg); 
     background: var(--element-bg); 
-    /* removed overflow-y because container now grows */
 } 
 
 /* HEADERS */
@@ -391,7 +388,7 @@ footer { padding: 60px 0; border-top: 1px solid var(--border-dim); font-family: 
     .split-mobile { grid-template-columns: 1fr !important; gap: 30px !important; }
     .scroll-nav { bottom: 80px; right: 20px; }
     
-    /* FIX: Ensure cards still look good on mobile with new flex layout */
+    /* CARD OVERLAP FIX FOR MOBILE */
     .outcome-grid {
         flex-direction: column;
         align-items: center;
